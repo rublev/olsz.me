@@ -6,12 +6,15 @@
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   /**
    * goes here because when set in user settings it wont format the use
-   * settings file itself awd aw da da wd wad awd wad awd
+   * settings file itself 
    */
   "[json][jsonc]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "[tailwindcss][markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "[glsl]": {
+    "editor.defaultFormatter": "circledev.glsl-canvas",
+  },
 }

@@ -45,7 +45,8 @@ export default antfu(
           maxLength: 80,
           logicalWrap: true,
           ignoreUrls: false,
-          ignoreCommentsWithCode: false,
+          ignoreCommentsWithCode: true,
+          semanticComments: ['```'],
         },
       ],
       /*
@@ -60,6 +61,7 @@ export default antfu(
           logicalWrap: true,
           ignoreUrls: false,
           ignoreCommentsWithCode: true,
+          semanticComments: ['```'],
         },
       ],
     },

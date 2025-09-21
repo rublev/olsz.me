@@ -1,6 +1,16 @@
+<script setup>
+import { useHead } from '#app/composables/head'
+
+useHead({
+  htmlAttrs: {
+    class: 'dark',
+  },
+})
+</script>
+
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <NuxtRouteAnnouncer />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>

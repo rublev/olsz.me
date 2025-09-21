@@ -5,16 +5,19 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/devtools',
     '@nuxt/fonts',
+    '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/ui',
     '@vueuse/nuxt',
-    'shadcn-nuxt',
-    'nuxt-svgo',
     '@nuxt/eslint',
     'nuxt-eslint-auto-explicit-import',
   ],
   fonts: {
+    defaults: {
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+      styles: ['normal', 'italic'],
+    },
     families: [
       { name: 'Syne', provider: 'google' },
       { name: 'JetBrains Mono', provider: 'google' },
@@ -36,13 +39,12 @@ export default defineNuxtConfig({
   },
   vite: { plugins: [tailwindcss()] },
   css: ['./app/assets/css/main.css'],
-  // shadcn: {
-  //   prefix: '',
-  //   componentDir: './app/components/ui',
-  // },
-  svgo: {
-    autoImportPath: './assets/icons/',
-    dts: false,
-    defaultImport: 'component',
+  icon: {
+    customCollections: [
+      {
+        prefix: 'svg',
+        dir: './app/assets/icons',
+      },
+    ],
   },
 })
