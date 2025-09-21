@@ -13,7 +13,7 @@ export default {
     'at-rule-no-unknown': [
       true,
       {
-        ignoreAtRules: ['tailwind', 'screen'],
+        ignoreAtRules: ['tailwind', 'screen', 'custom-variant', 'theme'],
       },
     ],
     'selector-pseudo-class-no-unknown': [

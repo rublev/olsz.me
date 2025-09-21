@@ -1,0 +1,14 @@
+{
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  /**
+   * goes here because when set in user settings it wont format the use
+   * settings file itself awd aw da da wd wad awd wad awd
+   */
+  "[json][jsonc]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
+}

@@ -1,3 +1,5 @@
+import tailwindcss from '@tailwindcss/vite'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
@@ -9,32 +11,26 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/eslint',
   ],
+  fonts: {
+    families: [
+      { name: 'Syne', provider: 'google' },
+      { name: 'JetBrains Mono', provider: 'google' },
+    ],
+  },
   future: {
     compatibilityVersion: 4,
   },
-  compatibilityDate: '2025-05-20',
+  compatibilityDate: '2025-07-15',
+  devtools: { enabled: false },
   eslint: {
     config: {
       standalone: false,
     },
   },
-  devtools: { enabled: true },
   typescript: {
     typeCheck: true,
     strict: true,
   },
-  ui: {
-    theme: {
-      colors: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'info',
-        'success',
-        'warning',
-        'error',
-      ],
-    },
-  },
-  css: ['~/assets/css/main.css'],
+  vite: { plugins: [tailwindcss()] },
+  css: ['./app/assets/css/main.css'],
 })

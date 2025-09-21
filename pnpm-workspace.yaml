@@ -6,3 +6,7 @@ onlyBuiltDependencies:
   - simple-git-hooks
   - unrs-resolver
   - vue-demi
+
+# move here instead of .npmrc
+shamefullyHoist: true
+strictPeerDependencies: false
