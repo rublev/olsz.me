@@ -10,5 +10,8 @@
    */
   "[json][jsonc]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[tailwindcss][markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

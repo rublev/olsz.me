@@ -22,5 +22,7 @@ export default {
         ignorePseudoClasses: ['global'],
       },
     ],
+    // Force string notation for imports instead of url() notation
+    'import-notation': 'string',
   },
 }

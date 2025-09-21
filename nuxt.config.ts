@@ -9,7 +9,10 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
     '@nuxt/ui',
     '@vueuse/nuxt',
+    'shadcn-nuxt',
+    'nuxt-svgo',
     '@nuxt/eslint',
+    'nuxt-eslint-auto-explicit-import',
   ],
   fonts: {
     families: [
@@ -33,4 +36,13 @@ export default defineNuxtConfig({
   },
   vite: { plugins: [tailwindcss()] },
   css: ['./app/assets/css/main.css'],
+  // shadcn: {
+  //   prefix: '',
+  //   componentDir: './app/components/ui',
+  // },
+  svgo: {
+    autoImportPath: './assets/icons/',
+    dts: false,
+    defaultImport: 'component',
+  },
 })

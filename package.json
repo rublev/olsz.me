@@ -9,7 +9,7 @@
     "generate": "nuxt generate",
     "postinstall": "nuxt prepare && pnpm simple-git-hooks install",
     "lint": "pnpm lint:js && pnpm lint:style",
-    "lint:js": "eslint . --fix",
+    "lint:js": "eslint . --fix --config eslint.config.ts",
     "lint:style": "stylelint **/*.{vue,css} --fix --ignore-path .gitignore",
     "preview": "nuxt preview",
     "typecheck": "nuxt typecheck",
@@ -33,6 +33,10 @@
     "eslint-plugin-comment-length": "^2.2.2",
     "lint-staged": "16.1.6",
     "nuxt": "^4.1.2",
+    "nuxt-eslint-auto-explicit-import": "^0.1.1",
+    "nuxt-svgo": "^4.2.6",
+    "reka-ui": "^2.5.0",
+    "shadcn-nuxt": "https://pkg.pr.new/shadcn-nuxt@1418",
     "simple-git-hooks": "2.13.1",
     "stylelint": "16.24.0",
     "stylelint-config-recommended-vue": "1.6.1",
@@ -47,7 +51,7 @@
   },
   "lint-staged": {
     "*.{js,ts,mjs,vue}": [
-      "eslint --fix"
+      "eslint --fix --config eslint.config.ts"
     ],
     "*.{css,vue}": "stylelint --fix"
   }

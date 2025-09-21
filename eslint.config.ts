@@ -6,17 +6,8 @@ import nuxt from './.nuxt/eslint.config.mjs'
 /* https://github.com/schoero/eslint-plugin-better-tailwindcss/blob/56aa614b8264b6ce2814c0b99252e55b58b5520a/docs/parsers/vue.mda7wdgwad8hahwdgafw6d7a8whdagwydg7aw8hdubawyvdgwhdubvywad.com */
 export default antfu(
   {
-    rules: {
-      'vue/block-order': [
-        'error',
-        {
-          order: ['script', 'template', 'style'],
-        },
-      ],
-      'vue/multi-word-component-names': 'off',
-    },
-  },
-  {
+    isInEditor: false,
+    jsonc: false, // Disable jsonc to avoid compatibility issues with ESLint 9
     plugins: {
       'better-tailwindcss': betterTW,
     },
@@ -28,6 +19,17 @@ export default antfu(
     rules: {
       /* Enable comprehensive Tailwind CSS linting */
       ...betterTW.configs['recommended-error'].rules,
+    },
+  },
+  {
+    rules: {
+      'vue/block-order': [
+        'error',
+        {
+          order: ['script', 'template', 'style'],
+        },
+      ],
+      'vue/multi-word-component-names': 'off',
     },
   },
   {
