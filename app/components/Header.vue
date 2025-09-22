@@ -3,8 +3,11 @@
 <template>
   <header
     class="
-      fixed bottom-0 mx-auto flex w-full max-w-[680px] flex-col items-center
-      justify-between bg-black py-3
+      fixed bottom-0 z-100 mx-auto flex w-full max-w-[680px] flex-col
+      items-center justify-between bg-black py-3
+      before:pointer-events-none before:absolute before:top-[-20px]
+      before:right-0 before:left-0 before:h-5 before:bg-gradient-to-t
+      before:from-black before:to-transparent
       md:flex-row
     "
   >
