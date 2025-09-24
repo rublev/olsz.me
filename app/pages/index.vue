@@ -1,4 +1,16 @@
 <script setup>
+import { ref } from 'vue'
+
+const isAnyHovered = ref(false)
+
+function handleCardHover() {
+  isAnyHovered.value = true
+}
+
+function handleCardUnhover() {
+  isAnyHovered.value = false
+}
+
 const projects = [
   {
     href: 'https://browsertest.ai',
@@ -7,6 +19,8 @@ const projects = [
     iconBgClass: 'bg-blue-600',
     role: 'CTO & Founder',
     period: 'Sep 2024 - Present',
+    brandColor: '#003cff',
+    isCurrentWork: true,
   },
   {
     href: 'https://valery.ca',
@@ -15,6 +29,7 @@ const projects = [
     iconBgClass: 'bg-green-600',
     role: 'Senior Software Engineer',
     period: 'May 2024 - May 2025',
+    brandColor: '#b5feee',
   },
   {
     href: 'https://stratosphere.digital',
@@ -23,6 +38,7 @@ const projects = [
     iconBgClass: 'bg-purple-600',
     role: 'Senior Software Developer',
     period: 'Dec 2021 - Jan 2024',
+    brandColor: '#ff5c00',
   },
   {
     href: 'https://compoundplanning.com/',
@@ -31,6 +47,7 @@ const projects = [
     iconBgClass: 'bg-purple-600',
     role: 'Senior Software Developer',
     period: 'Sep 2019 - Dec 2019',
+    brandColor: '#ffe9bf',
   },
   {
     href: 'https://web.archive.org/web/20221024023347/https://supaglobal.com/',
@@ -39,6 +56,7 @@ const projects = [
     iconBgClass: 'bg-purple-600',
     role: 'Senior Software Developer',
     period: 'Jun 2018 - Sep 2019',
+    brandColor: '#2e54f9',
   },
   {
     href: 'https://consensys.io',
@@ -47,6 +65,7 @@ const projects = [
     iconBgClass: 'bg-orange-600',
     role: 'Senior Full Stack Developer',
     period: 'Apr 2018 - Dec 2018',
+    brandColor: '#cbfa15',
   },
   {
     href: 'https://dailycodingproblem.com',
@@ -55,6 +74,7 @@ const projects = [
     iconBgClass: 'bg-red-600',
     role: 'Co-Founder (Acquired)',
     period: 'Sep 2017 - Mar 2018',
+    brandColor: '#2ab380',
   },
   {
     href: 'https://apps.apple.com/us/app/brd-bitcoin-wallet/id885251393',
@@ -63,6 +83,7 @@ const projects = [
     iconBgClass: 'bg-yellow-600',
     role: 'Senior Full Stack Developer',
     period: 'Aug 2016 - Jun 2017',
+    brandColor: '#fb7e61',
   },
   {
     href: 'https://rbcroyalbank.com',
@@ -71,8 +92,12 @@ const projects = [
     iconBgClass: 'bg-yellow-600',
     role: 'Technical Systems Analyst',
     period: 'Aug 2016 - Jun 2017',
+    brandColor: '#005DAA',
   },
 ]
+
+const currentProjects = projects.filter(project => project.isCurrentWork)
+const workHistory = projects.filter(project => !project.isCurrentWork)
 </script>
 
 <template>
@@ -97,11 +122,11 @@ const projects = [
 
     <section>
       <h2 class="mb-6 text-sm font-medium text-gray-400">
-        Work & Projects
+        Current Projects
       </h2>
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-2 rounded-lg">
         <ProjectCard
-          v-for="project in projects"
+          v-for="project in currentProjects"
           :key="project.href"
           :href="project.href"
           :title="project.title"
@@ -109,6 +134,32 @@ const projects = [
           :icon-bg-class="project.iconBgClass"
           :role="project.role"
           :period="project.period"
+          :brand-color="project.brandColor"
+          :is-active="!isAnyHovered"
+          @hover="handleCardHover"
+          @unhover="handleCardUnhover"
+        />
+      </div>
+    </section>
+
+    <section>
+      <h2 class="mb-6 text-sm font-medium text-gray-400">
+        Work & Projects
+      </h2>
+      <div class="flex flex-wrap gap-2 rounded-lg">
+        <ProjectCard
+          v-for="project in workHistory"
+          :key="project.href"
+          :href="project.href"
+          :title="project.title"
+          :initials="project.initials"
+          :icon-bg-class="project.iconBgClass"
+          :role="project.role"
+          :period="project.period"
+          :brand-color="project.brandColor"
+          :is-active="false"
+          @hover="handleCardHover"
+          @unhover="handleCardUnhover"
         />
       </div>
     </section>
