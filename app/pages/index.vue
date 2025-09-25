@@ -23,6 +23,16 @@ const projects = [
     isCurrentWork: true,
   },
   {
+    href: 'https://browsertest.ai',
+    title: 'Browsertest',
+    initials: 'BT',
+    iconBgClass: 'bg-blue-600',
+    role: 'CTO & Founder',
+    period: 'Sep 2024 - Present',
+    brandColor: '#003cff',
+    isCurrentWork: true,
+  },
+  {
     href: 'https://valery.ca',
     title: 'Valery',
     initials: 'V',
@@ -120,7 +130,7 @@ const workHistory = projects.filter(project => !project.isCurrentWork)
       </p>
     </section>
 
-    <section>
+    <!-- <section>
       <h2 class="mb-6 text-sm font-medium text-gray-400">
         Current Projects
       </h2>
@@ -162,6 +172,6 @@ const workHistory = projects.filter(project => !project.isCurrentWork)
           @unhover="handleCardUnhover"
         />
       </div>
-    </section>
+    </section> -->
   </main>
 </template>
