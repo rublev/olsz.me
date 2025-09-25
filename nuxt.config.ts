@@ -34,7 +34,9 @@ export default defineNuxtConfig({
     },
   },
   typescript: {
-    typeCheck: true,
+    // disabled typecheck because this fixes HMR
+    // https://github.com/nuxt/nuxt/issues/32564#issuecomment-3313960055
+    typeCheck: false,
     strict: true,
   },
   vite: { plugins: [tailwindcss()] },
