@@ -3,7 +3,7 @@ import betterTW from 'eslint-plugin-better-tailwindcss'
 import eslintPluginCommentLength from 'eslint-plugin-comment-length'
 import nuxt from './.nuxt/eslint.config.mjs'
 
-/* https://github.com/schoero/eslint-plugin-better-tailwindcss/blob/56aa614b8264b6ce2814c0b99252e55b58b5520a/docs/parsers/vue.mda7wdgwad8hahwdgafw6d7a8whdagwydg7aw8hdubawyvdgwhdubvywad.com */
+/* https://github.com/schoero/eslint-plugin-better-tailwindcss/blob/56aa614b8264b6ce2814c0b99252e55b58b5520a/docs/parsers/vue.md */
 export default antfu(
   {
     isInEditor: false,
@@ -19,6 +19,13 @@ export default antfu(
     rules: {
       /* Enable comprehensive Tailwind CSS linting */
       ...betterTW.configs['recommended-error'].rules,
+      /**
+       * if using prettier enable this and set eslint + prettier print width to
+       * the same size:
+       * https://github.com/schoero/eslint-plugin-better-tailwindcss/issues/45
+       * https://github.com/schoero/eslint-plugin-better-tailwindcss/issues/57
+       */
+      // 'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
     },
   },
   // vue rules
