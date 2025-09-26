@@ -50,7 +50,12 @@ onMounted(() => {
 
   // Create the main 3D scene and camera
   const scene = new THREE.Scene() // Container for all 3D objects
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000,
+  )
 
   /*
    * POST-PROCESSING SETUP Create a second rendering pipeline for applying
@@ -58,7 +63,10 @@ onMounted(() => {
    */
 
   // Render target: like a canvas where we draw the original scene first
-  const renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight)
+  const renderTarget = new THREE.WebGLRenderTarget(
+    window.innerWidth,
+    window.innerHeight,
+  )
 
   // Post-processing scene: separate scene just for applying effects
   const postScene = new THREE.Scene()
@@ -89,12 +97,23 @@ onMounted(() => {
 
   // Green channel: Acid greens and electric limes (maximum saturation)
   const G = function (x, y, t) {
-    return Math.floor(230 + 25 * Math.sin((x * x * Math.cos(t / 2.5) + y * y * Math.sin(t / 2)) / 200))
+    return Math.floor(
+      230
+      + 25
+      * Math.sin((x * x * Math.cos(t / 2.5) + y * y * Math.sin(t / 2)) / 200),
+    )
   }
 
   // Blue channel: Electric blues and cyber purples (intense range)
   const B = function (x, y, t) {
-    return Math.floor(220 + 35 * Math.sin(6 * Math.sin(t / 6) + ((x - 100) * (x - 100) + (y - 100) * (y - 100)) / 600))
+    return Math.floor(
+      220
+      + 35
+      * Math.sin(
+        6 * Math.sin(t / 6)
+        + ((x - 100) * (x - 100) + (y - 100) * (y - 100)) / 600,
+      ),
+    )
   }
 
   /*
@@ -102,7 +121,12 @@ onMounted(() => {
    */
 
   // Create high-resolution mesh for smooth neon flows
-  const geometry = new THREE.PlaneGeometry(window.innerWidth / 1.8, 480, 130, 130)
+  const geometry = new THREE.PlaneGeometry(
+    window.innerWidth / 1.8,
+    480,
+    130,
+    130,
+  )
 
   // Create material with enhanced neon colors
   const material = new THREE.ShaderMaterial({
@@ -151,7 +175,9 @@ onMounted(() => {
   const pixelateMaterial = new THREE.ShaderMaterial({
     uniforms: {
       tDiffuse: { value: null }, // Will hold the original rendered image
-      u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }, // Screen size
+      u_resolution: {
+        value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+      }, // Screen size
       intensity: { value: 0.35 }, // Strong pixelation for digital neon aesthetic
     },
     vertexShader: pixelateVertexShader,
@@ -208,7 +234,10 @@ onMounted(() => {
      */
 
     // Update organic movement with energetic neon timing
-    mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(j * 1.2, j * 1.2)
+    mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(
+      j * 1.2,
+      j * 1.2,
+    )
 
     // Update electric colors using our intense neon color functions
     mesh.material.uniforms.u_color1.value = new THREE.Vector3(

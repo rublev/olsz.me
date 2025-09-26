@@ -18,8 +18,12 @@
             hover:text-white
           "
         >
-          <h3 class="font-medium">Where it started</h3>
-          <span class="font-mono text-xs text-gray-500 uppercase">LIFE ~ 2025</span>
+          <h3 class="font-medium">
+            Where it started
+          </h3>
+          <span class="font-mono text-xs text-gray-500 uppercase">
+            LIFE ~ 2025
+          </span>
         </a>
       </li>
       <li
@@ -36,8 +40,12 @@
             hover:text-white
           "
         >
-          <h3 class="font-medium">The overlooked art of building a great interface</h3>
-          <span class="font-mono text-xs text-gray-500 uppercase">DESIGN ~ 2025</span>
+          <h3 class="font-medium">
+            The overlooked art of building a great interface
+          </h3>
+          <span class="font-mono text-xs text-gray-500 uppercase">
+            DESIGN ~ 2025
+          </span>
         </a>
       </li>
       <li
@@ -54,8 +62,12 @@
             hover:text-white
           "
         >
-          <h3 class="font-medium">Publishing Your Eagle Library on an Astro Site</h3>
-          <span class="font-mono text-xs text-gray-500 uppercase">SITE ~ 2025</span>
+          <h3 class="font-medium">
+            Publishing Your Eagle Library on an Astro Site
+          </h3>
+          <span class="font-mono text-xs text-gray-500 uppercase">
+            SITE ~ 2025
+          </span>
         </a>
       </li>
       <li
@@ -72,8 +84,12 @@
             hover:text-white
           "
         >
-          <h3 class="font-medium">How to Publish Your Eagle Library on the Web</h3>
-          <span class="font-mono text-xs text-gray-500 uppercase">SITE ~ 2025</span>
+          <h3 class="font-medium">
+            How to Publish Your Eagle Library on the Web
+          </h3>
+          <span class="font-mono text-xs text-gray-500 uppercase">
+            SITE ~ 2025
+          </span>
         </a>
       </li>
     </ul>

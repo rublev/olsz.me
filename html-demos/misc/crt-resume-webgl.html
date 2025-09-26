@@ -8,7 +8,7 @@
         margin: 0;
         overflow: hidden;
         background: #000;
-        font-family: 'Courier New', monospace;
+        font-family: "Courier New", monospace;
       }
       canvas {
         display: block;
@@ -17,134 +17,134 @@
   </head>
   <body>
     <script>
-      let scene, camera, renderer, planeMesh
-      let resumeTexture, resumeCanvas, resumeCtx
-      let uniforms
-      let scrollOffset = 0
-      let maxScroll = 0
-      let targetScrollOffset = 0
-      let scrollSmoothing = 0.15
+      let scene, camera, renderer, planeMesh;
+      let resumeTexture, resumeCanvas, resumeCtx;
+      let uniforms;
+      let scrollOffset = 0;
+      let maxScroll = 0;
+      let targetScrollOffset = 0;
+      let scrollSmoothing = 0.15;
 
       // Resume content - formatted to match PDF structure
       const resumeText = [
-        'marcel@portfolio:~$ cat resume.txt',
-        '',
-        '                           MARCEL OLSZEWSKI',
-        '',
-        'CONTACT         Phone: +1 (647) 834-8234           LinkedIn: linkedin.com/in/molsz',
-        'INFORMATION     Email: marcel.olszewski@gmail.com   GitHub: github.com/rublev',
-        '                                                   Website: olsz.me',
-        '',
-        'EDUCATION       Seneca Polytechnic, Toronto, ON',
-        '                Bachelor of Technology, Software Development    Jan 2011 – Jul 2013',
-        '                York University, Toronto, ON',
-        '                Bachelor of Engineering, Software Engineering   Jan 2010 – Jul 2011',
-        '',
-        '                Largely self-educated web developer with backgrounds in software',
-        '                development and engineering. Expert generalist known for turning',
-        '                ambiguous ideas into clean, performant UIs.',
-        '',
-        'PROFESSIONAL    CTO & Founder, browsertest.ai',
-        'EXPERIENCE      Artificial Intelligence & Automation           Sep 2024 – Present',
-        '                Developed an agentic QA automation tool catering to non-technical and',
-        '                time-constrained developers for effortless creation of self-healing test',
-        '                suites. Implemented project management strategies across the company for',
-        '                efficiency and alignment. Optimized DevOps pipelines to cut expenses and',
-        '                improve workflow efficiency. Led and managed development tasks for an',
-        '                international team.',
-        '',
-        '                Senior Software Engineer, Valery.ca',
-        '                AI-Powered Real Estate Platform                 May 2024 – May 2025',
-        '                Developed and deployed a real estate AI chatbot using Next.js, PostgreSQL,',
-        '                Pinecone, and Airtable with design crafted in Figma. Built conversational',
-        '                AI using RAG system with real-time market data integration for the Canadian',
-        '                market. Specialized in healthcare projects by integrating EHR and platforms.',
-        '',
-        '                Senior Software Developer, Stratosphere.digital',
-        '                Fintech, Healthcare, B2C                       Dec 2021 – Jan 2024',
-        '                Designed and implemented various browser and mobile applications for',
-        '                leading healthcare organizations. Developed a Web3 NFT Social Network using',
+        "marcel@portfolio:~$ cat resume.txt",
+        "",
+        "                           MARCEL OLSZEWSKI",
+        "",
+        "CONTACT         Phone: +1 (647) 834-8234           LinkedIn: linkedin.com/in/molsz",
+        "INFORMATION     Email: marcel.olszewski@gmail.com   GitHub: github.com/rublev",
+        "                                                   Website: olsz.me",
+        "",
+        "EDUCATION       Seneca Polytechnic, Toronto, ON",
+        "                Bachelor of Technology, Software Development    Jan 2011 – Jul 2013",
+        "                York University, Toronto, ON",
+        "                Bachelor of Engineering, Software Engineering   Jan 2010 – Jul 2011",
+        "",
+        "                Largely self-educated web developer with backgrounds in software",
+        "                development and engineering. Expert generalist known for turning",
+        "                ambiguous ideas into clean, performant UIs.",
+        "",
+        "PROFESSIONAL    CTO & Founder, browsertest.ai",
+        "EXPERIENCE      Artificial Intelligence & Automation           Sep 2024 – Present",
+        "                Developed an agentic QA automation tool catering to non-technical and",
+        "                time-constrained developers for effortless creation of self-healing test",
+        "                suites. Implemented project management strategies across the company for",
+        "                efficiency and alignment. Optimized DevOps pipelines to cut expenses and",
+        "                improve workflow efficiency. Led and managed development tasks for an",
+        "                international team.",
+        "",
+        "                Senior Software Engineer, Valery.ca",
+        "                AI-Powered Real Estate Platform                 May 2024 – May 2025",
+        "                Developed and deployed a real estate AI chatbot using Next.js, PostgreSQL,",
+        "                Pinecone, and Airtable with design crafted in Figma. Built conversational",
+        "                AI using RAG system with real-time market data integration for the Canadian",
+        "                market. Specialized in healthcare projects by integrating EHR and platforms.",
+        "",
+        "                Senior Software Developer, Stratosphere.digital",
+        "                Fintech, Healthcare, B2C                       Dec 2021 – Jan 2024",
+        "                Designed and implemented various browser and mobile applications for",
+        "                leading healthcare organizations. Developed a Web3 NFT Social Network using",
         "                Dfinity's Internet Computer Protocol, creating smart contracts in Motoko",
-        '                and building a custom NFT marketplace with React. Collaborated with diverse',
-        '                clients including driveway.app, steeprockinc.com, vitalsphere.digital,',
-        '                and signupmedia.com.',
-        '',
-        '                Senior Full Stack Developer, Compound Planning',
-        '                Fintech                                         Sep 2019 – Dec 2019',
-        '                Developed user onboarding system using React and TypeScript. Created',
-        '                initial designs and prototypes in Sketch & InvisionApp, which were then',
-        '                implemented as functional components. Streamlined stock options process',
-        '                for employees.',
-        '',
-        '                Co-Founder, Supaglobal.com',
-        '                Fintech                                         Jun 2018 – Sep 2019',
-        '                Created personalized real estate investment options for various investor',
-        '                profiles. Developed the AI stack using Java and implemented the frontend',
-        '                with Vue.js. Led technical decision-making processes, developed demos for',
-        '                stakeholders, and ensured data contract security.',
-        '',
-        '                Senior Full Stack Developer, ConsenSys',
-        '                Cryptocurrency                                  Apr 2018 – Dec 2018',
-        '                Worked primarily on the frontend and design of the Project Numia stablecoin',
-        '                exchange which is now PayTrie. Built out RESTful API using Node.js with',
-        '                fastify.js & knex.js. API testing with supertest. Built mobile responsive',
-        '                frontend with various API integrations such as Plaid for payments.',
-        '',
-        '                Co-Founder, Daily Coding Problem (Acquired)',
-        '                Education                                       Sep 2017 – Mar 2018',
-        '                Designed and implemented a personalized computer science question and',
-        '                solution mailing list. Led development of a free daily coding problem',
-        '                subscription service with premium options. Achieved rapid growth from $0',
-        '                to $8k Monthly Recurring Revenue (MRR) in just two months. Reached #2 on',
-        '                Product Hunt.',
-        '',
-        '                Senior Full Stack Developer, Breadwallet (Acquired)',
-        '                Cryptocurrency                                  Aug 2016 – Jun 2017',
-        '                Developed a secure iOS bitcoin wallet app with integrated exchange',
-        '                functionality. Built a bitcoin exchange using internal proxy API to',
+        "                and building a custom NFT marketplace with React. Collaborated with diverse",
+        "                clients including driveway.app, steeprockinc.com, vitalsphere.digital,",
+        "                and signupmedia.com.",
+        "",
+        "                Senior Full Stack Developer, Compound Planning",
+        "                Fintech                                         Sep 2019 – Dec 2019",
+        "                Developed user onboarding system using React and TypeScript. Created",
+        "                initial designs and prototypes in Sketch & InvisionApp, which were then",
+        "                implemented as functional components. Streamlined stock options process",
+        "                for employees.",
+        "",
+        "                Co-Founder, Supaglobal.com",
+        "                Fintech                                         Jun 2018 – Sep 2019",
+        "                Created personalized real estate investment options for various investor",
+        "                profiles. Developed the AI stack using Java and implemented the frontend",
+        "                with Vue.js. Led technical decision-making processes, developed demos for",
+        "                stakeholders, and ensured data contract security.",
+        "",
+        "                Senior Full Stack Developer, ConsenSys",
+        "                Cryptocurrency                                  Apr 2018 – Dec 2018",
+        "                Worked primarily on the frontend and design of the Project Numia stablecoin",
+        "                exchange which is now PayTrie. Built out RESTful API using Node.js with",
+        "                fastify.js & knex.js. API testing with supertest. Built mobile responsive",
+        "                frontend with various API integrations such as Plaid for payments.",
+        "",
+        "                Co-Founder, Daily Coding Problem (Acquired)",
+        "                Education                                       Sep 2017 – Mar 2018",
+        "                Designed and implemented a personalized computer science question and",
+        "                solution mailing list. Led development of a free daily coding problem",
+        "                subscription service with premium options. Achieved rapid growth from $0",
+        "                to $8k Monthly Recurring Revenue (MRR) in just two months. Reached #2 on",
+        "                Product Hunt.",
+        "",
+        "                Senior Full Stack Developer, Breadwallet (Acquired)",
+        "                Cryptocurrency                                  Aug 2016 – Jun 2017",
+        "                Developed a secure iOS bitcoin wallet app with integrated exchange",
+        "                functionality. Built a bitcoin exchange using internal proxy API to",
         "                securely communicate with Kraken's API in Golang. Integrated exchange",
-        '                directly into wallet app to streamline buying and selling bitcoin for',
-        '                users. Acquired by Coinbase.',
-        '',
-        '                Technical Systems Analyst, RBC',
-        '                Fintech                                         Jan 2013 – Apr 2014',
-        '                Designed and implemented user interface for RBC Express Mobile Business',
-        '                Banking app using jQuery Mobile and Phonegap on various devices including',
-        '                Android 4.0+, all iPhone and iPad models, and Blackberry devices.',
-        '                Developed internal tools like CSS Optimizer and HTML5 Code Integrator.',
-        '',
-        'OSS             OpenXR Recenter Override',
-        'PROJECTS        See https://github.com/rublev/openxr-recenter',
-        '                Developed an OpenXR API layer for VR position override and cockpit',
-        '                alignment. Intercepts xrLocateViews() and xrLocateSpace() calls to apply',
-        '                saved positional adjustments across VR sessions. Features quaternion-based',
-        '                pose transformations, multi-space coordinate system handling, DirectX',
-        '                overlay rendering, and comprehensive input handling.',
-        '',
-        'NOTABLE         Browsertest.ai',
-        'PROJECTS        Built an agentic QA automation tool for non-developers to streamline E2E',
-        '                testing that turns natural language into replayable test steps. Features',
-        '                include embedded real-time 60fps interactive browser, component definition',
-        '                for reuse, test scheduling, and real-time script generation.',
-        '',
-        '                Daily Coding Problem (Acquired)',
-        '                Built and launched dailycodingproblem.com, achieving rapid growth from $0',
-        '                to $8k Monthly Recurring Revenue (MRR) in just two months. Reached #2 on',
-        '                Product Hunt.',
-        '',
-        'PROGRAMMING     Expert: AWS, JavaScript, TypeScript, Node.js, Vue.js, React, Svelte,',
-        'EXPERIENCE      HTMX, WebGL, Docker, API Design, PostgreSQL, Natural Language Processing,',
-        '                LLM, AI Agent, UI/UX Design, Full Stack Development',
-        '',
-        '                Proficient: C++17, OpenXR API, DirectX 11, Quaternion Mathematics,',
-        '                Windows API, Python, React Native, Ruby on Rails, A/B Testing,',
-        '                Firebase, Google Cloud, Serverless, Webpack, Adobe Suite',
-        '',
-        'LANGUAGES       Fluent: English, Polish',
-        '                Learning: German, Ukrainian',
-        '',
-        'marcel@portfolio:~$ █'
-      ]
+        "                directly into wallet app to streamline buying and selling bitcoin for",
+        "                users. Acquired by Coinbase.",
+        "",
+        "                Technical Systems Analyst, RBC",
+        "                Fintech                                         Jan 2013 – Apr 2014",
+        "                Designed and implemented user interface for RBC Express Mobile Business",
+        "                Banking app using jQuery Mobile and Phonegap on various devices including",
+        "                Android 4.0+, all iPhone and iPad models, and Blackberry devices.",
+        "                Developed internal tools like CSS Optimizer and HTML5 Code Integrator.",
+        "",
+        "OSS             OpenXR Recenter Override",
+        "PROJECTS        See https://github.com/rublev/openxr-recenter",
+        "                Developed an OpenXR API layer for VR position override and cockpit",
+        "                alignment. Intercepts xrLocateViews() and xrLocateSpace() calls to apply",
+        "                saved positional adjustments across VR sessions. Features quaternion-based",
+        "                pose transformations, multi-space coordinate system handling, DirectX",
+        "                overlay rendering, and comprehensive input handling.",
+        "",
+        "NOTABLE         Browsertest.ai",
+        "PROJECTS        Built an agentic QA automation tool for non-developers to streamline E2E",
+        "                testing that turns natural language into replayable test steps. Features",
+        "                include embedded real-time 60fps interactive browser, component definition",
+        "                for reuse, test scheduling, and real-time script generation.",
+        "",
+        "                Daily Coding Problem (Acquired)",
+        "                Built and launched dailycodingproblem.com, achieving rapid growth from $0",
+        "                to $8k Monthly Recurring Revenue (MRR) in just two months. Reached #2 on",
+        "                Product Hunt.",
+        "",
+        "PROGRAMMING     Expert: AWS, JavaScript, TypeScript, Node.js, Vue.js, React, Svelte,",
+        "EXPERIENCE      HTMX, WebGL, Docker, API Design, PostgreSQL, Natural Language Processing,",
+        "                LLM, AI Agent, UI/UX Design, Full Stack Development",
+        "",
+        "                Proficient: C++17, OpenXR API, DirectX 11, Quaternion Mathematics,",
+        "                Windows API, Python, React Native, Ruby on Rails, A/B Testing,",
+        "                Firebase, Google Cloud, Serverless, Webpack, Adobe Suite",
+        "",
+        "LANGUAGES       Fluent: English, Polish",
+        "                Learning: German, Ukrainian",
+        "",
+        "marcel@portfolio:~$ █",
+      ];
 
       // Vertex shader
       const vertexShader = `
@@ -153,7 +153,7 @@
                 vUv = uv;
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
             }
-        `
+        `;
 
       // Fragment shader with real CRT curvature
       const fragmentShader = `
@@ -258,228 +258,258 @@
 
                 gl_FragColor = color;
             }
-        `
+        `;
 
       function init() {
         // Create canvas for resume content
-        resumeCanvas = document.createElement('canvas')
-        resumeCanvas.width = 1200
-        resumeCanvas.height = 900
-        resumeCtx = resumeCanvas.getContext('2d')
+        resumeCanvas = document.createElement("canvas");
+        resumeCanvas.width = 1200;
+        resumeCanvas.height = 900;
+        resumeCtx = resumeCanvas.getContext("2d");
 
         // Setup Three.js
-        scene = new THREE.Scene()
-        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-        renderer = new THREE.WebGLRenderer({ antialias: false })
-        renderer.setSize(window.innerWidth, window.innerHeight)
-        document.body.appendChild(renderer.domElement)
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(
+          75,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000,
+        );
+        renderer = new THREE.WebGLRenderer({ antialias: false });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
 
         // Setup texture
-        resumeTexture = new THREE.CanvasTexture(resumeCanvas)
-        resumeTexture.minFilter = THREE.LinearFilter
-        resumeTexture.magFilter = THREE.LinearFilter
+        resumeTexture = new THREE.CanvasTexture(resumeCanvas);
+        resumeTexture.minFilter = THREE.LinearFilter;
+        resumeTexture.magFilter = THREE.LinearFilter;
 
         // Setup uniforms
         uniforms = {
           uTexture: { value: resumeTexture },
           uTime: { value: 0.0 },
-          uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+          uResolution: {
+            value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+          },
           uCurvature: { value: 0.15 }, // Increased curvature for more obvious effect
           uScanlineIntensity: { value: 0.04 },
           uVignetteIntensity: { value: 1.2 },
-          uNoiseAmount: { value: 0.02 }
-        }
+          uNoiseAmount: { value: 0.02 },
+        };
 
         // Create shader material
         const material = new THREE.ShaderMaterial({
           uniforms: uniforms,
           vertexShader: vertexShader,
           fragmentShader: fragmentShader,
-          transparent: true
-        })
+          transparent: true,
+        });
 
         // Create plane (larger to better fill screen)
-        const geometry = new THREE.PlaneGeometry(10, 7.5)
-        planeMesh = new THREE.Mesh(geometry, material)
-        scene.add(planeMesh)
+        const geometry = new THREE.PlaneGeometry(10, 7.5);
+        planeMesh = new THREE.Mesh(geometry, material);
+        scene.add(planeMesh);
 
         // Position camera closer
-        camera.position.z = 6
+        camera.position.z = 6;
 
         // Draw resume content
-        drawResume()
+        drawResume();
 
         // Start animation
-        animate()
+        animate();
 
         // Handle resize
-        window.addEventListener('resize', onWindowResize)
+        window.addEventListener("resize", onWindowResize);
 
         // Handle scrolling
-        setupScrollHandlers()
+        setupScrollHandlers();
       }
 
       function setupScrollHandlers() {
         // Mouse wheel scrolling
         window.addEventListener(
-          'wheel',
+          "wheel",
           (e) => {
-            e.preventDefault()
-            const scrollSpeed = 1 // Reduced from 3 to 1 for less sensitivity
-            const deltaY = e.deltaY > 0 ? scrollSpeed : -scrollSpeed
-            const newTarget = targetScrollOffset + deltaY
+            e.preventDefault();
+            const scrollSpeed = 1; // Reduced from 3 to 1 for less sensitivity
+            const deltaY = e.deltaY > 0 ? scrollSpeed : -scrollSpeed;
+            const newTarget = targetScrollOffset + deltaY;
             targetScrollOffset = Math.max(
               0,
-              Math.min(newTarget, Math.max(0, resumeText.length - Math.floor(resumeCanvas.height / 20) + 4))
-            )
+              Math.min(
+                newTarget,
+                Math.max(
+                  0,
+                  resumeText.length - Math.floor(resumeCanvas.height / 20) + 4,
+                ),
+              ),
+            );
           },
-          { passive: false }
-        )
+          { passive: false },
+        );
 
         // Keyboard scrolling
-        window.addEventListener('keydown', (e) => {
-          let scrollAmount = 0
+        window.addEventListener("keydown", (e) => {
+          let scrollAmount = 0;
 
           switch (e.key) {
-            case 'ArrowUp':
-              scrollAmount = -1
-              break
-            case 'ArrowDown':
-              scrollAmount = 1
-              break
-            case 'PageUp':
-              scrollAmount = -10
-              break
-            case 'PageDown':
-              scrollAmount = 10
-              break
-            case 'Home':
-              targetScrollOffset = 0
-              return
-            case 'End':
-              targetScrollOffset = maxScroll
-              return
+            case "ArrowUp":
+              scrollAmount = -1;
+              break;
+            case "ArrowDown":
+              scrollAmount = 1;
+              break;
+            case "PageUp":
+              scrollAmount = -10;
+              break;
+            case "PageDown":
+              scrollAmount = 10;
+              break;
+            case "Home":
+              targetScrollOffset = 0;
+              return;
+            case "End":
+              targetScrollOffset = maxScroll;
+              return;
           }
 
           if (scrollAmount !== 0) {
-            e.preventDefault()
-            const newTarget = targetScrollOffset + scrollAmount
-            const maxScrollValue = Math.max(0, resumeText.length - Math.floor(resumeCanvas.height / 20) + 4)
-            targetScrollOffset = Math.max(0, Math.min(newTarget, maxScrollValue))
+            e.preventDefault();
+            const newTarget = targetScrollOffset + scrollAmount;
+            const maxScrollValue = Math.max(
+              0,
+              resumeText.length - Math.floor(resumeCanvas.height / 20) + 4,
+            );
+            targetScrollOffset = Math.max(
+              0,
+              Math.min(newTarget, maxScrollValue),
+            );
           }
-        })
+        });
 
         // Touch scrolling for mobile
-        let touchStartY = 0
-        let touchEndY = 0
+        let touchStartY = 0;
+        let touchEndY = 0;
 
         window.addEventListener(
-          'touchstart',
+          "touchstart",
           (e) => {
-            touchStartY = e.touches[0].clientY
+            touchStartY = e.touches[0].clientY;
           },
-          { passive: true }
-        )
+          { passive: true },
+        );
 
         window.addEventListener(
-          'touchmove',
+          "touchmove",
           (e) => {
-            e.preventDefault()
-            touchEndY = e.touches[0].clientY
-            const deltaY = touchStartY - touchEndY
-            const scrollSpeed = 0.1
-            targetScrollOffset = Math.max(0, Math.min(targetScrollOffset + deltaY * scrollSpeed, maxScroll))
-            touchStartY = touchEndY
+            e.preventDefault();
+            touchEndY = e.touches[0].clientY;
+            const deltaY = touchStartY - touchEndY;
+            const scrollSpeed = 0.1;
+            targetScrollOffset = Math.max(
+              0,
+              Math.min(targetScrollOffset + deltaY * scrollSpeed, maxScroll),
+            );
+            touchStartY = touchEndY;
           },
-          { passive: false }
-        )
+          { passive: false },
+        );
 
         // Focus the window so keyboard events work
-        window.focus()
+        window.focus();
       }
 
       function drawResume() {
-        const lineHeight = 20
-        const fontSize = 16
-        const visibleLines = Math.floor(resumeCanvas.height / lineHeight) - 4 // Leave room for padding
+        const lineHeight = 20;
+        const fontSize = 16;
+        const visibleLines = Math.floor(resumeCanvas.height / lineHeight) - 4; // Leave room for padding
 
         // Calculate max scroll based on content length
-        maxScroll = Math.max(0, resumeText.length - visibleLines)
+        maxScroll = Math.max(0, resumeText.length - visibleLines);
 
         // Clamp scroll offset to integer values to avoid array access issues
-        scrollOffset = Math.floor(Math.max(0, Math.min(scrollOffset, maxScroll)))
+        scrollOffset = Math.floor(
+          Math.max(0, Math.min(scrollOffset, maxScroll)),
+        );
 
         // Clear canvas
-        resumeCtx.fillStyle = '#000'
-        resumeCtx.fillRect(0, 0, resumeCanvas.width, resumeCanvas.height)
+        resumeCtx.fillStyle = "#000";
+        resumeCtx.fillRect(0, 0, resumeCanvas.width, resumeCanvas.height);
 
-        resumeCtx.fillStyle = '#FF8C00' // Windows 3.1 orange color
-        resumeCtx.font = `${fontSize}px "Courier New", monospace`
+        resumeCtx.fillStyle = "#FF8C00"; // Windows 3.1 orange color
+        resumeCtx.font = `${fontSize}px "Courier New", monospace`;
 
         // Calculate horizontal centering - move more to the right
-        const leftMargin = 150 // Much more right-aligned
+        const leftMargin = 150; // Much more right-aligned
 
         // Draw visible lines based on scroll offset
         for (let i = 0; i < visibleLines; i++) {
-          const lineIndex = Math.floor(scrollOffset) + i
+          const lineIndex = Math.floor(scrollOffset) + i;
           if (lineIndex >= 0 && lineIndex < resumeText.length) {
-            const line = resumeText[lineIndex] || '' // Fallback to empty string
-            const y = (i + 3) * lineHeight // Add more top padding
-            resumeCtx.fillText(line, leftMargin, y)
+            const line = resumeText[lineIndex] || ""; // Fallback to empty string
+            const y = (i + 3) * lineHeight; // Add more top padding
+            resumeCtx.fillText(line, leftMargin, y);
           }
         }
 
         // Draw scroll indicator if there's more content - on the left side
         if (maxScroll > 0) {
-          const scrollBarHeight = resumeCanvas.height - 40
-          const scrollBarY = 20
-          const scrollBarX = 15 // Left side instead of right
+          const scrollBarHeight = resumeCanvas.height - 40;
+          const scrollBarY = 20;
+          const scrollBarX = 15; // Left side instead of right
 
           // Scroll track
-          resumeCtx.fillStyle = '#331100' // Dark orange
-          resumeCtx.fillRect(scrollBarX, scrollBarY, 8, scrollBarHeight)
+          resumeCtx.fillStyle = "#331100"; // Dark orange
+          resumeCtx.fillRect(scrollBarX, scrollBarY, 8, scrollBarHeight);
 
           // Scroll thumb
-          const thumbHeight = Math.max(20, (visibleLines / resumeText.length) * scrollBarHeight)
-          const thumbY = scrollBarY + (scrollOffset / maxScroll) * (scrollBarHeight - thumbHeight)
+          const thumbHeight = Math.max(
+            20,
+            (visibleLines / resumeText.length) * scrollBarHeight,
+          );
+          const thumbY =
+            scrollBarY +
+            (scrollOffset / maxScroll) * (scrollBarHeight - thumbHeight);
 
-          resumeCtx.fillStyle = '#FF8C00' // Orange
-          resumeCtx.fillRect(scrollBarX, thumbY, 8, thumbHeight)
+          resumeCtx.fillStyle = "#FF8C00"; // Orange
+          resumeCtx.fillRect(scrollBarX, thumbY, 8, thumbHeight);
 
           // Scroll percentage at bottom left
-          const scrollPercent = maxScroll > 0 ? Math.round((scrollOffset / maxScroll) * 100) : 0
-          resumeCtx.fillStyle = '#CC6600' // Darker orange
-          resumeCtx.font = `10px "Courier New", monospace`
-          resumeCtx.fillText(`${scrollPercent}%`, 30, resumeCanvas.height - 10)
+          const scrollPercent =
+            maxScroll > 0 ? Math.round((scrollOffset / maxScroll) * 100) : 0;
+          resumeCtx.fillStyle = "#CC6600"; // Darker orange
+          resumeCtx.font = `10px "Courier New", monospace`;
+          resumeCtx.fillText(`${scrollPercent}%`, 30, resumeCanvas.height - 10);
         }
 
-        resumeTexture.needsUpdate = true
+        resumeTexture.needsUpdate = true;
       }
 
       function animate() {
-        requestAnimationFrame(animate)
+        requestAnimationFrame(animate);
 
         // Smooth scroll animation
-        const scrollDiff = targetScrollOffset - scrollOffset
+        const scrollDiff = targetScrollOffset - scrollOffset;
         if (Math.abs(scrollDiff) > 0.1) {
-          scrollOffset += scrollDiff * scrollSmoothing
-          drawResume()
+          scrollOffset += scrollDiff * scrollSmoothing;
+          drawResume();
         }
 
-        uniforms.uTime.value = performance.now() * 0.001
+        uniforms.uTime.value = performance.now() * 0.001;
 
-        renderer.render(scene, camera)
+        renderer.render(scene, camera);
       }
 
       function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight
-        camera.updateProjectionMatrix()
-        renderer.setSize(window.innerWidth, window.innerHeight)
-        uniforms.uResolution.value.set(window.innerWidth, window.innerHeight)
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        uniforms.uResolution.value.set(window.innerWidth, window.innerHeight);
       }
 
       // Initialize
-      init()
+      init();
     </script>
   </body>
 </html>

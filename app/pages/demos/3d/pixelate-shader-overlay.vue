@@ -46,7 +46,9 @@ function initShader(texture) {
   const material = new THREE.ShaderMaterial({
     uniforms: {
       tDiffuse: { value: texture },
-      resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+      resolution: {
+        value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+      },
       pixelSize: { value: 8.0 },
     },
     vertexShader: PixelShader.vertexShader,
@@ -62,7 +64,10 @@ function initShader(texture) {
 function handleResize() {
   if (renderer && mesh) {
     renderer.setSize(window.innerWidth, window.innerHeight)
-    mesh.material.uniforms.resolution.value.set(window.innerWidth, window.innerHeight)
+    mesh.material.uniforms.resolution.value.set(
+      window.innerWidth,
+      window.innerHeight,
+    )
     renderer.render(scene, camera)
   }
 }

@@ -1,7 +1,5 @@
 <script setup>
-import { ref } from 'vue'
-
-const isAnyHovered = ref(false)
+/* const isAnyHovered = ref(false)
 
 function handleCardHover() {
   isAnyHovered.value = true
@@ -60,13 +58,10 @@ const projects = [
     brandColor: '#ffe9bf',
   },
   {
-    href: 'https://web.archive.org/web/20221024023347/https://supaglobal.com/',
-    title: 'Supa Global',
-    initials: 'CP',
-    iconBgClass: 'bg-purple-600',
-    role: 'Senior Software Developer',
-    period: 'Jun 2018 - Sep 2019',
-    brandColor: '#2e54f9',
+ * href: 'https://web.archive.org/web/20221024023347/https://supaglobal.com/',
+ * title: 'Supa Global', initials: 'CP', iconBgClass: 'bg-purple-600', role:
+ * 'Senior Software Developer', period: 'Jun 2018 - Sep 2019', brandColor:
+ * '#2e54f9',
   },
   {
     href: 'https://consensys.io',
@@ -106,12 +101,15 @@ const projects = [
   },
 ]
 
+dd
+
 const currentProjects = projects.filter(project => project.isCurrentWork)
-const workHistory = projects.filter(project => !project.isCurrentWork)
+const workHistory = projects.filter(project => !project.isCurrentWork) */
 </script>
 
 <template>
   <main
+    style="border: 1px solid blue"
     class="
       mx-auto flex h-full max-w-[680px] flex-col gap-16 py-16 pt-[20vh] pb-8
     "
@@ -124,9 +122,10 @@ const workHistory = projects.filter(project => !project.isCurrentWork)
         Marcel Olszewski
       </h1>
       <p class="mt-4 text-[1.275rem] leading-[1.875rem] text-gray-300">
-        I'm a full-stack engineer and entrepreneur building tools that solve
+        <!-- I'm a full-stack engineer and entrepreneur building tools that solve
         real problems. This is my personal space on the web, where I share
-        projects, thoughts, and discoveries.
+        projects, thoughts, and discoveries. -->
+        Blurb
       </p>
     </section>
 

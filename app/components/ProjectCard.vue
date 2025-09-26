@@ -91,7 +91,9 @@ const tiltTimeout = ref(null)
 
 const noisePattern = computed(() => {
   // simple hash from title for consistent randomness
-  const seed = props.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  const seed = props.title
+    .split('')
+    .reduce((acc, char) => acc + char.charCodeAt(0), 0)
   // https://gist.github.com/patriciogonzalezvivo/670c22f3966e662d2f83
   // GLSL noise algo stuff. hacky randomness
   const random1 = Math.sin(seed * 12.9898) * 43758.5453
@@ -115,7 +117,9 @@ const colorBrightness = computed(() => {
 })
 
 // bright colors need different treatment
-const isBrightColor = computed(() => colorBrightness.value > BRIGHTNESS_THRESHOLD)
+const isBrightColor = computed(
+  () => colorBrightness.value > BRIGHTNESS_THRESHOLD,
+)
 
 // styles that change based on color brightness
 const dynamicStyles = computed(() => ({
@@ -160,15 +164,24 @@ function handleMouseMove(event) {
   // delay tilt to prevent mouse-over insta-jumping and messing with the card
   if (tiltEnabled.value) {
     // clamp rotation values
-    const rotateX = Math.max(-TILT_CLAMP, Math.min(TILT_CLAMP, (mouseY - centerY) / rect.height * -TILT_INTENSITY))
-    const rotateY = Math.max(-TILT_CLAMP, Math.min(TILT_CLAMP, (mouseX - centerX) / rect.width * TILT_INTENSITY))
+    const rotateX = Math.max(
+      -TILT_CLAMP,
+      Math.min(
+        TILT_CLAMP,
+        ((mouseY - centerY) / rect.height) * -TILT_INTENSITY,
+      ),
+    )
+    const rotateY = Math.max(
+      -TILT_CLAMP,
+      Math.min(TILT_CLAMP, ((mouseX - centerX) / rect.width) * TILT_INTENSITY),
+    )
 
     // do the 3d tilt thing
     tiltStyle.value = `perspective(${PERSPECTIVE}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${CARD_SCALE}) translateZ(0)`
 
     // make text move with mouse
-    const parallaxX = (mouseX - centerX) / rect.width * PARALLAX_SPEED
-    const parallaxY = (mouseY - centerY) / rect.height * PARALLAX_SPEED
+    const parallaxX = ((mouseX - centerX) / rect.width) * PARALLAX_SPEED
+    const parallaxY = ((mouseY - centerY) / rect.height) * PARALLAX_SPEED
     textParallaxStyle.value = `translate3d(${parallaxX}px, ${parallaxY}px, 30px)`
   }
 
@@ -215,9 +228,15 @@ function handleMouseLeave() {
     target="_blank"
     :style="{
       'transform': tiltStyle,
-      'backgroundColor': isHovered ? (isBrightColor.value ? props.brandColor : DARK_BG_COLOR) : BLACK_BG_COLOR,
+      'backgroundColor': isHovered
+        ? isBrightColor.value
+          ? props.brandColor
+          : DARK_BG_COLOR
+        : BLACK_BG_COLOR,
       'borderColor': isHovered ? props.brandColor : 'transparent',
-      'boxShadow': isHovered ? `4px 4px 0 0 ${props.brandColor}, 2px 2px 10px 5px rgba(0 0 0 / 1)` : 'none',
+      'boxShadow': isHovered
+        ? `4px 4px 0 0 ${props.brandColor}, 2px 2px 10px 5px rgba(0 0 0 / 1)`
+        : 'none',
       'transition': `transform ${tiltEnabled ? '150ms' : '400ms'} ease-out, background-color ${ANIMATION_DURATION}ms ${ANIMATION_EASING}, border-color ${ANIMATION_DURATION}ms ${ANIMATION_EASING}, box-shadow ${ANIMATION_DURATION}ms ${ANIMATION_EASING}`,
       '--brand-color': props.brandColor,
       '--brand-glow': dynamicStyles.glowColor,
@@ -247,9 +266,9 @@ function handleMouseLeave() {
         pointer-events-none absolute inset-0 opacity-0 mix-blend-color-burn
         transition-opacity duration-[600ms] ease-out
       "
-      :class="isBrightColor ? 'group-hover:opacity-90' : `
-        group-hover:opacity-70
-      `"
+      :class="
+        isBrightColor ? 'group-hover:opacity-90' : `group-hover:opacity-70`
+      "
       :style="{ background: props.brandColor }"
     />
     <!-- mouse lighting effect -->
@@ -271,9 +290,14 @@ function handleMouseLeave() {
       <!-- the actual title -->
       <span
         :style="{
-          filter: isHovered ? `contrast(${HOVER_CONTRAST}) saturate(${HOVER_SATURATION}) brightness(${HOVER_BRIGHTNESS})` : `contrast(${DEFAULT_CONTRAST})`,
+          filter: isHovered
+            ? `contrast(${HOVER_CONTRAST}) saturate(${HOVER_SATURATION}) brightness(${HOVER_BRIGHTNESS})`
+            : `contrast(${DEFAULT_CONTRAST})`,
           transition: `all ${ANIMATION_DURATION}ms ${ANIMATION_EASING}`,
-          textShadow: isHovered && isBrightColor ? `${TEXT_SHADOW_OFFSET} ${TEXT_SHADOW_BLUR} ${TEXT_SHADOW_BLUR} ${TEXT_SHADOW_COLOR}` : 'none',
+          textShadow:
+            isHovered && isBrightColor
+              ? `${TEXT_SHADOW_OFFSET} ${TEXT_SHADOW_BLUR} ${TEXT_SHADOW_BLUR} ${TEXT_SHADOW_COLOR}`
+              : 'none',
         }"
         class="
           relative z-20 translate-z-0 text-lg leading-none font-semibold
@@ -282,7 +306,9 @@ function handleMouseLeave() {
           group-hover:text-white
         "
         :class="{ '!text-white': props.isActive }"
-      >{{ title }}</span>
+      >
+        {{ title }}
+      </span>
     </div>
     <div
       class="relative mt-auto flex flex-col justify-end"
@@ -293,9 +319,14 @@ function handleMouseLeave() {
     >
       <p
         :style="{
-          filter: isHovered ? `drop-shadow(0 0 ${TEXT_GLOW_SECONDARY}px ${dynamicStyles.glowColor})` : 'none',
+          filter: isHovered
+            ? `drop-shadow(0 0 ${TEXT_GLOW_SECONDARY}px ${dynamicStyles.glowColor})`
+            : 'none',
           transition: `all ${ANIMATION_DURATION}ms ${ANIMATION_EASING}`,
-          textShadow: isHovered && isBrightColor ? `${TEXT_SHADOW_OFFSET} ${TEXT_SHADOW_BLUR} ${TEXT_SHADOW_BLUR} ${TEXT_SHADOW_COLOR}` : 'none',
+          textShadow:
+            isHovered && isBrightColor
+              ? `${TEXT_SHADOW_OFFSET} ${TEXT_SHADOW_BLUR} ${TEXT_SHADOW_BLUR} ${TEXT_SHADOW_COLOR}`
+              : 'none',
         }"
         class="
           relative z-15 origin-bottom-left translate-z-0
@@ -306,12 +337,18 @@ function handleMouseLeave() {
           group-hover:-translate-y-6 group-hover:text-white
           group-hover:brightness-130
         "
-        :class="{ '!-translate-y-6 !text-white !brightness-130': props.isActive }"
-      >{{ role }}</p>
+        :class="{
+          '!-translate-y-6 !text-white !brightness-130': props.isActive,
+        }"
+      >
+        {{ role }}
+      </p>
       <span
         :style="{
           color: isHovered ? props.brandColor : GRAY_TEXT_COLOR,
-          filter: isHovered ? `drop-shadow(0 0 ${TEXT_GLOW_SECONDARY}px ${dynamicStyles.glowColor})` : 'none',
+          filter: isHovered
+            ? `drop-shadow(0 0 ${TEXT_GLOW_SECONDARY}px ${dynamicStyles.glowColor})`
+            : 'none',
           transition: `all ${ANIMATION_DURATION}ms ${ANIMATION_EASING}`,
         }"
         class="
@@ -321,7 +358,9 @@ function handleMouseLeave() {
           group-hover:translate-y-0 group-hover:opacity-100
         "
         :class="{ '!translate-y-0 !opacity-100': props.isActive }"
-      >{{ period }}</span>
+      >
+        {{ period }}
+      </span>
     </div>
   </a>
 </template>

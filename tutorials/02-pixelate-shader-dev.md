@@ -16,14 +16,14 @@ The original shader was defined as a JavaScript object with vertex and fragment 
 THREE.PixelateShader = {
   uniforms: {
     tDiffuse: { value: null },
-    intensity: { value: 1.0 }
+    intensity: { value: 1.0 },
   },
   vertexShader: [
     /* vertex code */
   ].join('\n'),
   fragmentShader: [
     /* fragment code */
-  ].join('\n')
+  ].join('\n'),
 }
 ```
 
@@ -92,7 +92,10 @@ void main() {
 ### Render Targets
 
 ```javascript
-const renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight)
+const renderTarget = new THREE.WebGLRenderTarget(
+  window.innerWidth,
+  window.innerHeight,
+)
 const postScene = new THREE.Scene()
 const postCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
 ```
@@ -109,11 +112,13 @@ const postCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
 const pixelateMaterial = new THREE.ShaderMaterial({
   uniforms: {
     tDiffuse: { value: null }, // Input texture
-    u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-    intensity: { value: 0.3 } // Pixelation strength
+    u_resolution: {
+      value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+    },
+    intensity: { value: 0.3 }, // Pixelation strength
   },
   vertexShader: pixelateVertexShader,
-  fragmentShader: pixelateFragmentShader
+  fragmentShader: pixelateFragmentShader,
 })
 ```
 

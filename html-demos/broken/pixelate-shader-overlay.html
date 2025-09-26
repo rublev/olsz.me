@@ -33,10 +33,7 @@
     <div class="content">
       <h1>Hello World</h1>
       <p>This is normal DOM text and images.</p>
-      <img
-        src="https://picsum.photos/400/200"
-        alt=""
-      />
+      <img src="https://picsum.photos/400/200" alt="" />
     </div>
 
     <canvas id="overlay"></canvas>
@@ -45,15 +42,17 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
 
     <script>
-      const overlay = document.getElementById('overlay')
-      let renderer, scene, camera, mesh
+      const overlay = document.getElementById("overlay");
+      let renderer, scene, camera, mesh;
 
       // Pixelation shader
       const PixelShader = {
         uniforms: {
           tDiffuse: { value: null },
-          resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-          pixelSize: { value: 8.0 }
+          resolution: {
+            value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+          },
+          pixelSize: { value: 8.0 },
         },
         vertexShader: `
         varying vec2 vUv;
@@ -72,39 +71,41 @@
           vec2 coord = dxy * floor(vUv / dxy);
           gl_FragColor = texture2D(tDiffuse, coord);
         }
-      `
-      }
+      `,
+      };
 
       function init(texture) {
-        renderer = new THREE.WebGLRenderer({ canvas: overlay })
-        renderer.setSize(window.innerWidth, window.innerHeight)
+        renderer = new THREE.WebGLRenderer({ canvas: overlay });
+        renderer.setSize(window.innerWidth, window.innerHeight);
 
-        scene = new THREE.Scene()
-        camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
+        scene = new THREE.Scene();
+        camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
         const material = new THREE.ShaderMaterial({
           uniforms: {
             tDiffuse: { value: texture },
-            resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-            pixelSize: { value: 8.0 }
+            resolution: {
+              value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+            },
+            pixelSize: { value: 8.0 },
           },
           vertexShader: PixelShader.vertexShader,
-          fragmentShader: PixelShader.fragmentShader
-        })
+          fragmentShader: PixelShader.fragmentShader,
+        });
 
-        mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material)
-        scene.add(mesh)
+        mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+        scene.add(mesh);
 
-        renderer.render(scene, camera)
+        renderer.render(scene, camera);
       }
 
       // Take snapshot of body, then feed to shader
       html2canvas(document.body).then((canvas) => {
-        const tex = new THREE.CanvasTexture(canvas)
-        tex.minFilter = THREE.NearestFilter
-        tex.magFilter = THREE.NearestFilter
-        init(tex)
-      })
+        const tex = new THREE.CanvasTexture(canvas);
+        tex.minFilter = THREE.NearestFilter;
+        tex.magFilter = THREE.NearestFilter;
+        init(tex);
+      });
     </script>
   </body>
 </html>

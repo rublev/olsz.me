@@ -49,7 +49,12 @@ onMounted(() => {
 
   // Create the main 3D scene and camera
   const scene = new THREE.Scene() // Container for all 3D objects
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000,
+  )
 
   /*
    * POST-PROCESSING SETUP Create a second rendering pipeline for applying
@@ -57,7 +62,10 @@ onMounted(() => {
    */
 
   // Render target: like a canvas where we draw the original scene first
-  const renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight)
+  const renderTarget = new THREE.WebGLRenderTarget(
+    window.innerWidth,
+    window.innerHeight,
+  )
 
   // Post-processing scene: separate scene just for applying effects
   const postScene = new THREE.Scene()
@@ -93,14 +101,25 @@ onMounted(() => {
   // modulation The cos(t/4) and sin(t/3) make the pattern evolve slowly over
   // time
   const G = function (x, y, t) {
-    return Math.floor(192 + 64 * Math.sin((x * x * Math.cos(t / 4) + y * y * Math.sin(t / 3)) / 300))
+    return Math.floor(
+      192
+      + 64
+      * Math.sin((x * x * Math.cos(t / 4) + y * y * Math.sin(t / 3)) / 300),
+    )
   }
 
   // Blue channel: Radial patterns centered at (100,
   // 100) with complex time modulation The sin(t/9) creates very slow,
   // deep oscillations in the pattern
   const B = function (x, y, t) {
-    return Math.floor(192 + 64 * Math.sin(5 * Math.sin(t / 9) + ((x - 100) * (x - 100) + (y - 100) * (y - 100)) / 1100))
+    return Math.floor(
+      192
+      + 64
+      * Math.sin(
+        5 * Math.sin(t / 9)
+        + ((x - 100) * (x - 100) + (y - 100) * (y - 100)) / 1100,
+      ),
+    )
   }
 
   /*
@@ -109,7 +128,12 @@ onMounted(() => {
 
   // Create a flat rectangle divided into a 100x100 grid of vertices
   // This gives us lots of points to distort with our vertex shader
-  const geometry = new THREE.PlaneGeometry(window.innerWidth / 2, 400, 100, 100)
+  const geometry = new THREE.PlaneGeometry(
+    window.innerWidth / 2,
+    400,
+    100,
+    100,
+  )
 
   // Create material with our custom shaders
   const material = new THREE.ShaderMaterial({
@@ -164,7 +188,9 @@ onMounted(() => {
   const pixelateMaterial = new THREE.ShaderMaterial({
     uniforms: {
       tDiffuse: { value: null }, // Will hold the original rendered image
-      u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }, // Screen size
+      u_resolution: {
+        value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+      }, // Screen size
       intensity: { value: 2 }, // Pixelation strength (0.0 = none, 1.0 = very blocky)
     },
     vertexShader: pixelateVertexShader, // Simple pass-through vertex shader
@@ -366,12 +392,16 @@ onMounted(() => {
 
 /* When an item is selected, it gets a colored background */
 .selectable .selected {
-  background-color: var(--safe-user-color); /* Uses the dynamically calculated color */
+  background-color: var(
+    --safe-user-color
+  ); /* Uses the dynamically calculated color */
   background-color: yellow;
   mix-blend-mode: color-burn;
 }
 .selected {
-  background-color: var(--safe-user-color); /* Uses the dynamically calculated color */
+  background-color: var(
+    --safe-user-color
+  ); /* Uses the dynamically calculated color */
   background-color: yellow;
   mix-blend-mode: color-burn;
 }

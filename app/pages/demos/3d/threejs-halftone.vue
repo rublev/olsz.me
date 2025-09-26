@@ -32,10 +32,18 @@ async function init() {
   const THREE = await import('three')
   const { default: Stats } = await import('three/addons/libs/stats.module.js')
   const { GUI } = await import('three/addons/libs/lil-gui.module.min.js')
-  const { OrbitControls } = await import('three/addons/controls/OrbitControls.js')
-  const { EffectComposer } = await import('three/addons/postprocessing/EffectComposer.js')
-  const { RenderPass } = await import('three/addons/postprocessing/RenderPass.js')
-  const { HalftonePass } = await import('three/addons/postprocessing/HalftonePass.js')
+  const { OrbitControls } = await import(
+    'three/addons/controls/OrbitControls.js',
+  )
+  const { EffectComposer } = await import(
+    'three/addons/postprocessing/EffectComposer.js',
+  )
+  const { RenderPass } = await import(
+    'three/addons/postprocessing/RenderPass.js',
+  )
+  const { HalftonePass } = await import(
+    'three/addons/postprocessing/HalftonePass.js',
+  )
 
   renderer = new THREE.WebGLRenderer()
   renderer.setPixelRatio(window.devicePixelRatio)
@@ -44,7 +52,12 @@ async function init() {
 
   clock = new THREE.Clock()
 
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000)
+  camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    1,
+    1000,
+  )
   camera.position.z = 12
 
   stats = new Stats()
@@ -62,7 +75,10 @@ async function init() {
   scene.background = new THREE.Color(0x444444)
 
   group = new THREE.Group()
-  const floor = new THREE.Mesh(new THREE.BoxGeometry(100, 1, 100), new THREE.MeshPhongMaterial({}))
+  const floor = new THREE.Mesh(
+    new THREE.BoxGeometry(100, 1, 100),
+    new THREE.MeshPhongMaterial({}),
+  )
   floor.position.y = -10
   const light = new THREE.PointLight(0xFFFFFF, 250)
   light.position.y = 2
@@ -101,8 +117,16 @@ async function init() {
   for (let i = 0; i < 50; ++i) {
     // fill scene with coloured cubes
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), mat)
-    mesh.position.set(Math.random() * 16 - 8, Math.random() * 16 - 8, Math.random() * 16 - 8)
-    mesh.rotation.set(Math.random() * Math.PI * 2, Math.random() * Math.PI * 2, Math.random() * Math.PI * 2)
+    mesh.position.set(
+      Math.random() * 16 - 8,
+      Math.random() * 16 - 8,
+      Math.random() * 16 - 8,
+    )
+    mesh.rotation.set(
+      Math.random() * Math.PI * 2,
+      Math.random() * Math.PI * 2,
+      Math.random() * Math.PI * 2,
+    )
     group.add(mesh)
   }
 
@@ -162,7 +186,9 @@ async function init() {
   }
 
   gui = new GUI()
-  gui.add(controller, 'shape', { Dot: 1, Ellipse: 2, Line: 3, Square: 4 }).onChange(onGUIChange)
+  gui
+    .add(controller, 'shape', { Dot: 1, Ellipse: 2, Line: 3, Square: 4 })
+    .onChange(onGUIChange)
   gui.add(controller, 'radius', 1, 25).onChange(onGUIChange)
   gui.add(controller, 'rotateR', 0, 90).onChange(onGUIChange)
   gui.add(controller, 'rotateG', 0, 90).onChange(onGUIChange)
@@ -200,7 +226,9 @@ async function init() {
         text-blue-400
         hover:text-blue-300
       "
-    >three.js</a>
+    >
+      three.js
+    </a>
     - RGB Halftone post-processing by
     <a
       href="https://github.com/meatbags"
@@ -209,6 +237,8 @@ async function init() {
         text-blue-400
         hover:text-blue-300
       "
-    >Xavier Burrow</a>
+    >
+      Xavier Burrow
+    </a>
   </div>
 </template>

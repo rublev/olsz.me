@@ -25,36 +25,49 @@ export default {
         "
       >
         <div>
-          <p>Phone: +1 (647) 834-8234</p>
-          <p>Email: marcel.olszewski@gmail.com</p>
+          <p>
+            Phone: +1 (647) 834-8234
+          </p>
+          <p>
+            Email: marcel.olszewski@gmail.com
+          </p>
         </div>
         <div>
           <p>
             LinkedIn:
             <a
-              href="https://linkedin.com/in/molsz" class="
+              href="https://linkedin.com/in/molsz"
+              class="
                 text-primary
                 hover:underline
               "
-            >linkedin.com/in/molsz</a>
+            >
+              linkedin.com/in/molsz
+            </a>
           </p>
           <p>
             GitHub:
             <a
-              href="https://github.com/rublev" class="
+              href="https://github.com/rublev"
+              class="
                 text-primary
                 hover:underline
               "
-            >github.com/rublev</a>
+            >
+              github.com/rublev
+            </a>
           </p>
           <p>
             Website:
             <a
-              href="https://olsz.me" class="
+              href="https://olsz.me"
+              class="
                 text-primary
                 hover:underline
               "
-            >olsz.me</a>
+            >
+              olsz.me
+            </a>
           </p>
         </div>
       </div>
@@ -327,19 +340,26 @@ export default {
           </h3>
           <p class="text-sm text-muted-foreground">
             <a
-              href="https://github.com/rublev/openxr-recenter" class="
+              href="https://github.com/rublev/openxr-recenter"
+              class="
                 text-primary
                 hover:underline
               "
-            >github.com/rublev/openxr-recenter</a>
+            >
+              github.com/rublev/openxr-recenter
+            </a>
           </p>
         </div>
         <p class="mb-2 text-sm text-foreground">
           Developed an OpenXR API layer for VR position override and cockpit
           alignment. Intercepts
-          <code class="rounded bg-muted px-1 text-foreground">xrLocateViews()</code>
+          <code class="rounded bg-muted px-1 text-foreground">
+            xrLocateViews()
+          </code>
           and
-          <code class="rounded bg-muted px-1 text-foreground">xrLocateSpace()</code>
+          <code class="rounded bg-muted px-1 text-foreground">
+            xrLocateSpace()
+          </code>
           calls to apply saved positional adjustments across VR sessions.
           Features quaternion-based pose transformations, multi-space coordinate
           system handling, DirectX overlay rendering for visual markers, and
@@ -401,12 +421,16 @@ export default {
 
       <div class="space-y-2 text-sm text-foreground">
         <p>
-          <strong>Through Stratosphere.digital:</strong>
+          <strong>
+            Through Stratosphere.digital:
+          </strong>
           Driveway.app, Secureframe, SignupMedia, Ways2Well, Vitalsphere,
           Steeprock OLA
         </p>
         <p>
-          <strong>Select Clients:</strong>
+          <strong>
+            Select Clients:
+          </strong>
           Valery.ca, ConsenSys, Knit People, BRD/Breadwallet (Acquired),
           Keyhole, NorthernBlock, VeriTransfer, SimpleTax (Acquired), Interad,
           Redstamp, RBC Royal Bank
@@ -423,7 +447,9 @@ export default {
       <div class="space-y-4 text-sm text-foreground">
         <div>
           <p>
-            <strong>Expert:</strong>
+            <strong>
+              Expert:
+            </strong>
             AWS, JavaScript, TypeScript, Node.js, Vue.js, React, Svelte, HTMX,
             WebGL, Docker, API Design, PostgreSQL, Natural Language Processing,
             LLM, AI Agent, UI/UX Design, Full Stack Development
@@ -431,7 +457,9 @@ export default {
         </div>
         <div>
           <p>
-            <strong>Proficient:</strong>
+            <strong>
+              Proficient:
+            </strong>
             C++17, OpenXR API, DirectX 11, Quaternion Mathematics, Windows API,
             Python, React Native, Ruby on Rails, A/B Testing, Firebase, Google
             Cloud, Serverless, Webpack, Adobe Suite
@@ -448,11 +476,15 @@ export default {
 
       <div class="space-y-2 text-sm text-foreground">
         <p>
-          <strong>Fluent:</strong>
+          <strong>
+            Fluent:
+          </strong>
           English, Polish
         </p>
         <p>
-          <strong>Learning:</strong>
+          <strong>
+            Learning:
+          </strong>
           German, Ukrainian
         </p>
       </div>

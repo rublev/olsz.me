@@ -16,14 +16,14 @@ Someone had written some code that creates this pixelate effect, but it was all 
 THREE.PixelateShader = {
   uniforms: {
     tDiffuse: { value: null }, // The image to pixelate
-    intensity: { value: 1.0 } // How blocky to make it
+    intensity: { value: 1.0 }, // How blocky to make it
   },
   vertexShader: [
     /* bunch of graphics code */
   ].join('\n'),
   fragmentShader: [
     /* more graphics code */
-  ].join('\n')
+  ].join('\n'),
 }
 ```
 
@@ -98,7 +98,10 @@ Now we need to set up our "photography studio" to take pictures and apply effect
 ### Creating Two Cameras
 
 ```javascript
-const renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight)
+const renderTarget = new THREE.WebGLRenderTarget(
+  window.innerWidth,
+  window.innerHeight,
+)
 const postScene = new THREE.Scene()
 const postCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
 ```
@@ -118,11 +121,13 @@ The `renderTarget` is like having a piece of photo paper where we develop the fi
 const pixelateMaterial = new THREE.ShaderMaterial({
   uniforms: {
     tDiffuse: { value: null }, // The original photo
-    u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }, // Screen size
-    intensity: { value: 0.3 } // How much pixelation (0.3 = mild)
+    u_resolution: {
+      value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+    }, // Screen size
+    intensity: { value: 0.3 }, // How much pixelation (0.3 = mild)
   },
   vertexShader: pixelateVertexShader, // Our position handler
-  fragmentShader: pixelateFragmentShader // Our pixelation magic
+  fragmentShader: pixelateFragmentShader, // Our pixelation magic
 })
 ```
 

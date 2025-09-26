@@ -50,7 +50,12 @@ onMounted(() => {
 
   // Create the main 3D scene and camera
   const scene = new THREE.Scene() // Container for all 3D objects
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000,
+  )
 
   /*
    * POST-PROCESSING SETUP Create a second rendering pipeline for applying
@@ -58,7 +63,10 @@ onMounted(() => {
    */
 
   // Render target: like a canvas where we draw the original scene first
-  const renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight)
+  const renderTarget = new THREE.WebGLRenderTarget(
+    window.innerWidth,
+    window.innerHeight,
+  )
 
   // Post-processing scene: separate scene just for applying effects
   const postScene = new THREE.Scene()
@@ -89,12 +97,23 @@ onMounted(() => {
 
   // Green channel: Classic green monitor phosphor
   const G = function (x, y, t) {
-    return Math.floor(160 + 80 * Math.sin((x * x * Math.cos(t / 5) + y * y * Math.sin(t / 4)) / 350))
+    return Math.floor(
+      160
+      + 80
+      * Math.sin((x * x * Math.cos(t / 5) + y * y * Math.sin(t / 4)) / 350),
+    )
   }
 
   // Blue channel: Deep blue phosphor with subtle variation
   const B = function (x, y, t) {
-    return Math.floor(140 + 60 * Math.sin(4 * Math.sin(t / 10) + ((x - 100) * (x - 100) + (y - 100) * (y - 100)) / 900))
+    return Math.floor(
+      140
+      + 60
+      * Math.sin(
+        4 * Math.sin(t / 10)
+        + ((x - 100) * (x - 100) + (y - 100) * (y - 100)) / 900,
+      ),
+    )
   }
 
   /*
@@ -102,7 +121,12 @@ onMounted(() => {
    */
 
   // Create mesh with appropriate resolution for CRT phosphor simulation
-  const geometry = new THREE.PlaneGeometry(window.innerWidth / 2, 450, 110, 110)
+  const geometry = new THREE.PlaneGeometry(
+    window.innerWidth / 2,
+    450,
+    110,
+    110,
+  )
 
   // Create material with CRT shader
   const material = new THREE.ShaderMaterial({
@@ -150,7 +174,9 @@ onMounted(() => {
   const pixelateMaterial = new THREE.ShaderMaterial({
     uniforms: {
       tDiffuse: { value: null }, // Will hold the original rendered image
-      u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }, // Screen size
+      u_resolution: {
+        value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+      }, // Screen size
       intensity: { value: 0.25 }, // Moderate pixelation for CRT pixel grid
     },
     vertexShader: pixelateVertexShader,
@@ -207,7 +233,10 @@ onMounted(() => {
      */
 
     // Update organic movement with CRT-appropriate timing
-    mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(j * 0.7, j * 0.7)
+    mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(
+      j * 0.7,
+      j * 0.7,
+    )
 
     // Update phosphor colors using our CRT color functions
     mesh.material.uniforms.u_color1.value = new THREE.Vector3(

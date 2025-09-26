@@ -49,7 +49,12 @@ onMounted(() => {
 
   // Create the main 3D scene and camera
   const scene = new THREE.Scene() // Container for all 3D objects
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000,
+  )
 
   /*
    * POST-PROCESSING SETUP Create a second rendering pipeline for applying
@@ -57,7 +62,10 @@ onMounted(() => {
    */
 
   // Render target: like a canvas where we draw the original scene first
-  const renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight)
+  const renderTarget = new THREE.WebGLRenderTarget(
+    window.innerWidth,
+    window.innerHeight,
+  )
 
   // Post-processing scene: separate scene just for applying effects
   const postScene = new THREE.Scene()
@@ -88,12 +96,23 @@ onMounted(() => {
 
   // Green channel: Acid greens and electric limes
   const G = function (x, y, t) {
-    return Math.floor(180 + 75 * Math.sin((x * x * Math.cos(t / 3) + y * y * Math.sin(t / 2)) / 250))
+    return Math.floor(
+      180
+      + 75
+      * Math.sin((x * x * Math.cos(t / 3) + y * y * Math.sin(t / 2)) / 250),
+    )
   }
 
   // Blue channel: Electric blues and deep purples
   const B = function (x, y, t) {
-    return Math.floor(200 + 55 * Math.sin(3 * Math.sin(t / 8) + ((x - 100) * (x - 100) + (y - 100) * (y - 100)) / 800))
+    return Math.floor(
+      200
+      + 55
+      * Math.sin(
+        3 * Math.sin(t / 8)
+        + ((x - 100) * (x - 100) + (y - 100) * (y - 100)) / 800,
+      ),
+    )
   }
 
   /*
@@ -102,7 +121,12 @@ onMounted(() => {
 
   // Create a more organic mesh with higher resolution for smoother risograph
   // effects
-  const geometry = new THREE.PlaneGeometry(window.innerWidth / 1.5, 500, 120, 120)
+  const geometry = new THREE.PlaneGeometry(
+    window.innerWidth / 1.5,
+    500,
+    120,
+    120,
+  )
 
   // Create material with risograph shader
   const material = new THREE.ShaderMaterial({
@@ -150,7 +174,9 @@ onMounted(() => {
   const pixelateMaterial = new THREE.ShaderMaterial({
     uniforms: {
       tDiffuse: { value: null }, // Will hold the original rendered image
-      u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }, // Screen size
+      u_resolution: {
+        value: new THREE.Vector2(window.innerWidth, window.innerHeight),
+      }, // Screen size
       intensity: { value: 0.4 }, // Stronger pixelation for print texture
     },
     vertexShader: pixelateVertexShader,
@@ -207,7 +233,10 @@ onMounted(() => {
      */
 
     // Update organic movement with slower, more print-like motion
-    mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(j * 0.5, j * 0.5)
+    mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(
+      j * 0.5,
+      j * 0.5,
+    )
 
     // Update ink colors using our vibrant risograph color functions
     mesh.material.uniforms.u_color1.value = new THREE.Vector3(
@@ -257,8 +286,5 @@ onMounted(() => {
     RISOGRAPH CANVAS CONTAINER
     This div holds our Three.js canvas for the risograph print simulation
   -->
-  <div
-    ref="canvasContainer"
-    class="absolute top-0 left-0 h-full w-full"
-  />
+  <div ref="canvasContainer" class="absolute top-0 left-0 h-full w-full" />
 </template>

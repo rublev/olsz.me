@@ -93,7 +93,11 @@ function rgb(r, g, b) {
 function hexToRgb(hex) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
   return result
-    ? new THREE.Vector3(Number.parseInt(result[1], 16), Number.parseInt(result[2], 16), Number.parseInt(result[3], 16))
+    ? new THREE.Vector3(
+      Number.parseInt(result[1], 16),
+      Number.parseInt(result[2], 16),
+      Number.parseInt(result[3], 16),
+    )
     : new THREE.Vector3(255, 255, 255)
 }
 
@@ -112,9 +116,15 @@ onMounted(async () => {
    */
 
   // Dynamically import Three.js post-processing modules
-  const { EffectComposer } = await import('three/addons/postprocessing/EffectComposer.js')
-  const { RenderPass } = await import('three/addons/postprocessing/RenderPass.js')
-  const { HalftonePass } = await import('three/addons/postprocessing/HalftonePass.js')
+  const { EffectComposer } = await import(
+    'three/addons/postprocessing/EffectComposer.js',
+  )
+  const { RenderPass } = await import(
+    'three/addons/postprocessing/RenderPass.js',
+  )
+  const { HalftonePass } = await import(
+    'three/addons/postprocessing/HalftonePass.js',
+  )
 
   // Create the WebGL renderer (uses GPU for fast graphics)
   const renderer = new THREE.WebGLRenderer()
@@ -123,7 +133,12 @@ onMounted(async () => {
 
   // Create the main 3D scene and camera
   const scene = new THREE.Scene() // Container for all 3D objects
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000,
+  )
 
   /*
    * POST-PROCESSING SETUP
@@ -168,14 +183,25 @@ onMounted(async () => {
   // modulation The cos(t/4) and sin(t/3) make the pattern evolve slowly over
   // time
   const G = function (x, y, t) {
-    return Math.floor(192 + 64 * Math.sin((x * x * Math.cos(t / 4) + y * y * Math.sin(t / 3)) / 300))
+    return Math.floor(
+      192
+      + 64
+      * Math.sin((x * x * Math.cos(t / 4) + y * y * Math.sin(t / 3)) / 300),
+    )
   }
 
   // Blue channel: Radial patterns centered at (100,
   // 100) with complex time modulation The sin(t/9) creates very slow,
   // deep oscillations in the pattern
   const B = function (x, y, t) {
-    return Math.floor(192 + 64 * Math.sin(5 * Math.sin(t / 9) + ((x - 100) * (x - 100) + (y - 100) * (y - 100)) / 1100))
+    return Math.floor(
+      192
+      + 64
+      * Math.sin(
+        5 * Math.sin(t / 9)
+        + ((x - 100) * (x - 100) + (y - 100) * (y - 100)) / 1100,
+      ),
+    )
   }
 
   /*
@@ -184,7 +210,12 @@ onMounted(async () => {
 
   // Create a flat rectangle divided into a 100x100 grid of vertices
   // This gives us lots of points to distort with our vertex shader
-  const geometry = new THREE.PlaneGeometry(window.innerWidth / 2, 400, 100, 100)
+  const geometry = new THREE.PlaneGeometry(
+    window.innerWidth / 2,
+    400,
+    100,
+    100,
+  )
 
   // Create material with our custom shaders
   const material = new THREE.ShaderMaterial({
@@ -390,21 +421,22 @@ onMounted(async () => {
       <!-- Main Enable/Disable Toggle -->
       <div class="mb-4">
         <label class="flex items-center gap-2">
-          <input
-            v-model="controls.enabled"
-            type="checkbox"
-            class="h-4 w-4"
-          >
-          <span>Enable Effect</span>
+          <input v-model="controls.enabled" type="checkbox" class="h-4 w-4">
+          <span>
+            Enable Effect
+          </span>
         </label>
       </div>
 
       <!-- Mode Toggle -->
       <div class="mb-4">
-        <label class="mb-2 block text-sm font-medium">Mode</label>
+        <label class="mb-2 block text-sm font-medium">
+          Mode
+        </label>
         <div class="flex gap-2">
           <button
-            class="rounded px-3 py-1 text-sm transition-colors" :class="[
+            class="rounded px-3 py-1 text-sm transition-colors"
+            :class="[
               controls.mode === 'mathematical'
                 ? 'bg-blue-600 text-white'
                 : `
@@ -417,11 +449,14 @@ onMounted(async () => {
             Mathematical
           </button>
           <button
-            class="rounded px-3 py-1 text-sm transition-colors" :class="[
-              controls.mode === 'manual' ? 'bg-purple-600 text-white' : `
-                bg-gray-600 text-gray-300
-                hover:bg-gray-500
-              `,
+            class="rounded px-3 py-1 text-sm transition-colors"
+            :class="[
+              controls.mode === 'manual'
+                ? 'bg-purple-600 text-white'
+                : `
+                  bg-gray-600 text-gray-300
+                  hover:bg-gray-500
+                `,
             ]"
             @click="controls.mode = 'manual'"
           >
@@ -431,17 +466,16 @@ onMounted(async () => {
       </div>
 
       <!-- Manual Color Controls (only shown in manual mode) -->
-      <div
-        v-if="controls.mode === 'manual'"
-        class="mb-4"
-      >
+      <div v-if="controls.mode === 'manual'" class="mb-4">
         <h3 class="mb-3 text-sm font-medium">
           Colors
         </h3>
 
         <!-- Color Presets -->
         <div class="mb-3">
-          <label class="mb-2 block text-xs font-medium">Presets</label>
+          <label class="mb-2 block text-xs font-medium">
+            Presets
+          </label>
           <div class="grid grid-cols-2 gap-2">
             <button
               v-for="preset in controls.presets"
@@ -460,7 +494,9 @@ onMounted(async () => {
         <!-- Individual Color Pickers -->
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="mb-1 block text-xs font-medium">Background</label>
+            <label class="mb-1 block text-xs font-medium">
+              Background
+            </label>
             <input
               v-model="controls.colors.bg"
               type="color"
@@ -468,7 +504,9 @@ onMounted(async () => {
             >
           </div>
           <div>
-            <label class="mb-1 block text-xs font-medium">BG Main</label>
+            <label class="mb-1 block text-xs font-medium">
+              BG Main
+            </label>
             <input
               v-model="controls.colors.bgMain"
               type="color"
@@ -476,7 +514,9 @@ onMounted(async () => {
             >
           </div>
           <div>
-            <label class="mb-1 block text-xs font-medium">Color 1</label>
+            <label class="mb-1 block text-xs font-medium">
+              Color 1
+            </label>
             <input
               v-model="controls.colors.color1"
               type="color"
@@ -484,7 +524,9 @@ onMounted(async () => {
             >
           </div>
           <div>
-            <label class="mb-1 block text-xs font-medium">Color 2</label>
+            <label class="mb-1 block text-xs font-medium">
+              Color 2
+            </label>
             <input
               v-model="controls.colors.color2"
               type="color"
@@ -517,7 +559,9 @@ onMounted(async () => {
 
         <!-- Shape Control -->
         <div class="mb-3">
-          <label class="mb-2 block text-xs font-medium">Shape</label>
+          <label class="mb-2 block text-xs font-medium">
+            Shape
+          </label>
           <select
             v-model.number="controls.halftone.shape"
             class="w-full rounded bg-gray-700 p-1 text-xs"
@@ -539,7 +583,9 @@ onMounted(async () => {
 
         <!-- Radius Control -->
         <div class="mb-3">
-          <label class="mb-2 block text-xs font-medium">Radius: {{ controls.halftone.radius }}</label>
+          <label class="mb-2 block text-xs font-medium">
+            Radius: {{ controls.halftone.radius }}
+          </label>
           <input
             v-model.number="controls.halftone.radius"
             type="range"
@@ -552,7 +598,10 @@ onMounted(async () => {
 
         <!-- Rotation Controls -->
         <div class="mb-3">
-          <label class="mb-2 block text-xs font-medium">Red Rotation: {{ Math.round((controls.halftone.rotateR * 180) / Math.PI) }}°</label>
+          <label class="mb-2 block text-xs font-medium">
+            Red Rotation:
+            {{ Math.round((controls.halftone.rotateR * 180) / Math.PI) }}°
+          </label>
           <input
             v-model.number="controls.halftone.rotateR"
             type="range"
@@ -564,7 +613,10 @@ onMounted(async () => {
         </div>
 
         <div class="mb-3">
-          <label class="mb-2 block text-xs font-medium">Green Rotation: {{ Math.round((controls.halftone.rotateG * 180) / Math.PI) }}°</label>
+          <label class="mb-2 block text-xs font-medium">
+            Green Rotation:
+            {{ Math.round((controls.halftone.rotateG * 180) / Math.PI) }}°
+          </label>
           <input
             v-model.number="controls.halftone.rotateG"
             type="range"
@@ -576,7 +628,10 @@ onMounted(async () => {
         </div>
 
         <div class="mb-3">
-          <label class="mb-2 block text-xs font-medium">Blue Rotation: {{ Math.round((controls.halftone.rotateB * 180) / Math.PI) }}°</label>
+          <label class="mb-2 block text-xs font-medium">
+            Blue Rotation:
+            {{ Math.round((controls.halftone.rotateB * 180) / Math.PI) }}°
+          </label>
           <input
             v-model.number="controls.halftone.rotateB"
             type="range"
@@ -589,7 +644,9 @@ onMounted(async () => {
 
         <!-- Scatter Control -->
         <div class="mb-3">
-          <label class="mb-2 block text-xs font-medium">Scatter: {{ controls.halftone.scatter.toFixed(2) }}</label>
+          <label class="mb-2 block text-xs font-medium">
+            Scatter: {{ controls.halftone.scatter.toFixed(2) }}
+          </label>
           <input
             v-model.number="controls.halftone.scatter"
             type="range"
@@ -602,7 +659,9 @@ onMounted(async () => {
 
         <!-- Blending Control -->
         <div class="mb-3">
-          <label class="mb-2 block text-xs font-medium">Blending: {{ controls.halftone.blending.toFixed(2) }}</label>
+          <label class="mb-2 block text-xs font-medium">
+            Blending: {{ controls.halftone.blending.toFixed(2) }}
+          </label>
           <input
             v-model.number="controls.halftone.blending"
             type="range"
@@ -615,7 +674,9 @@ onMounted(async () => {
 
         <!-- Blending Mode Control -->
         <div class="mb-3">
-          <label class="mb-2 block text-xs font-medium">Blending Mode</label>
+          <label class="mb-2 block text-xs font-medium">
+            Blending Mode
+          </label>
           <select
             v-model.number="controls.halftone.blendingMode"
             class="w-full rounded bg-gray-700 p-1 text-xs"
@@ -646,7 +707,9 @@ onMounted(async () => {
               type="checkbox"
               class="h-4 w-4"
             >
-            <span class="text-xs">Greyscale</span>
+            <span class="text-xs">
+              Greyscale
+            </span>
           </label>
         </div>
 
@@ -658,7 +721,9 @@ onMounted(async () => {
               type="checkbox"
               class="h-4 w-4"
             >
-            <span class="text-xs">Disable Halftone</span>
+            <span class="text-xs">
+              Disable Halftone
+            </span>
           </label>
         </div>
       </div>
@@ -666,10 +731,12 @@ onMounted(async () => {
       <!-- Mode Description -->
       <div class="text-xs text-gray-400">
         <div v-if="controls.mode === 'mathematical'">
-          🌈 Mathematical mode uses complex functions to create organic, rainbow-like gradients that change over time
+          🌈 Mathematical mode uses complex functions to create organic,
+          rainbow-like gradients that change over time
         </div>
         <div v-else>
-          🎨 Manual mode lets you pick specific colors and create custom gradient combinations
+          🎨 Manual mode lets you pick specific colors and create custom
+          gradient combinations
         </div>
       </div>
     </div>
@@ -678,19 +745,19 @@ onMounted(async () => {
 
 <style lang="css">
 /* Custom range slider styling for dark theme */
-input[type='range'] {
+input[type="range"] {
   appearance: none;
   background: transparent;
   cursor: pointer;
 }
 
-input[type='range']::-webkit-slider-track {
+input[type="range"]::-webkit-slider-track {
   background: #374151;
   height: 4px;
   border-radius: 2px;
 }
 
-input[type='range']::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   height: 16px;
   width: 16px;
@@ -700,14 +767,14 @@ input[type='range']::-webkit-slider-thumb {
   border: none;
 }
 
-input[type='range']::-moz-range-track {
+input[type="range"]::-moz-range-track {
   background: #374151;
   height: 4px;
   border-radius: 2px;
   border: none;
 }
 
-input[type='range']::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
   height: 16px;
   width: 16px;
   border-radius: 50%;
@@ -717,18 +784,18 @@ input[type='range']::-moz-range-thumb {
 }
 
 /* Custom color input styling */
-input[type='color'] {
+input[type="color"] {
   border: none;
   cursor: pointer;
 }
 
-input[type='color']::-webkit-color-swatch-wrapper {
+input[type="color"]::-webkit-color-swatch-wrapper {
   padding: 0;
   border-radius: 4px;
   overflow: hidden;
 }
 
-input[type='color']::-webkit-color-swatch {
+input[type="color"]::-webkit-color-swatch {
   border: none;
   border-radius: 4px;
 }

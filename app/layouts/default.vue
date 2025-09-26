@@ -1,13 +1,11 @@
 <script setup></script>
 
 <template>
-  <div
+  <!-- <div
     class="flex min-h-screen flex-col-reverse"
-  >
-    <Header />
-    <main class="min-h-screen flex-grow p-4">
-      <slot />
-    </main>
-    <Footer class="mt-auto" />
-  </div>
+  > -->
+  <main class="min-h-screen flex-grow p-4">
+    <Header /><slot /><Footer class="mt-auto" />
+  </main>
+  <!-- </div> -->
 </template>
