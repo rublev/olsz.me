@@ -21,6 +21,7 @@ export default antfu(
       ...betterTW.configs['recommended-error'].rules,
     },
   },
+  // vue rules
   {
     rules: {
       'vue/block-order': [
@@ -30,6 +31,21 @@ export default antfu(
         },
       ],
       'vue/multi-word-component-names': 'off',
+      'vue/singleline-html-element-content-newline': [
+        'error',
+        {
+          ignoreWhenNoAttributes: true,
+          ignoreWhenEmpty: true,
+          ignores: ['pre', 'textarea'],
+        },
+      ],
+      'vue/max-attributes-per-line': [
+        'error',
+        {
+          singleline: { max: 3 },
+          multiline: { max: 1 },
+        },
+      ],
     },
   },
   {
