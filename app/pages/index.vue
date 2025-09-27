@@ -1,5 +1,7 @@
 <script setup>
-/* const isAnyHovered = ref(false)
+import { ref } from 'vue'
+
+const isAnyHovered = ref(false)
 
 function handleCardHover() {
   isAnyHovered.value = true
@@ -58,10 +60,13 @@ const projects = [
     brandColor: '#ffe9bf',
   },
   {
- * href: 'https://web.archive.org/web/20221024023347/https://supaglobal.com/',
- * title: 'Supa Global', initials: 'CP', iconBgClass: 'bg-purple-600', role:
- * 'Senior Software Developer', period: 'Jun 2018 - Sep 2019', brandColor:
- * '#2e54f9',
+    href: 'https://web.archive.org/web/20221024023347/https://supaglobal.com/',
+    title: 'Supa Global',
+    initials: 'SG',
+    iconBgClass: 'bg-purple-600',
+    role: 'Senior Software Developer',
+    period: 'Jun 2018 - Sep 2019',
+    brandColor: '#2e54f9',
   },
   {
     href: 'https://consensys.io',
@@ -101,10 +106,8 @@ const projects = [
   },
 ]
 
-dd
-
 const currentProjects = projects.filter(project => project.isCurrentWork)
-const workHistory = projects.filter(project => !project.isCurrentWork) */
+const workHistory = projects.filter(project => !project.isCurrentWork)
 </script>
 
 <template>
@@ -129,7 +132,7 @@ const workHistory = projects.filter(project => !project.isCurrentWork) */
       </p>
     </section>
 
-    <!-- <section>
+    <section>
       <h2 class="mb-6 text-sm font-medium text-gray-400">
         Current Projects
       </h2>
@@ -171,6 +174,6 @@ const workHistory = projects.filter(project => !project.isCurrentWork) */
           @unhover="handleCardUnhover"
         />
       </div>
-    </section> -->
+    </section>
   </main>
 </template>
