@@ -3,6 +3,11 @@
   "type": "module",
   "private": true,
   "packageManager": "pnpm@10.17.1",
+  "browserslist": [
+    ">0.3%, defaults, last 2 versions, not dead",
+    "iOS >= 12",
+    "Safari >= 12"
+  ],
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
