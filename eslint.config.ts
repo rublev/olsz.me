@@ -67,7 +67,7 @@ export default antfu(
           mode: 'compact-on-overflow',
           maxLength: 80,
           logicalWrap: true,
-          ignoreUrls: false,
+          ignoreUrls: true,
           ignoreCommentsWithCode: true,
           semanticComments: ['```'],
         },
