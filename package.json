@@ -18,6 +18,11 @@
     "preview-build": "nuxt build && nuxt preview",
     "typecheck": "nuxt typecheck"
   },
+  "browserslist": [
+    ">0.3%, defaults, last 2 versions, not dead",
+    "iOS >= 12",
+    "Safari >= 12"
+  ],
   "dependencies": {
     "@antfu/eslint-config": "5.4.1",
     "@iconify-json/mdi": "^1.2.3",
