@@ -10,9 +10,7 @@
     "
   >
     <div class="flex flex-col gap-2">
-      <span>
-        &copy; 2010-2025 Marcel Olszewski
-      </span>
+      <span> &copy; 2010-2025 Marcel Olszewski </span>
     </div>
     <div class="flex items-center">
       <Icon name="svg:logo-bw" class="h-[20px] w-[33px] opacity-60" />

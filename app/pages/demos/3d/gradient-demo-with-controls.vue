@@ -496,9 +496,7 @@ onMounted(() => {
       <div class="mb-4">
         <label class="flex items-center gap-2">
           <input v-model="controls.enabled" type="checkbox" class="h-4 w-4">
-          <span>
-            Enable Effect
-          </span>
+          <span> Enable Effect </span>
         </label>
       </div>
 

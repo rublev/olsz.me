@@ -25,12 +25,8 @@ export default {
         "
       >
         <div>
-          <p>
-            Phone: +1 (647) 834-8234
-          </p>
-          <p>
-            Email: marcel.olszewski@gmail.com
-          </p>
+          <p>Phone: +1 (647) 834-8234</p>
+          <p>Email: marcel.olszewski@gmail.com</p>
         </div>
         <div>
           <p>
@@ -421,16 +417,12 @@ export default {
 
       <div class="space-y-2 text-sm text-foreground">
         <p>
-          <strong>
-            Through Stratosphere.digital:
-          </strong>
+          <strong> Through Stratosphere.digital: </strong>
           Driveway.app, Secureframe, SignupMedia, Ways2Well, Vitalsphere,
           Steeprock OLA
         </p>
         <p>
-          <strong>
-            Select Clients:
-          </strong>
+          <strong> Select Clients: </strong>
           Valery.ca, ConsenSys, Knit People, BRD/Breadwallet (Acquired),
           Keyhole, NorthernBlock, VeriTransfer, SimpleTax (Acquired), Interad,
           Redstamp, RBC Royal Bank
@@ -447,9 +439,7 @@ export default {
       <div class="space-y-4 text-sm text-foreground">
         <div>
           <p>
-            <strong>
-              Expert:
-            </strong>
+            <strong> Expert: </strong>
             AWS, JavaScript, TypeScript, Node.js, Vue.js, React, Svelte, HTMX,
             WebGL, Docker, API Design, PostgreSQL, Natural Language Processing,
             LLM, AI Agent, UI/UX Design, Full Stack Development
@@ -457,9 +447,7 @@ export default {
         </div>
         <div>
           <p>
-            <strong>
-              Proficient:
-            </strong>
+            <strong> Proficient: </strong>
             C++17, OpenXR API, DirectX 11, Quaternion Mathematics, Windows API,
             Python, React Native, Ruby on Rails, A/B Testing, Firebase, Google
             Cloud, Serverless, Webpack, Adobe Suite
@@ -476,15 +464,11 @@ export default {
 
       <div class="space-y-2 text-sm text-foreground">
         <p>
-          <strong>
-            Fluent:
-          </strong>
+          <strong> Fluent: </strong>
           English, Polish
         </p>
         <p>
-          <strong>
-            Learning:
-          </strong>
+          <strong> Learning: </strong>
           German, Ukrainian
         </p>
       </div>

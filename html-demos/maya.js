@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-expressions */
+
 !(function () {
-  'use strict'
   const e = {}
   const t = {}
   function n(r) {
