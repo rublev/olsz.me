@@ -3,24 +3,25 @@ import tailwindcss from '@tailwindcss/vite'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/devtools',
-    '@nuxt/fonts',
-    '@nuxt/icon',
-    '@nuxt/image',
-    '@nuxt/scripts',
-    '@nuxt/ui',
-    '@vueuse/nuxt',
     '@nuxt/eslint',
-    'nuxt-eslint-auto-explicit-import',
+    '@nuxt/fonts',
+    '@nuxt/image', // why does this add +20mb to my bundle size?
+    '@nuxt/icon',
+    '@vueuse/nuxt',
   ],
+  ignore: ['app/pages/demos/**'],
+  vueuse: {
+    // Only auto-import specific VueUse functions you actually use
+    ssrHandlers: false,
+  },
   fonts: {
     defaults: {
-      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
-      styles: ['normal', 'italic'],
+      weights: [400, 600, 700], // Only load weights you actually use
+      styles: ['normal'],
     },
     families: [
       { name: 'Syne', provider: 'google' },
-      { name: 'JetBrains Mono', provider: 'google' },
+      // Remove JetBrains Mono if not used
     ],
   },
   future: {
@@ -39,7 +40,21 @@ export default defineNuxtConfig({
     typeCheck: false,
     strict: true,
   },
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    build: {
+      sourcemap: false, // Disable sourcemaps to fix Tailwind warning
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // Split vendor libraries into separate chunks
+            'vue-vendor': ['vue', 'vue-router'],
+            'nuxt-vendor': ['nuxt/app'],
+          },
+        },
+      },
+    },
+  },
   css: ['./app/assets/css/main.css'],
   icon: {
     // makes bundle smaller only include mdi icons
