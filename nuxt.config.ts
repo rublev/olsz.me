@@ -42,6 +42,11 @@ export default defineNuxtConfig({
   vite: { plugins: [tailwindcss()] },
   css: ['./app/assets/css/main.css'],
   icon: {
+    // makes bundle smaller only include mdi icons
+    serverBundle: {
+      collections: ['mdi'],
+    },
+    mode: 'svg',
     customCollections: [
       {
         prefix: 'svg',
