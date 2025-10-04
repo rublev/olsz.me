@@ -14,6 +14,16 @@ export default antfu(
     settings: {
       'better-tailwindcss': {
         entryPoint: 'app/assets/css/main.css',
+        attributes: [
+          'class',
+          'className',
+          'enter-active-class',
+          'leave-active-class',
+          'enter-from-class',
+          'enter-to-class',
+          'leave-from-class',
+          'leave-to-class',
+        ],
       },
     },
     rules: {
