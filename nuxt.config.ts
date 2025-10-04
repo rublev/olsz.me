@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     },
     families: [
       { name: 'Syne', provider: 'google' },
-      // Remove JetBrains Mono if not used
+      { name: 'Inter', provider: 'google' },
     ],
   },
   future: {
