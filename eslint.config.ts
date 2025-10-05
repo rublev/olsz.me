@@ -63,6 +63,7 @@ export default antfu(
           multiline: { max: 1 },
         },
       ],
+      'eslint-comments/no-unlimited-disable': 'off',
     },
   },
   {

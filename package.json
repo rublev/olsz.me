@@ -13,7 +13,7 @@
     "postinstall": "nuxt prepare",
     "lint": "pnpm lint:js && pnpm lint:style",
     "lint:js": "eslint . --fix --config eslint.config.ts",
-    "lint:style": "stylelint **/*.{vue,css} --fix --ignore-path .gitignore",
+    "lint:style": "stylelint **/*.{vue,css} --fix --ignore-path .stylelintignore",
     "preview": "nuxt preview",
     "preview-build": "nuxt build && nuxt preview",
     "typecheck": "nuxt typecheck"
