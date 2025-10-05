@@ -2,24 +2,27 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 
 // animation timing constants
-const WIDTH_SHRINK_DELAY = 500
-const CHEVRON_SHOW_DELAY = 2000
-const EXPAND_TEXT_DELAY = 500
-const SCROLL_TOP_THRESHOLD = 200
+const WIDTH_SHRINK_DELAY = 0
+const EXPAND_TEXT_DELAY = 0
+const SCROLL_TOP_THRESHOLD = 10
 const DIRECTION_THRESHOLD = 30
-const MEASURE_WIDTH_DELAY = 500
 
 const isScrolled = ref(false)
 const isCollapsed = ref(false)
 const headerRef = ref(null)
-const naturalWidth = ref() // fallback
 const lastScrollY = ref(0)
 const scrollThreshold = ref(0)
+const naturalWidth = ref() // natural width
+const originalNaturalWidth = ref() // natural width
+
+// social
+const socialRef = ref()
+const socialNaturalWidth = ref()
+const socialOriginalNaturalWidth = ref()
 
 // staggered animation states
 const textFading = ref(false)
 const widthShrinking = ref(false)
-const chevronVisible = ref(false)
 
 // animation control
 const animationTimeouts = ref([])
@@ -46,14 +49,10 @@ function collapse() {
 
   const timeout1 = setTimeout(() => {
     widthShrinking.value = true
+    isAnimating.value = false
   }, WIDTH_SHRINK_DELAY)
 
-  const timeout2 = setTimeout(() => {
-    chevronVisible.value = true
-    isAnimating.value = false
-  }, CHEVRON_SHOW_DELAY)
-
-  animationTimeouts.value.push(timeout1, timeout2)
+  animationTimeouts.value.push(timeout1)
   isCollapsed.value = true
 }
 
@@ -65,7 +64,6 @@ function expand() {
   clearAnimationTimeouts()
   isAnimating.value = true
 
-  chevronVisible.value = false
   widthShrinking.value = false
 
   const timeout = setTimeout(() => {
@@ -75,18 +73,6 @@ function expand() {
 
   animationTimeouts.value.push(timeout)
   isCollapsed.value = false
-}
-
-function toggleMenu(event) {
-  event.preventDefault()
-  event.stopPropagation()
-
-  if (isCollapsed.value) {
-    expand()
-  }
-  else {
-    collapse()
-  }
 }
 
 function handleScroll() {
@@ -129,115 +115,116 @@ function handleScroll() {
   if (scrollAccumulator.value >= DIRECTION_THRESHOLD && !isAnimating.value) {
     scrollAccumulator.value = 0
 
-    if (currentScrollY > SCROLL_TOP_THRESHOLD) {
-      if (currentDirection.value === 'down' && !isCollapsed.value) {
-        collapse()
-      }
-      else if (currentDirection.value === 'up' && isCollapsed.value) {
-        expand()
-      }
+    if (currentDirection.value === 'down' && !isCollapsed.value && currentScrollY > SCROLL_TOP_THRESHOLD) {
+      collapse()
+    }
+    else if (currentDirection.value === 'up' && isCollapsed.value) {
+      expand()
     }
   }
 
   lastScrollY.value = currentScrollY
 }
 
+function measureWidth(refElement, varNames) {
+  if (!refElement.value)
+    return
+
+  const names = Array.isArray(varNames) ? varNames : [varNames]
+  const width = refElement.value.scrollWidth
+
+  names.forEach((varName) => {
+    varName.value = width
+  })
+}
+
 onMounted(async () => {
   window.addEventListener('scroll', handleScroll)
-
-  // wait for render then measure width - social links always rendered now
-  await new Promise(resolve => setTimeout(resolve, MEASURE_WIDTH_DELAY))
-  if (headerRef.value) {
-    naturalWidth.value = headerRef.value.scrollWidth
-  }
+  measureWidth(headerRef, [naturalWidth, originalNaturalWidth])
+  measureWidth(socialRef, [socialNaturalWidth, socialOriginalNaturalWidth])
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
-
-  // cleanup timers
   clearAnimationTimeouts()
 })
 </script>
 
 <template>
-  <header
-    ref="headerRef"
+  <div
     class="
-      fixed bottom-4 left-1/2 z-30 flex -translate-x-1/2 items-center
-      justify-center rounded-full bg-[#5553] text-white backdrop-blur
+      fixed inset-x-0 bottom-0 z-20 h-20 bg-gradient-to-t from-black
+      to-transparent transition-opacity duration-600
     "
-    :style="{
-      width: widthShrinking
-        ? '48px'
-        : naturalWidth
-          ? `${naturalWidth}px`
-          : 'auto',
-      padding: widthShrinking ? '8px' : '16px',
-      gap: widthShrinking ? '0' : '8px',
-      transition: 'all 400ms ease-in-out',
-    }"
+    :class="[isCollapsed ? 'opacity-0' : 'opacity-100']"
   >
-    <Transition
-      enter-active-class="transition-opacity duration-500 ease-out"
-      leave-active-class="transition-opacity duration-300 ease-in"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <button
-        v-if="chevronVisible"
-        class="
-          absolute inset-0 flex touch-manipulation items-center justify-center
-        "
-        @click="toggleMenu"
-      >
-        <Icon name="mdi:chevron-up" mode="css" class="h-4 w-4" />
-      </button>
-    </Transition>
-
-    <div
+    <header
+      ref="headerRef"
       class="
-        flex items-center gap-3 overflow-hidden transition-opacity
-        duration-[1000ms] ease-out
+        fixed bottom-4 left-4 z-30 flex items-center justify-start rounded-full
+        font-inter text-white
       "
-      :class="[textFading ? 'opacity-0' : 'opacity-100']"
+      :style="{
+        width: widthShrinking
+          ? '0px'
+          : `${naturalWidth}px`,
+        gap: widthShrinking ? '0' : '8px',
+        transition: 'all 400ms ease-in-out',
+      }"
     >
-      <a href="/" class="flex items-center">
-        <Icon name="svg:logo-color" class="h-[22px]" />
-      </a>
-      <nav class="flex items-center gap-2">
-        <a
-          href="/resume"
-          class="
-            transition-all duration-200
-            hover:text-blue-200
-          "
-        >
-          Resume
+      <div
+        class="
+          flex items-center justify-start gap-3 overflow-hidden
+          transition-opacity duration-[1000ms] ease-in-out
+        "
+        :class="[textFading ? 'opacity-0' : 'opacity-100']"
+      >
+        <a href="/" class="flex items-center">
+          <Icon name="svg:logo-color" class="h-[22px]" />
         </a>
-        <a
-          href="/contact"
-          class="
-            transition-all duration-200
-            hover:text-blue-200
-          "
-        >
-          Contact
-        </a>
-      </nav>
-      <nav class="flex gap-2">
-        <a
-          href="https://app.10xmanagement.com/clients/marcel-olszewski-16302/profile"
-          target="_blank"
-          class="
-            border-red-500 leading-none transition-all duration-200
-            hover:text-blue-200
-          "
-        >
-          10x
-        </a>
+        <nav class="flex items-center gap-2">
+          <a
+            href="/resume"
+            class="
+              transition-all duration-200
+              hover:text-blue-200
+            "
+          >
+            Resume
+          </a>
+          <a
+            href="/contact"
+            class="
+              transition-all duration-200
+              hover:text-blue-200
+            "
+          >
+            Contact
+          </a>
+        </nav>
+      </div>
+    </header>
+    <header
+      ref="socialRef"
+      class="
+        fixed right-4 bottom-4 z-30 flex items-center justify-start rounded-full
+        font-inter text-white
+      "
+      :style="{
+        width: widthShrinking
+          ? '0px'
+          : `${socialNaturalWidth}px`,
+        gap: widthShrinking ? '0' : '8px',
+        transition: 'all 400ms ease-in-out',
+      }"
+    >
+      <div
+        class="
+          flex items-center justify-start gap-3 overflow-hidden
+          transition-opacity duration-[1000ms] ease-in-out
+        "
+        :class="[textFading ? 'opacity-0' : 'opacity-100']"
+      >
         <a
           href="https://linkedin.com/in/marcelolszewski"
           target="_blank"
@@ -246,7 +233,7 @@ onUnmounted(() => {
             hover:text-blue-200
           "
         >
-          <Icon mode="css" name="mdi:linkedin" class="h-4 w-4" />
+          <Icon name="mdi:linkedin" class="h-5 w-5" />
         </a>
         <a
           href="https://github.com/marcelolszewski"
@@ -256,9 +243,19 @@ onUnmounted(() => {
             hover:text-blue-200
           "
         >
-          <Icon mode="css" name="mdi:github" class="h-4 w-4" />
+          <Icon name="mdi:github" class="h-5 w-5" />
         </a>
-      </nav>
-    </div>
-  </header>
+        <a
+          href="https://app.10xmanagement.com/clients/marcel-olszewski-16302/profile"
+          target="_blank"
+          class="
+            border-red-500 leading-none transition-all duration-200
+            hover:text-blue-200
+          "
+        >
+          <Icon name="svg:logo-10x" class="h-5" />
+        </a>
+      </div>
+    </header>
+  </div>
 </template>
