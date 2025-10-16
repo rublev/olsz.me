@@ -30,6 +30,13 @@ export default antfu(
       /* Enable comprehensive Tailwind CSS linting */
       ...betterTW.configs['recommended-error'].rules,
       /**
+       * keeping this here but commented because i'm definitely going to forget
+       * how to do this in the future
+       */
+      // 'better-tailwindcss/no-unregistered-classes': ['error', {
+      //   ignore: ['^CLASSNAME$'],
+      // }],
+      /**
        * if using prettier enable this and set eslint + prettier print width to
        * the same size:
        * https://github.com/schoero/eslint-plugin-better-tailwindcss/issues/45

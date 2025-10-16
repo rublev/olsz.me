@@ -14,16 +14,6 @@ export default defineNuxtConfig({
     // Only auto-import specific VueUse functions you actually use
     ssrHandlers: false,
   },
-  fonts: {
-    defaults: {
-      weights: [400, 600, 700], // Only load weights you actually use
-      styles: ['normal'],
-    },
-    families: [
-      { name: 'Syne', provider: 'google' },
-      { name: 'Inter', provider: 'google' },
-    ],
-  },
   future: {
     compatibilityVersion: 4,
   },
