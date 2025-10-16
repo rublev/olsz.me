@@ -1,11 +1,30 @@
 <script setup></script>
 
 <template>
-  <!-- <div
-    class="flex min-h-screen flex-col-reverse"
-  > -->
-  <main class="min-h-screen flex-grow p-4">
-    <Header /><slot /><Footer class="mt-auto" />
-  </main>
-  <!-- </div> -->
+  <div class="relative min-h-screen">
+    <!-- orpheus pinned to the bottom of the page -->
+    <div class="pointer-events-none fixed inset-x-0 bottom-0 z-0">
+      <img
+        src="/assets/animations/orpheus.gif"
+        alt=""
+        class="h-auto w-full"
+        style="image-rendering: pixelated;"
+      >
+    </div>
+
+    <!-- content -->
+    <main
+      class="
+        relative z-10 min-h-screen flex-grow p-8
+        md:p-4
+      "
+    >
+      <Header />
+      <slot />
+      <!-- <Footer class="mt-auto" /> -->
+    </main>
+
+    <!-- vignette overlay -->
+    <PixelatedVignette :pixel-size="8" :intensity="0.1" color="#000000" />
+  </div>
 </template>

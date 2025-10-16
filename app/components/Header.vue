@@ -1,90 +1,70 @@
 <script setup>
+import { useMediaQuery } from '@vueuse/core'
 import { onMounted, onUnmounted, ref } from 'vue'
+import GLYPHS from '@/assets/glyphs.json'
 
-// animation timing constants
-const WIDTH_SHRINK_DELAY = 0
-const EXPAND_TEXT_DELAY = 0
 const SCROLL_TOP_THRESHOLD = 10
 const DIRECTION_THRESHOLD = 30
 
-const isScrolled = ref(false)
 const isCollapsed = ref(false)
 const headerRef = ref(null)
+const socialRef = ref(null)
 const lastScrollY = ref(0)
-const scrollThreshold = ref(0)
-const naturalWidth = ref() // natural width
-const originalNaturalWidth = ref() // natural width
-
-// social
-const socialRef = ref()
+const naturalWidth = ref()
 const socialNaturalWidth = ref()
-const socialOriginalNaturalWidth = ref()
 
-// staggered animation states
 const textFading = ref(false)
 const widthShrinking = ref(false)
 
-// animation control
-const animationTimeouts = ref([])
-const isAnimating = ref(false)
-
-// track scroll direction with threshold
 const scrollAccumulator = ref(0)
-const currentDirection = ref(null) // up/down/null
+const currentDirection = ref(null)
 
-function clearAnimationTimeouts() {
-  animationTimeouts.value.forEach(timeout => clearTimeout(timeout))
-  animationTimeouts.value = []
+const isDesktop = useMediaQuery('(min-width: 768px)')
+
+// THEME SWITCHER
+const isDark = ref(false)
+
+function toggleTheme() {
+  isDark.value = !isDark.value
+  const newTheme = isDark.value ? 'dark' : 'light'
+
+  sessionStorage.setItem('theme', newTheme)
+
+  if (isDark.value) {
+    document.documentElement.classList.add('dark')
+  }
+  else {
+    document.documentElement.classList.remove('dark')
+  }
 }
 
 function collapse() {
-  if (isCollapsed.value || isAnimating.value)
+  if (isCollapsed.value)
     return
 
-  // clear pending animations
-  clearAnimationTimeouts()
-  isAnimating.value = true
-
   textFading.value = true
-
-  const timeout1 = setTimeout(() => {
-    widthShrinking.value = true
-    isAnimating.value = false
-  }, WIDTH_SHRINK_DELAY)
-
-  animationTimeouts.value.push(timeout1)
+  widthShrinking.value = true
   isCollapsed.value = true
 }
 
 function expand() {
-  if (!isCollapsed.value || isAnimating.value)
+  if (!isCollapsed.value)
     return
 
-  // clear pending animations
-  clearAnimationTimeouts()
-  isAnimating.value = true
-
   widthShrinking.value = false
-
-  const timeout = setTimeout(() => {
-    textFading.value = false
-    isAnimating.value = false
-  }, EXPAND_TEXT_DELAY)
-
-  animationTimeouts.value.push(timeout)
+  textFading.value = false
   isCollapsed.value = false
 }
 
 function handleScroll() {
-  isScrolled.value = window.scrollY > scrollThreshold.value
+  // Skip collapse/expand on desktop
+  if (isDesktop.value)
+    return
 
   const currentScrollY = window.scrollY
 
   // at top? always expand
-  if (currentScrollY <= scrollThreshold.value && isCollapsed.value) {
-    // cancel animation and force expand
-    clearAnimationTimeouts()
-    isAnimating.value = false
+  if (currentScrollY <= 0 && isCollapsed.value) {
     scrollAccumulator.value = 0
     expand()
     lastScrollY.value = currentScrollY
@@ -111,8 +91,8 @@ function handleScroll() {
     scrollAccumulator.value += Math.abs(scrollDelta)
   }
 
-  // trigger if moved enough and not animating
-  if (scrollAccumulator.value >= DIRECTION_THRESHOLD && !isAnimating.value) {
+  // trigger if moved enough
+  if (scrollAccumulator.value >= DIRECTION_THRESHOLD) {
     scrollAccumulator.value = 0
 
     if (currentDirection.value === 'down' && !isCollapsed.value && currentScrollY > SCROLL_TOP_THRESHOLD) {
@@ -126,136 +106,165 @@ function handleScroll() {
   lastScrollY.value = currentScrollY
 }
 
-function measureWidth(refElement, varNames) {
-  if (!refElement.value)
-    return
-
-  const names = Array.isArray(varNames) ? varNames : [varNames]
-  const width = refElement.value.scrollWidth
-
-  names.forEach((varName) => {
-    varName.value = width
-  })
+function measureWidth(refElement) {
+  return refElement.value?.scrollWidth
 }
 
-onMounted(async () => {
+onMounted(() => {
   window.addEventListener('scroll', handleScroll)
-  measureWidth(headerRef, [naturalWidth, originalNaturalWidth])
-  measureWidth(socialRef, [socialNaturalWidth, socialOriginalNaturalWidth])
+  naturalWidth.value = measureWidth(headerRef)
+  socialNaturalWidth.value = measureWidth(socialRef)
+
+  // Initialize isDark from current state
+  isDark.value = document.documentElement.classList.contains('dark')
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
-  clearAnimationTimeouts()
 })
 </script>
 
 <template>
   <div
     class="
-      fixed inset-x-0 bottom-0 z-20 h-20 bg-gradient-to-t from-black
-      to-transparent transition-opacity duration-600
+      fixed inset-x-0 right-0 bottom-0 left-0 z-20 flex h-15 flex-col
+      items-center bg-black px-8 transition-opacity duration-600
+      before:pointer-events-none before:absolute before:inset-x-0
+      before:bottom-15 before:h-10 before:bg-gradient-to-b
+      before:from-transparent before:to-black before:content-['']
+      md:relative md:bg-transparent md:p-4 md:opacity-100 md:before:hidden
     "
     :class="[isCollapsed ? 'opacity-0' : 'opacity-100']"
   >
-    <header
-      ref="headerRef"
+    <div
       class="
-        fixed bottom-4 left-4 z-30 flex items-center justify-start rounded-full
-        font-inter text-white
+        flex h-15 w-full items-center justify-between
+        md:max-w-2xl md:px-4
       "
-      :style="{
-        width: widthShrinking
-          ? '0px'
-          : `${naturalWidth}px`,
-        gap: widthShrinking ? '0' : '8px',
-        transition: 'all 400ms ease-in-out',
-      }"
     >
-      <div
+      <header
+        ref="headerRef"
         class="
-          flex items-center justify-start gap-3 overflow-hidden
-          transition-opacity duration-[1000ms] ease-in-out
+          flex items-center justify-start rounded-full text-white
+          md:w-auto
         "
-        :class="[textFading ? 'opacity-0' : 'opacity-100']"
+        :style="{
+          width: isDesktop ? 'auto' : (widthShrinking ? '0px' : (naturalWidth ? `${naturalWidth}px` : 'auto')),
+          gap: widthShrinking ? '0' : '8px',
+          transition: 'all 400ms ease-in-out',
+        }"
       >
-        <a href="/" class="flex items-center">
-          <Icon name="svg:logo-color" class="h-[22px]" />
-        </a>
-        <nav class="flex items-center gap-2">
-          <a
-            href="/resume"
+        <div
+          class="
+            flex items-center justify-start gap-3 transition-opacity
+            duration-[1000ms] ease-in-out
+            md:gap-4
+          "
+          :class="[textFading ? 'opacity-0' : 'opacity-100']"
+        >
+          <a href="/" class="flex shrink-0 items-center">
+            <PixelatedLogo :height="22" :pixel-size="4" />
+            <!-- <Icon
+              mode="css"
+              name="svg:logo-color"
+              class="!h-5 !w-5 !mask-contain"
+            /> -->
+          </a>
+          <nav
             class="
-              transition-all duration-200
-              hover:text-blue-200
+              flex items-center gap-2
+              md:gap-4
             "
           >
-            Resume
-          </a>
+            <a
+              href="/resume"
+              class="
+                transition-all duration-200
+                hover:text-pink-500
+              "
+            >
+              Resume
+            </a>
+            <a
+              href="/contact"
+              class="
+                transition-all duration-200
+                hover:text-pink-500
+              "
+            >
+              Contact
+            </a>
+          </nav>
+        </div>
+      </header>
+      <header
+        ref="socialRef"
+        class="
+          flex items-center justify-start rounded-full text-white
+          md:w-auto
+        "
+        :style="{
+          width: isDesktop ? 'auto' : (widthShrinking ? '0px' : (socialNaturalWidth ? `${socialNaturalWidth}px` : 'auto')),
+          gap: widthShrinking ? '0' : '8px',
+          transition: 'all 400ms ease-in-out',
+        }"
+      >
+        <div
+          class="
+            flex items-center justify-start gap-3 overflow-hidden
+            transition-opacity duration-[1000ms] ease-in-out
+          "
+          :class="[textFading ? 'opacity-0' : 'opacity-100']"
+        >
           <a
-            href="/contact"
+            href="https://linkedin.com/in/marcelolszewski"
+            target="_blank"
             class="
-              transition-all duration-200
-              hover:text-blue-200
+              h-5 w-5 border-red-500 leading-none transition-all duration-200
+              hover:text-pink-500
             "
           >
-            Contact
+            <Icon
+              mode="css"
+              name="mdi:linkedin"
+              class="!h-5 !w-5 !mask-contain"
+            />
           </a>
-        </nav>
-      </div>
-    </header>
-    <header
-      ref="socialRef"
-      class="
-        fixed right-4 bottom-4 z-30 flex items-center justify-start rounded-full
-        font-inter text-white
-      "
-      :style="{
-        width: widthShrinking
-          ? '0px'
-          : `${socialNaturalWidth}px`,
-        gap: widthShrinking ? '0' : '8px',
-        transition: 'all 400ms ease-in-out',
-      }"
-    >
-      <div
-        class="
-          flex items-center justify-start gap-3 overflow-hidden
-          transition-opacity duration-[1000ms] ease-in-out
-        "
-        :class="[textFading ? 'opacity-0' : 'opacity-100']"
-      >
-        <a
-          href="https://linkedin.com/in/marcelolszewski"
-          target="_blank"
-          class="
-            border-red-500 leading-none transition-all duration-200
-            hover:text-blue-200
-          "
-        >
-          <Icon name="mdi:linkedin" class="h-5 w-5" />
-        </a>
-        <a
-          href="https://github.com/marcelolszewski"
-          target="_blank"
-          class="
-            border-red-500 leading-none transition-all duration-200
-            hover:text-blue-200
-          "
-        >
-          <Icon name="mdi:github" class="h-5 w-5" />
-        </a>
-        <a
-          href="https://app.10xmanagement.com/clients/marcel-olszewski-16302/profile"
-          target="_blank"
-          class="
-            border-red-500 leading-none transition-all duration-200
-            hover:text-blue-200
-          "
-        >
-          <Icon name="svg:logo-10x" class="h-5" />
-        </a>
-      </div>
-    </header>
+          <a
+            href="https://github.com/marcelolszewski"
+            target="_blank"
+            class="
+              border-red-500 leading-none transition-all duration-200
+              hover:text-pink-500
+            "
+          >
+            <Icon name="mdi:github" class="h-5 w-5" />
+          </a>
+          <a
+            href="https://app.10xmanagement.com/clients/marcel-olszewski-16302/profile"
+            target="_blank"
+            class="
+              border-red-500 leading-none transition-all duration-200
+              hover:text-pink-500
+            "
+          >
+            <Icon name="svg:logo-10x" class="h-5" />
+          </a>
+          <span class="text-gray-500">
+            |
+          </span>
+          <button
+            class="
+              font-['PP_Mondwest'] text-4xl text-white transition-all
+              duration-200
+              hover:text-pink-500
+            "
+            @click="toggleTheme"
+          >
+            {{ isDark ? GLYPHS.mondwest.sun_empty : GLYPHS.mondwest.sun_filled }}
+          </button>
+        </div>
+      </header>
+    </div>
   </div>
 </template>
