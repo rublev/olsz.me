@@ -242,8 +242,8 @@ function handleMouseLeave() {
       '--brand-glow': dynamicStyles.glowColor,
     }"
     class="
-      group relative flex h-[140px] w-[198px] origin-center flex-col
-      overflow-hidden border-2 p-4
+      group relative h-[140px] w-1/3 origin-center flex-col overflow-hidden
+      border-2 p-4
       [transform-style:preserve-3d]
       hover:relative hover:z-10 hover:cursor-alias
     "

@@ -35,11 +35,13 @@
         position: fixed; /* Canvas stays in same position relative to viewport */
         top: 0; /* Position at top-left corner */
         left: 0;
+        bottom: 0;
+        right: 0;
         pointer-events: none; /* Canvas doesn't block mouse events - events pass through to elements below */
         z-index: 10; /* Canvas appears above selectable items but below instructions */
         border: 2px solid red;
         width: 150px;
-        display:;
+        /* display:; */
       }
 
       /* =====================================
@@ -81,10 +83,11 @@
       }
 
       /* The core effect: images blend with the background using color-burn */
-      .selectable.selected img {
+      img {
         /* This CSS blend mode creates the green/black gradient effect */
         /* color-burn: makes lights areas of image darker, creates high contrast */
         mix-blend-mode: color-burn;
+        image-rendering: pixelated;
       }
 
       /* Text items also get the blend effect */
@@ -133,9 +136,10 @@
     <!-- Large demo image at full resolution (656x434 pixels) -->
     <div
       class="selectable selected"
-      style="top: 80px; left: 100px; width: 656px; height: 434px"
+      style="top: 200px; right: 200px; bottom: 200px; left: 200px"
     >
-      <img src="demo-image.png" alt="Demo Image Full Size" />
+      <!-- <img src="demo-image.png" alt="Demo Image Full Size" /> -->
+      <img src="orpheus.gif" alt="Demo Image Full Size" />
     </div>
 
     <script>
@@ -329,14 +333,14 @@
         "Original color:",
         originalUserColor,
         "Safe color:",
-        userColor,
+        userColor
       );
 
       // Update the CSS custom property with the calculated safe color
       // This makes it available to all CSS rules that use var(--safe-user-color)
       document.documentElement.style.setProperty(
         "--safe-user-color",
-        userColor,
+        userColor
       );
 
       /* =====================================
