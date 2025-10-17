@@ -41,7 +41,7 @@
   "devDependencies": {
     "@nuxt/devtools": "2.6.5",
     "@nuxt/scripts": "0.13.0",
-    "eslint": "^9.37.0",
+    "eslint": "^9.38.0",
     "nuxt-eslint-auto-explicit-import": "^0.1.1",
     "prettier": "^3.6.2",
     "sass": "^1.93.2",
