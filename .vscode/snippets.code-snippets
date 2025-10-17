@@ -15,7 +15,13 @@
   "Icon Component": {
     "scope": "vue,html,typescript,javascript",
     "prefix": "icon",
-    "body": ["<Icon name=\"${1:svg}:${2:}\" class=\"h-6 w-auto${3}\" ${0}/>"],
+    "body": ["<Icon name=\"${1:svg}:${2:}\" class=\"${3:h-6 w-auto} ${4}\" ${0}/>"],
     "description": "Insert Icon component with prefix, name, and classes",
+  },
+  "Inline Border Style": {
+    "scope": "vue,html,typescript,javascript,css",
+    "prefix": "br",
+    "body": ["style=\"border: ${1:2}px solid ${2:red};\"${0}"],
+    "description": "Insert inline border style with thickness and color",
   },
 }
