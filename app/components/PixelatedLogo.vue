@@ -21,7 +21,9 @@ const canvasRef = ref(null)
 const canvasWidth = ref(0)
 
 async function loadSVGAsImage() {
-  const blob = new Blob([logoColorSvg], { type: 'image/svg+xml;charset=utf-8' })
+  const blob = new Blob([logoColorSvg], {
+    type: 'image/svg+xml;charset=utf-8',
+  })
   const url = URL.createObjectURL(blob)
 
   return new Promise((resolve, reject) => {
@@ -109,7 +111,7 @@ function pixelateManual(canvas, img, pixelSize, targetHeight) {
   for (let y = 0; y < height; y += pixelSize) {
     for (let x = 0; x < width; x += pixelSize) {
       // Sample the color at the block's top-left corner
-      const pixelIndex = ((y * width) + x) * 4
+      const pixelIndex = (y * width + x) * 4
       const r = data[pixelIndex]
       const g = data[pixelIndex + 1]
       const b = data[pixelIndex + 2]
@@ -142,7 +144,11 @@ onMounted(async () => {
 <template>
   <canvas
     ref="canvasRef"
-    :style="{ width: `${canvasWidth}px`, height: `${height}px`, imageRendering: 'pixelated' }"
+    :style="{
+      width: `${canvasWidth}px`,
+      height: `${height}px`,
+      imageRendering: 'pixelated',
+    }"
     class="block"
   />
 </template>

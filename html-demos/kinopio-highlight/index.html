@@ -333,14 +333,14 @@
         "Original color:",
         originalUserColor,
         "Safe color:",
-        userColor
+        userColor,
       );
 
       // Update the CSS custom property with the calculated safe color
       // This makes it available to all CSS rules that use var(--safe-user-color)
       document.documentElement.style.setProperty(
         "--safe-user-color",
-        userColor
+        userColor,
       );
 
       /* =====================================

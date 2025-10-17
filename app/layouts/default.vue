@@ -8,7 +8,7 @@
         src="/assets/animations/orpheus.gif"
         alt=""
         class="h-auto w-full"
-        style="image-rendering: pixelated;"
+        style="image-rendering: pixelated"
       >
     </div>
 

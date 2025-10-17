@@ -11,7 +11,9 @@ const manual16Ref = ref(null)
 
 async function loadSVGAsImage() {
   // Create a blob from the imported SVG text
-  const blob = new Blob([logoColorSvg], { type: 'image/svg+xml;charset=utf-8' })
+  const blob = new Blob([logoColorSvg], {
+    type: 'image/svg+xml;charset=utf-8',
+  })
   const url = URL.createObjectURL(blob)
 
   return new Promise((resolve, reject) => {
@@ -56,7 +58,17 @@ function pixelateDownscale(canvas, img, pixelSize) {
   tempCtx.drawImage(img, 0, 0, smallWidth, smallHeight)
 
   // Scale it back up to main canvas
-  ctx.drawImage(tempCanvas, 0, 0, smallWidth, smallHeight, 0, 0, canvas.width, canvas.height)
+  ctx.drawImage(
+    tempCanvas,
+    0,
+    0,
+    smallWidth,
+    smallHeight,
+    0,
+    0,
+    canvas.width,
+    canvas.height,
+  )
 }
 
 function pixelateManual(canvas, img, blockSize) {
@@ -78,7 +90,7 @@ function pixelateManual(canvas, img, blockSize) {
   for (let y = 0; y < canvas.height; y += blockSize) {
     for (let x = 0; x < canvas.width; x += blockSize) {
       // Sample the color at the block's top-left corner
-      const pixelIndex = ((y * canvas.width) + x) * 4
+      const pixelIndex = (y * canvas.width + x) * 4
       const r = data[pixelIndex]
       const g = data[pixelIndex + 1]
       const b = data[pixelIndex + 2]
@@ -141,10 +153,7 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           No pixelation
         </p>
-        <canvas
-          ref="originalRef"
-          class="w-full"
-        />
+        <canvas ref="originalRef" class="w-full" />
       </div>
 
       <!-- Downscale Method - 4x -->
@@ -155,10 +164,7 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           Mild pixelation
         </p>
-        <canvas
-          ref="downscale4Ref"
-          class="w-full"
-        />
+        <canvas ref="downscale4Ref" class="w-full" />
       </div>
 
       <!-- Downscale Method - 8x -->
@@ -169,10 +175,7 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           Medium pixelation
         </p>
-        <canvas
-          ref="downscale8Ref"
-          class="w-full"
-        />
+        <canvas ref="downscale8Ref" class="w-full" />
       </div>
 
       <!-- Downscale Method - 16x -->
@@ -183,10 +186,7 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           Heavy pixelation
         </p>
-        <canvas
-          ref="downscale16Ref"
-          class="w-full"
-        />
+        <canvas ref="downscale16Ref" class="w-full" />
       </div>
 
       <!-- Manual Sampling - 8px blocks -->
@@ -197,10 +197,7 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           Block-based pixelation
         </p>
-        <canvas
-          ref="manual8Ref"
-          class="w-full"
-        />
+        <canvas ref="manual8Ref" class="w-full" />
       </div>
 
       <!-- Manual Sampling - 16px blocks -->
@@ -211,10 +208,7 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           Large block pixelation
         </p>
-        <canvas
-          ref="manual16Ref"
-          class="w-full"
-        />
+        <canvas ref="manual16Ref" class="w-full" />
       </div>
     </div>
 

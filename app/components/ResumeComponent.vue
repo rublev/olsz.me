@@ -1,28 +1,24 @@
 <script>
+/* eslint-disable */
 // Resume component displaying Marcel Olszewski's professional experience
 // Uses Tailwind CSS for styling with responsive design
 export default {
-  name: 'ResumeComponent',
-}
+  name: "ResumeComponent",
+};
 </script>
 
 <template>
   <div class="mx-auto max-w-4xl bg-background p-8">
     <!-- Header Section -->
     <div class="mb-8">
-      <h1 class="mb-2 text-4xl font-bold text-primary">
-        Marcel Olszewski
-      </h1>
-      <p class="mb-4 text-muted-foreground">
+      <h1 class="text-primary mb-2 text-4xl font-bold">Marcel Olszewski</h1>
+      <p class="text-muted-foreground mb-4">
         Largely self-educated web developer with backgrounds in software
         development and engineering. Expert generalist known for turning
         ambiguous ideas into clean, performant UIs.
       </p>
       <div
-        class="
-          grid grid-cols-1 gap-4 text-sm text-muted-foreground
-          md:grid-cols-2
-        "
+        class="text-muted-foreground grid grid-cols-1 gap-4 text-sm md:grid-cols-2"
       >
         <div>
           <p>Phone: +1 (647) 834-8234</p>
@@ -33,10 +29,7 @@ export default {
             LinkedIn:
             <a
               href="https://linkedin.com/in/molsz"
-              class="
-                text-primary
-                hover:underline
-              "
+              class="text-primary hover:underline"
             >
               linkedin.com/in/molsz
             </a>
@@ -45,23 +38,14 @@ export default {
             GitHub:
             <a
               href="https://github.com/rublev"
-              class="
-                text-primary
-                hover:underline
-              "
+              class="text-primary hover:underline"
             >
               github.com/rublev
             </a>
           </p>
           <p>
             Website:
-            <a
-              href="https://olsz.me"
-              class="
-                text-primary
-                hover:underline
-              "
-            >
+            <a href="https://olsz.me" class="text-primary hover:underline">
               olsz.me
             </a>
           </p>
@@ -71,7 +55,7 @@ export default {
 
     <!-- Professional Experience Section -->
     <div class="mb-10">
-      <h2 class="mb-6 text-xl font-bold tracking-wide text-primary uppercase">
+      <h2 class="text-primary mb-6 text-xl font-bold tracking-wide uppercase">
         Professional Experience
       </h2>
 
@@ -86,9 +70,7 @@ export default {
               Artificial Intelligence & Automation
             </p>
           </div>
-          <p class="text-sm text-muted-foreground">
-            Sep 2024 — Present
-          </p>
+          <p class="text-muted-foreground text-sm">Sep 2024 — Present</p>
         </div>
         <ul class="space-y-2 text-sm text-foreground">
           <li>
@@ -117,13 +99,9 @@ export default {
             <h3 class="text-lg font-bold text-foreground">
               Senior Software Engineer, Valery.ca
             </h3>
-            <p class="text-muted-foreground">
-              AI-Powered Real Estate Platform
-            </p>
+            <p class="text-muted-foreground">AI-Powered Real Estate Platform</p>
           </div>
-          <p class="text-sm text-muted-foreground">
-            May 2024 — May 2025
-          </p>
+          <p class="text-muted-foreground text-sm">May 2024 — May 2025</p>
         </div>
         <ul class="space-y-2 text-sm text-foreground">
           <li>
@@ -146,13 +124,9 @@ export default {
             <h3 class="text-lg font-bold text-foreground">
               Senior Software Developer, Stratosphere.digital
             </h3>
-            <p class="text-muted-foreground">
-              Fintech, Healthcare, B2C
-            </p>
+            <p class="text-muted-foreground">Fintech, Healthcare, B2C</p>
           </div>
-          <p class="text-sm text-muted-foreground">
-            Dec 2021 — Jan 2024
-          </p>
+          <p class="text-muted-foreground text-sm">Dec 2021 — Jan 2024</p>
         </div>
         <ul class="space-y-2 text-sm text-foreground">
           <li>
@@ -173,13 +147,9 @@ export default {
             <h3 class="text-lg font-bold text-foreground">
               Senior Full Stack Developer, Compound Planning
             </h3>
-            <p class="text-muted-foreground">
-              Fintech
-            </p>
+            <p class="text-muted-foreground">Fintech</p>
           </div>
-          <p class="text-sm text-muted-foreground">
-            Sep 2019 — Dec 2019
-          </p>
+          <p class="text-muted-foreground text-sm">Sep 2019 — Dec 2019</p>
         </div>
         <ul class="space-y-2 text-sm text-foreground">
           <li>
@@ -198,13 +168,9 @@ export default {
             <h3 class="text-lg font-bold text-foreground">
               Co-Founder, Supaglobal.com
             </h3>
-            <p class="text-muted-foreground">
-              Fintech
-            </p>
+            <p class="text-muted-foreground">Fintech</p>
           </div>
-          <p class="text-sm text-muted-foreground">
-            Jun 2018 — Sep 2019
-          </p>
+          <p class="text-muted-foreground text-sm">Jun 2018 — Sep 2019</p>
         </div>
         <ul class="space-y-2 text-sm text-foreground">
           <li>
@@ -224,13 +190,9 @@ export default {
             <h3 class="text-lg font-bold text-foreground">
               Senior Full Stack Developer, ConsenSys
             </h3>
-            <p class="text-muted-foreground">
-              Cryptocurrency
-            </p>
+            <p class="text-muted-foreground">Cryptocurrency</p>
           </div>
-          <p class="text-sm text-muted-foreground">
-            Apr 2018 — Dec 2018
-          </p>
+          <p class="text-muted-foreground text-sm">Apr 2018 — Dec 2018</p>
         </div>
         <ul class="space-y-2 text-sm text-foreground">
           <li>
@@ -250,13 +212,9 @@ export default {
             <h3 class="text-lg font-bold text-foreground">
               Co-Founder, Daily Coding Problem (Acquired)
             </h3>
-            <p class="text-muted-foreground">
-              Education
-            </p>
+            <p class="text-muted-foreground">Education</p>
           </div>
-          <p class="text-sm text-muted-foreground">
-            Sep 2017 — Mar 2018
-          </p>
+          <p class="text-muted-foreground text-sm">Sep 2017 — Mar 2018</p>
         </div>
         <ul class="space-y-2 text-sm text-foreground">
           <li>
@@ -276,13 +234,9 @@ export default {
             <h3 class="text-lg font-bold text-foreground">
               Senior Full Stack Developer, Breadwallet (Acquired)
             </h3>
-            <p class="text-muted-foreground">
-              Cryptocurrency
-            </p>
+            <p class="text-muted-foreground">Cryptocurrency</p>
           </div>
-          <p class="text-sm text-muted-foreground">
-            Aug 2016 — Jun 2017
-          </p>
+          <p class="text-muted-foreground text-sm">Aug 2016 — Jun 2017</p>
         </div>
         <ul class="space-y-2 text-sm text-foreground">
           <li>
@@ -302,13 +256,9 @@ export default {
             <h3 class="text-lg font-bold text-foreground">
               Technical Systems Analyst, RBC
             </h3>
-            <p class="text-muted-foreground">
-              Fintech
-            </p>
+            <p class="text-muted-foreground">Fintech</p>
           </div>
-          <p class="text-sm text-muted-foreground">
-            Jan 2013 — Apr 2014
-          </p>
+          <p class="text-muted-foreground text-sm">Jan 2013 — Apr 2014</p>
         </div>
         <ul class="space-y-2 text-sm text-foreground">
           <li>
@@ -324,7 +274,7 @@ export default {
 
     <!-- OSS Projects Section -->
     <div class="mb-10">
-      <h2 class="mb-6 text-xl font-bold tracking-wide text-primary uppercase">
+      <h2 class="text-primary mb-6 text-xl font-bold tracking-wide uppercase">
         OSS Projects
       </h2>
 
@@ -334,13 +284,10 @@ export default {
           <h3 class="text-lg font-bold text-foreground">
             OpenXR Recenter Override
           </h3>
-          <p class="text-sm text-muted-foreground">
+          <p class="text-muted-foreground text-sm">
             <a
               href="https://github.com/rublev/openxr-recenter"
-              class="
-                text-primary
-                hover:underline
-              "
+              class="text-primary hover:underline"
             >
               github.com/rublev/openxr-recenter
             </a>
@@ -349,11 +296,11 @@ export default {
         <p class="mb-2 text-sm text-foreground">
           Developed an OpenXR API layer for VR position override and cockpit
           alignment. Intercepts
-          <code class="rounded bg-muted px-1 text-foreground">
+          <code class="bg-muted rounded px-1 text-foreground">
             xrLocateViews()
           </code>
           and
-          <code class="rounded bg-muted px-1 text-foreground">
+          <code class="bg-muted rounded px-1 text-foreground">
             xrLocateSpace()
           </code>
           calls to apply saved positional adjustments across VR sessions.
@@ -367,16 +314,14 @@ export default {
 
     <!-- Notable Projects Section -->
     <div class="mb-10">
-      <h2 class="mb-6 text-xl font-bold tracking-wide text-primary uppercase">
+      <h2 class="text-primary mb-6 text-xl font-bold tracking-wide uppercase">
         Notable Projects
       </h2>
 
       <!-- Browsertest.ai -->
       <div class="mb-6">
         <div class="mb-2 flex items-start justify-between">
-          <h3 class="text-lg font-bold text-foreground">
-            Browsertest.ai
-          </h3>
+          <h3 class="text-lg font-bold text-foreground">Browsertest.ai</h3>
         </div>
         <p class="mb-2 text-sm text-foreground">
           Built an agentic QA automation tool for non-developers to streamline
@@ -411,7 +356,7 @@ export default {
 
     <!-- Clients Section -->
     <div class="mb-10">
-      <h2 class="mb-6 text-xl font-bold tracking-wide text-primary uppercase">
+      <h2 class="text-primary mb-6 text-xl font-bold tracking-wide uppercase">
         Clients
       </h2>
 
@@ -432,7 +377,7 @@ export default {
 
     <!-- Programming Experience Section -->
     <div class="mb-10">
-      <h2 class="mb-6 text-xl font-bold tracking-wide text-primary uppercase">
+      <h2 class="text-primary mb-6 text-xl font-bold tracking-wide uppercase">
         Programming Experience
       </h2>
 
@@ -458,7 +403,7 @@ export default {
 
     <!-- Languages Section -->
     <div class="mb-10">
-      <h2 class="mb-6 text-xl font-bold tracking-wide text-primary uppercase">
+      <h2 class="text-primary mb-6 text-xl font-bold tracking-wide uppercase">
         Languages
       </h2>
 
@@ -476,7 +421,7 @@ export default {
 
     <!-- Education Section -->
     <div class="mb-8">
-      <h2 class="mb-6 text-xl font-bold tracking-wide text-primary uppercase">
+      <h2 class="text-primary mb-6 text-xl font-bold tracking-wide uppercase">
         Education
       </h2>
 
@@ -490,9 +435,7 @@ export default {
               Bachelor of Technology, Software Development
             </p>
           </div>
-          <p class="text-sm text-muted-foreground">
-            Jan 2011 — Jul 2013
-          </p>
+          <p class="text-muted-foreground text-sm">Jan 2011 — Jul 2013</p>
         </div>
 
         <div class="flex items-start justify-between">
@@ -504,9 +447,7 @@ export default {
               Bachelor of Engineering, Software Engineering
             </p>
           </div>
-          <p class="text-sm text-muted-foreground">
-            Jan 2010 — Jul 2011
-          </p>
+          <p class="text-muted-foreground text-sm">Jan 2010 — Jul 2011</p>
         </div>
       </div>
     </div>

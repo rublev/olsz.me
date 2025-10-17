@@ -95,7 +95,11 @@ function handleScroll() {
   if (scrollAccumulator.value >= DIRECTION_THRESHOLD) {
     scrollAccumulator.value = 0
 
-    if (currentDirection.value === 'down' && !isCollapsed.value && currentScrollY > SCROLL_TOP_THRESHOLD) {
+    if (
+      currentDirection.value === 'down'
+      && !isCollapsed.value
+      && currentScrollY > SCROLL_TOP_THRESHOLD
+    ) {
       collapse()
     }
     else if (currentDirection.value === 'up' && isCollapsed.value) {
@@ -149,7 +153,13 @@ onUnmounted(() => {
           md:w-auto
         "
         :style="{
-          width: isDesktop ? 'auto' : (widthShrinking ? '0px' : (naturalWidth ? `${naturalWidth}px` : 'auto')),
+          width: isDesktop
+            ? 'auto'
+            : widthShrinking
+              ? '0px'
+              : naturalWidth
+                ? `${naturalWidth}px`
+                : 'auto',
           gap: widthShrinking ? '0' : '8px',
           transition: 'all 400ms ease-in-out',
         }"
@@ -204,7 +214,13 @@ onUnmounted(() => {
           md:w-auto
         "
         :style="{
-          width: isDesktop ? 'auto' : (widthShrinking ? '0px' : (socialNaturalWidth ? `${socialNaturalWidth}px` : 'auto')),
+          width: isDesktop
+            ? 'auto'
+            : widthShrinking
+              ? '0px'
+              : socialNaturalWidth
+                ? `${socialNaturalWidth}px`
+                : 'auto',
           gap: widthShrinking ? '0' : '8px',
           transition: 'all 400ms ease-in-out',
         }"
@@ -260,7 +276,9 @@ onUnmounted(() => {
             "
             @click="toggleTheme"
           >
-            {{ isDark ? GLYPHS.mondwest.sun_empty : GLYPHS.mondwest.sun_filled }}
+            {{
+              isDark ? GLYPHS.mondwest.sun_empty : GLYPHS.mondwest.sun_filled
+            }}
           </button>
         </div>
       </header>

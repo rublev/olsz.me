@@ -116,7 +116,12 @@ function pixelateVignette() {
   canvas.height = height
 
   // Create the gradient vignette
-  const vignetteCanvas = createVignetteGradient(width, height, props.intensity, props.color)
+  const vignetteCanvas = createVignetteGradient(
+    width,
+    height,
+    props.intensity,
+    props.color,
+  )
 
   // Disable image smoothing for pixelated effect
   ctx.imageSmoothingEnabled = false
