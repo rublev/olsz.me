@@ -19,11 +19,7 @@ import GLYPHS from '@/assets/glyphs.json'
                 href="https://app.10xmanagement.com/clients/marcel-olszewski-16302/profile"
                 target="_blank"
               >
-                <Icon
-                  name="svg:10x-pixelated"
-                  class="h-auto w-8"
-                  color="white"
-                />
+                <Icon name="svg:10x-pixelated" class="h-auto w-8" color="white" />
               </a>
               <a href="mailto:hi@olsz.me">
                 <Icon name="svg:email" class="h-auto w-8" color="white" />
