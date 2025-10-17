@@ -52,10 +52,10 @@
 }
 
 .dark {
-  --background: oklch(0% 0 0);
+  --background: oklch(14.263% 0.02828 238.93); /* custom navy #010b14 */
   --foreground: oklch(98.5% 0 0deg);
-  --border: oklch(26.9% 0 0deg);
-  --ring: oklch(43.9% 0 0deg);
+  --border: oklch(92.2% 0 0deg);
+  --ring: oklch(70.8% 0 0deg);
 }
 
 @theme inline {
