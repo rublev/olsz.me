@@ -10,53 +10,17 @@ import GLYPHS from '@/assets/glyphs.json'
     "
   >
     <article class="pt-8">
-      <h1 class="mb-2 font-['PP_Mondwest'] text-4xl font-bold">
-        Hey, I'm Marcel {{ GLYPHS.katakana.shi }}<span class="text-green-400">
-          {{ GLYPHS.mondwest.alembic }}
-        </span>
-        <!-- </span><br>
-        &#x26C5; &#x265F;
-        &#x25CA;
-        &#x25A0;
-        &#x25A1;
-        &#x25A6;
-        &#x25A7;
-        &#x25A8;
-        &#x25A8;
-        &#x25A9;
+      <!-- top header section -->
+      <div class="flex flex-col gap-2.5">
+        <h1 id="fag" class="font-mondwest text-5xl font-bold">
+          Hey, I'm Marcel {{ GLYPHS.katakana.shi }}
+        </h1>
+        <p class="font-mondwest text-2xl font-normal">
+          Frontend & design oriented full-stack developer
+        </p>
+      </div>
 
-        &#x2600;
-        &#x2601;
-        &#x2602;
-        &#x2603;
-        &#x2614;
-        &#x2628;
-
-        &#x263C;
-        &#x265C;
-        &#x2697;
-        &#x26C8;
-        &#x25A9;
-        &#x266C;
-        &#x266B;
-        &#x266A;
-        &#x2669;
-        &#x2728;
-
-        №1
-        &#xFB00;
-        &#xFB01;
-        &#xFB02;
-        &#xFB03;
-        &#x30FE;五 -->
-      </h1>
-      <h3 class="mb-6 font-['PP_Mondwest'] text-xl font-normal">
-        №1 Full stack developer & designer -----
-      </h3>
-      <p class="mb-3 font-['PP_NeueBit'] text-xl">
-        Things I've worked on:
-      </p>
-      <ul
+      <!-- <ul
         class="
           mb-6 list-disc space-y-2 pl-6 font-['PP_NeueBit'] text-4xl leading-6
           tracking-wide
@@ -184,7 +148,7 @@ import GLYPHS from '@/assets/glyphs.json'
             RBC Royal Bank
           </a>
         </li>
-      </ul>
+      </ul> -->
 
       <!-- <p
         class="

@@ -255,8 +255,7 @@ onUnmounted(() => {
           </span>
           <button
             class="
-              font-['PP_Mondwest'] text-4xl text-white transition-all
-              duration-200
+              font-mondwest text-4xl text-white transition-all duration-200
               hover:text-pink-500
             "
             @click="toggleTheme"

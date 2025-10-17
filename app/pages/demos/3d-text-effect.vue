@@ -18,18 +18,18 @@
       >
         Marcel Olszewski
       </h1>
-      <h1 class="mb-2 font-['PP_Mondwest'] text-4xl font-bold">
+      <h1 class="mb-2 font-mondwest text-4xl font-bold">
         Hey, I'm Marcel 🌿
       </h1>
-      <h3 class="mb-6 font-['PP_Mondwest'] text-xl font-normal">
+      <h3 class="mb-6 font-mondwest text-xl font-normal">
         Full stack developer & designer
       </h3>
-      <p class="mb-3 font-['PP_NeueBit'] text-xl">
+      <p class="mb-3 text-xl">
         Things I've worked on:
       </p>
       <ul
         class="
-          mb-6 list-none space-y-2 pl-6 font-['PP_NeueBit'] text-4xl leading-6
+          mb-6 list-none space-y-2 pl-6 text-4xl leading-6
           tracking-wide
         "
       >
@@ -161,7 +161,7 @@
 
       <p
         class="
-          mt-6 mb-1 font-['PP_NeueBit'] text-lg text-gray-600
+          mt-6 mb-1 text-lg text-gray-600
           dark:text-gray-400
         "
       >
@@ -169,7 +169,7 @@
       </p>
       <p
         class="
-          mb-3 font-['PP_NeueBit'] text-base text-gray-600
+          mb-3 text-base text-gray-600
           dark:text-gray-400
         "
       >
@@ -183,10 +183,10 @@
         "
       >
 
-      <h3 class="mb-4 font-['PP_Mondwest'] text-2xl font-bold">
+      <h3 class="mb-4 font-mondwest text-2xl font-bold">
         Reach out
       </h3>
-      <ul class="mb-4 list-none space-y-1 pl-0 font-['PP_NeueBit'] text-base">
+      <ul class="mb-4 list-none space-y-1 pl-0 text-base">
         <li>
           GitHub <a
             href="https://github.com/olstenlarck"
@@ -225,7 +225,7 @@
         </li>
       </ul>
 
-      <small class="mt-32 block font-['PP_NeueBit'] text-xs">
+      <small class="mt-32 block text-xs">
         2025 © Marcel Olszewski.
       </small>
     </article>
