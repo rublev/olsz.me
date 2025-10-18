@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
 
 let renderer, clock, camera, stats, composer, group, scene, controls, gui

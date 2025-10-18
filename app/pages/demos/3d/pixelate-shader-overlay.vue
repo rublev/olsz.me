@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import html2canvas from 'html2canvas' // uninstalled this
 import * as THREE from 'three'
 import { onMounted, onUnmounted, ref } from 'vue'

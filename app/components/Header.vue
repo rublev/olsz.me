@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useMediaQuery } from '@vueuse/core'
 import { onMounted, onUnmounted, ref } from 'vue'
 import GLYPHS from '@/assets/glyphs.json'

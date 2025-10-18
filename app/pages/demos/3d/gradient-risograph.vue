@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 /*
  * RISOGRAPH GRADIENT DEMO
  *

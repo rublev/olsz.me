@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 /*
  * GRADIENT DEMO WITH HALFTONE EFFECT
  *

@@ -1,4 +1,4 @@
-<script setup></script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="relative min-h-screen">
@@ -15,11 +15,11 @@
     <!-- content -->
     <main
       class="
-        relative z-10 flex min-h-screen flex-grow justify-center p-8
-        md:p-4
+        relative z-10 flex min-h-screen flex-grow justify-center
+        md:p-12
       "
     >
-      <!-- <Header /> -->
+      <Header />
       <slot />
       <!-- <Footer class="mt-auto" /> -->
     </main>
