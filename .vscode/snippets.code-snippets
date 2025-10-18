@@ -15,7 +15,9 @@
   "Icon Component": {
     "scope": "vue,html,typescript,javascript",
     "prefix": "icon",
-    "body": ["<Icon name=\"${1:svg}:${2:}\" class=\"${3:h-6 w-auto} ${4}\" ${0}/>"],
+    "body": [
+      "<Icon name=\"${1:svg}:${2:}\" class=\"${3:h-6 w-auto} ${4}\" ${0}/>",
+    ],
     "description": "Insert Icon component with prefix, name, and classes",
   },
   "Inline Border Style": {
