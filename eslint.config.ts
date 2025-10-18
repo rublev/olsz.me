@@ -45,34 +45,6 @@ export default antfu(
       // 'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
     },
   },
-  // vue rules
-  {
-    rules: {
-      'vue/block-order': [
-        'error',
-        {
-          order: ['script', 'template', 'style'],
-        },
-      ],
-      'vue/multi-word-component-names': 'off',
-      'vue/singleline-html-element-content-newline': [
-        'error',
-        {
-          ignoreWhenNoAttributes: true,
-          ignoreWhenEmpty: true,
-          ignores: ['pre', 'textarea'],
-        },
-      ],
-      'vue/max-attributes-per-line': [
-        'error',
-        {
-          singleline: { max: 3 },
-          multiline: { max: 1 },
-        },
-      ],
-      'eslint-comments/no-unlimited-disable': 'off',
-    },
-  },
   {
     plugins: {
       'comment-length': eslintPluginCommentLength,
@@ -108,4 +80,34 @@ export default antfu(
     },
   },
   nuxt(),
+  // vue rules / should come after antfu
+  {
+    files: ['**/*.vue'],
+    rules: {
+      'vue/no-multiple-template-root': 'off',
+      'vue/multi-word-component-names': 'off',
+      'eslint-comments/no-unlimited-disable': 'off',
+      'vue/block-order': [
+        'error',
+        {
+          order: ['script', 'template', 'style'],
+        },
+      ],
+      'vue/singleline-html-element-content-newline': [
+        'error',
+        {
+          ignoreWhenNoAttributes: true,
+          ignoreWhenEmpty: true,
+          ignores: ['pre', 'textarea'],
+        },
+      ],
+      'vue/max-attributes-per-line': [
+        'error',
+        {
+          singleline: { max: 3 },
+          multiline: { max: 1 },
+        },
+      ],
+    },
+  },
 )
