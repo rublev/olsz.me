@@ -19,7 +19,7 @@
         md:p-12
       "
     >
-      <Header />
+      <!-- <Header /> -->
       <slot />
       <!-- <Footer class="mt-auto" /> -->
     </main>
