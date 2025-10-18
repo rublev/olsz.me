@@ -43,7 +43,7 @@
     "PP NeueBit", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
 
-  --color-navy: #010b14;
+  --color-navy: oklch(14.263% 0.02828 238.93);
 }
 
 /* light */
