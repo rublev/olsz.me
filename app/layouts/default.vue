@@ -15,7 +15,7 @@
     <!-- content -->
     <main
       class="
-        relative z-10 min-h-screen flex-grow p-8
+        relative z-10 flex min-h-screen flex-grow justify-center p-8
         md:p-4
       "
     >
@@ -25,6 +25,6 @@
     </main>
 
     <!-- vignette overlay -->
-    <PixelatedVignette :pixel-size="8" :intensity="0.1" color="#000000" />
+    <PixelatedVignette :pixel-size="8" :intensity="0.075" color="#000000" />
   </div>
 </template>
