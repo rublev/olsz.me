@@ -4,6 +4,15 @@ import GLYPHS from '@/assets/glyphs.json'
 
 <template>
   <div class="flex max-w-2xl gap-4">
+    <PixelRounded>
+      <img
+        src="https://plus.unsplash.com/premium_photo-1760614424094-4625f04d287d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870"
+        width="300"
+        height="200"
+        alt="Pixelated Corners"
+      >
+    </PixelRounded>
+
     <!-- SIDEBAR -->
     <div class="flex flex-col gap-4">
       <!-- 10x -->

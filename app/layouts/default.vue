@@ -13,12 +13,7 @@
     </div>
 
     <!-- content -->
-    <main
-      class="
-        relative z-10 flex min-h-screen flex-grow justify-center
-        md:p-12
-      "
-    >
+    <main class="relative z-10 flex min-h-screen flex-grow justify-center p-12">
       <!-- <Header /> -->
       <slot />
       <!-- <Footer class="mt-auto" /> -->
