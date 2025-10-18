@@ -34,9 +34,12 @@ export default antfu(
        * keeping this here but commented because i'm definitely going to forget
        * how to do this in the future
        */
-      // 'better-tailwindcss/no-unregistered-classes': ['error', {
-      //   ignore: ['^CLASSNAME$'],
-      // }],
+      'better-tailwindcss/no-unregistered-classes': [
+        'error',
+        {
+          ignore: ['^pixel-rounded$'],
+        },
+      ],
       /**
        * if using prettier enable this and set eslint + prettier print width to
        * the same size:
