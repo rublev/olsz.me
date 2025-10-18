@@ -82,3 +82,70 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 ## notes
 
 - [ ] the pnpm sharp override in package.json is from: https://github.com/nuxt/image/issues/204
+
+- give this a try later, like on the 14kb website size page where I got it from:
+
+```html
+<svg class="hidden" xmlns="http://www.w3.org/2000/svg">
+  <desc>https://endtimes.dev/practical-betterments/</desc>
+  <filter id="x" height="500%">
+    <feTurbulence
+      baseFrequency="0.01 0.02"
+      numOctaves="2"
+      result="t0"
+    ></feTurbulence>
+    <feDisplacementMap
+      in="SourceGraphic"
+      in2="t0"
+      result="d0"
+      scale="4"
+    ></feDisplacementMap>
+    <feComposite
+      in="SourceGraphic"
+      in2="d0"
+      operator="atop"
+      result="0"
+    ></feComposite>
+    <feTurbulence baseFrequency="1" numOctaves="2" result="t1"></feTurbulence>
+    <feDisplacementMap
+      in="0"
+      in2="t1"
+      result="d1"
+      scale="1"
+    ></feDisplacementMap>
+    <feComposite in="0" in2="d1" operator="atop" result="1"></feComposite>
+    <feOffset dx="-3" dy="-3" in="1"></feOffset>
+  </filter>
+</svg>
+
+<svg class="hidden" xmlns="http://www.w3.org/2000/svg">
+  <filter id="xs">
+    <feTurbulence
+      baseFrequency="0.01 0.02"
+      numOctaves="2"
+      result="t0"
+    ></feTurbulence>
+    <feDisplacementMap
+      in="SourceGraphic"
+      in2="t0"
+      result="d0"
+      scale="4"
+    ></feDisplacementMap>
+    <feComposite
+      in="SourceGraphic"
+      in2="d0"
+      operator="atop"
+      result="0"
+    ></feComposite>
+    <feTurbulence baseFrequency="1" numOctaves="2" result="t1"></feTurbulence>
+    <feDisplacementMap
+      in="0"
+      in2="t1"
+      result="d1"
+      scale="1"
+    ></feDisplacementMap>
+    <feComposite in="0" in2="d1" operator="atop" result="1"></feComposite>
+    <feOffset dx="-3" dy="-3" in="1"></feOffset>
+  </filter>
+</svg>
+```
