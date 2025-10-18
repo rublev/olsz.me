@@ -29,6 +29,7 @@ export default antfu(
     rules: {
       /* Enable comprehensive Tailwind CSS linting */
       ...betterTW.configs['recommended-error'].rules,
+      'eslint-comments/no-unlimited-disable': 'off',
       /**
        * keeping this here but commented because i'm definitely going to forget
        * how to do this in the future
