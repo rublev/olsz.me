@@ -63,6 +63,22 @@
 }
 
 @layer base {
+  /* body { */
+  /* basically just disabled tailwinds "antialiased" class */
+  /* -webkit-font-smoothing: subpixel-antialiased !important; */
+
+  /* this makes the fonts lighter and more pixely in firefox */
+  /* -moz-osx-font-smoothing: grayscale !important; */
+  /* chrome equivalent */
+  /* text-rendering: geometricPrecision !important; */
+
+  /**
+    * makes it ultra shit and pixelated on safari+chrome (not FF) and only looks
+    * good at 24-26px fonts
+    */
+  /* -webkit-font-smoothing: none !important; */
+  /* } */
+
   a {
     cursor: alias;
   }
