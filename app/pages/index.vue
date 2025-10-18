@@ -3,30 +3,47 @@ import GLYPHS from '@/assets/glyphs.json'
 </script>
 
 <template>
-  <div
-    class="flex max-w-2xl"
-    style="border: 2px solid red;"
-  >
+  <div class="flex max-w-2xl" style="border: 2px solid red">
     <!-- SIDEBAR -->
-    <div class="flex" style="border: 2px solid yellow">
+    <div class="flex flex-col gap-4" style="border: 2px solid red">
       <!-- 10x -->
       <a
         href="https://app.10xmanagement.com/clients/marcel-olszewski-16302/profile"
         target="_blank"
       >
-        <Icon name="svg:10x-pixelated" class="h-auto w-8" color="white" />
+        <Icon
+          name="svg:10x-pixelated"
+          class="h-auto w-6"
+          color="white"
+          style="shape-rendering: crispEdges1"
+        />
       </a>
       <!-- github -->
       <a href="https://github.com/rublev" target="_blank">
-        <Icon name="svg:github" class="h-auto w-8" color="white" />
+        <Icon
+          name="svg:github"
+          class="h-auto w-6"
+          color="white"
+          style="shape-rendering: crispEdges1"
+        />
       </a>
       <!-- linkedin -->
       <a href="https://www.linkedin.com/in/marcelolszewski/" target="_blank">
-        <Icon name="svg:linkedin" class="h-auto w-8" color="white" />
+        <Icon
+          name="svg:linkedin"
+          class="h-auto w-6"
+          color="white"
+          style="shape-rendering: crispEdges1"
+        />
       </a>
       <!-- email -->
       <a href="mailto:hi@olsz.me">
-        <Icon name="svg:email" class="h-auto w-8" color="white" />
+        <Icon
+          name="svg:email"
+          class="h-auto w-6"
+          color="white"
+          style="shape-rendering: crispEdges1"
+        />
       </a>
     </div>
     <!-- CONTENT -->
