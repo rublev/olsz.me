@@ -4,15 +4,18 @@ import GLYPHS from '@/assets/glyphs.json'
 
 <template>
   <div class="flex max-w-2xl gap-4">
-    <PixelRounded>
-      <img
-        src="https://plus.unsplash.com/premium_photo-1760614424094-4625f04d287d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=870"
-        width="300"
-        height="200"
-        alt="Pixelated Corners"
+    <div style="filter: drop-shadow(5px 5px 0px #ff0000);">
+      <PixelRounded
+        :radius="6"
+        :multiplier="2"
+        border-color="lime"
+        :border-width="4"
       >
-    </PixelRounded>
-
+        <div class="bg-black p-2 text-4xl font-bold">
+          Pixel test
+        </div>
+      </PixelRounded>
+    </div>
     <!-- SIDEBAR -->
     <div class="flex flex-col gap-4">
       <!-- 10x -->
@@ -31,7 +34,7 @@ import GLYPHS from '@/assets/glyphs.json'
       <a href="https://github.com/rublev" target="_blank">
         <Icon
           name="svg:github"
-          class="h-auto w-6"
+          class="h-5 w-5"
           color="white"
           style="shape-rendering: crispEdges1"
         />
