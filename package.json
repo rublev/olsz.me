@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "clean": "git clean -fdx -e .env",
+    "clean": "git add -A && git clean -fdx -e .env",
     "dev": "nuxt dev",
     "dev-host": "nuxt dev --host --no-qr",
     "fixall": "pnpm format && pnpm lint",
