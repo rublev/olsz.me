@@ -42,39 +42,27 @@
   --font-sans:
     "PP NeueBit", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
+
+  --color-navy: #010b14;
 }
 
+/* light */
 :root {
-  --background: oklch(14.263% 0.02828 238.93); /* custom navy #010b14 */
-  --foreground: oklch(98.5% 0 0deg);
-  --border: oklch(92.2% 0 0deg);
-  --ring: oklch(70.8% 0 0deg);
+  --background: var(--color-navy);
+  --foreground: var(--color-white);
 }
 
+/* dark */
 .dark {
-  --background: oklch(14.263% 0.02828 238.93); /* custom navy #010b14 */
-  --foreground: oklch(98.5% 0 0deg);
-  --border: oklch(92.2% 0 0deg);
-  --ring: oklch(70.8% 0 0deg);
+  --background: var(--color-black);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-border: var(--border);
-  --color-ring: var(--ring);
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    @apply bg-background text-foreground font-sans;
-    min-height: 100vh;
-  }
-
   a {
     cursor: alias;
   }
