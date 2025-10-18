@@ -78,3 +78,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 - [ ] eventually remove explicit `eslint.config.ts` flag in `package.json` once ESLint >9 recognizes `.ts` config files natively
 
 - [ ] figure out why `'import-notation': 'string'` in ./stylelint.config.js is necessary for better-tailwindcss not to break, aka why @import url("") breaks stylelint. thank god for @nuxt/fonts removing the need to have google fonts import via url
+
+## notes
+
+- [ ] the pnpm sharp override in package.json is from: https://github.com/nuxt/image/issues/204
