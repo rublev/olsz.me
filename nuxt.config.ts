@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@vueuse/nuxt',
   ],
-  ignore: ['app/pages/demos/**'],
+  // ignore: ['app/pages/demos/**'],
   vueuse: {
     // Only auto-import specific VueUse functions you actually use
     ssrHandlers: false,
