@@ -4,9 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "clean": "rm -rf .nuxt .output node_modules .turbo dist",
-    "dev": "pnpm clean && pnpm i && nuxt dev",
-    "dev-host": "pnpm clean && pnpm i && nuxt dev --host --no-qr",
+    "clean": "rm -rf .nuxt .output .turbo dist",
+    "dev": "pnpm clean && nuxt dev",
+    "dev-host": "pnpm clean && nuxt dev --host --no-qr",
     "fixall": "pnpm format && pnpm lint",
     "format": "prettier . --write",
     "generate": "nuxt generate",
