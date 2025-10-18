@@ -23,20 +23,23 @@ import sNoiseShader from '~/assets/shaders/snoise.glsl?raw' // Simplex noise fun
 import vertexShader from '~/assets/shaders/vertex.glsl?raw' // Creates wavy mesh distortion
 
 // Vue reactive reference to the canvas container div
-const canvasContainer = ref(null)
+const canvasContainer = ref<HTMLDivElement | null>(null)
 
 // Helper function: Generate random integer between min and max (inclusive)
-function randomInteger(min, max) {
+function randomInteger(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 // Helper function: Convert RGB values to Three.js Vector3 format
 // Three.js expects colors as Vector3 objects for shader uniforms
-function rgb(r, g, b) {
+function rgb(r: number, g: number, b: number) {
   return new THREE.Vector3(r, g, b)
 }
 
 onMounted(() => {
+  if (!canvasContainer.value)
+    return
+
   /*
    * THREE.JS SETUP
    * Initialize the 3D graphics system
@@ -93,14 +96,14 @@ onMounted(() => {
 
   // Red channel: Creates flowing red patterns using cosine waves
   // Base of 192 + variation of 64 = colors range from 128-256 (bright)
-  const R = function (x, y, t) {
+  const R = function (x: number, y: number, t: number) {
     return Math.floor(192 + 64 * Math.cos((x * x - y * y) / 300 + t))
   }
 
   // Green channel: More complex pattern using sine with time-based frequency
   // modulation The cos(t/4) and sin(t/3) make the pattern evolve slowly over
   // time
-  const G = function (x, y, t) {
+  const G = function (x: number, y: number, t: number) {
     return Math.floor(
       192
       + 64
@@ -111,7 +114,7 @@ onMounted(() => {
   // Blue channel: Radial patterns centered at (100,
   // 100) with complex time modulation The sin(t/9) creates very slow,
   // deep oscillations in the pattern
-  const B = function (x, y, t) {
+  const B = function (x: number, y: number, t: number) {
     return Math.floor(
       192
       + 64
@@ -139,19 +142,19 @@ onMounted(() => {
   const material = new THREE.ShaderMaterial({
     uniforms: {
       // ORIGINAL
-      u_bg: { type: 'v3', value: rgb(255, 255, 0) }, // Background color (purple)
-      u_bgMain: { type: 'v3', value: rgb(255, 0, 0) }, // Main background (purple)
-      u_color1: { type: 'v3', value: rgb(0, 255, 0) }, // First gradient color (purple)
-      u_color2: { type: 'v3', value: rgb(0, 0, 255) }, // Second gradient color (darker purple)
-      u_time: { type: 'f', value: 30 }, // Animation time counter
-      u_randomisePosition: { type: 'v2', value: randomisePosition }, // Organic movement offset
+      u_bg: { value: rgb(255, 255, 0) }, // Background color (purple)
+      u_bgMain: { value: rgb(255, 0, 0) }, // Main background (purple)
+      u_color1: { value: rgb(0, 255, 0) }, // First gradient color (purple)
+      u_color2: { value: rgb(0, 0, 255) }, // Second gradient color (darker purple)
+      u_time: { value: 30 }, // Animation time counter
+      u_randomisePosition: { value: randomisePosition }, // Organic movement offset
       // NORMAL
-      // u_bg: { type: 'v3', value: rgb(0, 0, 0) }, // Background color (purple)
-      // u_bgMain: { type: 'v3', value: rgb(0, 0, 0) }, // Main background (purple)
-      // u_color1: { type: 'v3', value: rgb(0, 0, 0) }, // First gradient color (purple)
-      // u_color2: { type: 'v3', value: rgb(0, 0, 0) }, // Second gradient color (darker purple)
-      // u_time: { type: 'f', value: 30 }, // Animation time counter
-      // u_randomisePosition: { type: 'v2', value: randomisePosition } // Organic movement offset
+      // u_bg: { value: rgb(0, 0, 0) }, // Background color (purple)
+      // u_bgMain: { value: rgb(0, 0, 0) }, // Main background (purple)
+      // u_color1: { value: rgb(0, 0, 0) }, // First gradient color (purple)
+      // u_color2: { value: rgb(0, 0, 0) }, // Second gradient color (darker purple)
+      // u_time: { value: 30 }, // Animation time counter
+      // u_randomisePosition: { value: randomisePosition } // Organic movement offset
     },
     // Combine noise shader with our fragment shader
     fragmentShader: sNoiseShader + fragmentShader,
@@ -173,9 +176,9 @@ onMounted(() => {
   mesh.scale.multiplyScalar(4) // Make it 4x bigger
 
   // Rotate it for a more dynamic angle
-  mesh.rotationX = -1.0 // Tilt it forward
-  mesh.rotationY = 0.0 // No left/right rotation
-  mesh.rotationZ = 0.1 // Slight roll for visual interest
+  mesh.rotation.x = -1.0 // Tilt it forward
+  mesh.rotation.y = 0.0 // No left/right rotation
+  mesh.rotation.z = 0.1 // Slight roll for visual interest
 
   // Add the mesh to our 3D scene
   scene.add(mesh)
@@ -236,7 +239,7 @@ onMounted(() => {
     renderer.render(scene, camera) // Render the gradient mesh
 
     // PASS 2: Apply pixelate effect to the captured texture
-    pixelateMaterial.uniforms.tDiffuse.value = renderTarget.texture // Pass texture to pixelate shader
+    pixelateMaterial.uniforms.tDiffuse!.value = renderTarget.texture // Pass texture to pixelate shader
 
     // Render the pixelated result to the actual screen
     renderer.setRenderTarget(null) // Draw to screen now
@@ -248,17 +251,17 @@ onMounted(() => {
      */
 
     // Update organic movement offset for vertex distortion
-    mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(j, j)
+    mesh.material.uniforms.u_randomisePosition!.value = new THREE.Vector2(j, j)
 
     // Update gradient colors using our dynamic color functions
-    mesh.material.uniforms.u_color1.value = new THREE.Vector3(
+    mesh.material.uniforms.u_color1!.value = new THREE.Vector3(
       R(x, y, t / 2), // Red component
       G(x, y, t / 2), // Green component
       B(x, y, t / 2), // Blue component
     )
 
     // Update time for shader animations
-    mesh.material.uniforms.u_time.value = t
+    mesh.material.uniforms.u_time!.value = t
 
     /*
      * COLOR ANIMATION LOGIC

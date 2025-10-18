@@ -1,7 +1,20 @@
 <script setup lang="ts">
+import type * as THREE from 'three'
+import type { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import type { GUI } from 'three/addons/libs/lil-gui.module.min.js'
+import type Stats from 'three/addons/libs/stats.module.js'
+import type { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js'
 import { onMounted, onUnmounted } from 'vue'
 
-let renderer, clock, camera, stats, composer, group, scene, controls, gui
+let renderer: THREE.WebGLRenderer | undefined
+let clock: THREE.Clock | undefined
+let camera: THREE.PerspectiveCamera | undefined
+let stats: Stats | undefined
+let composer: EffectComposer | undefined
+let group: THREE.Group | undefined
+let scene: THREE.Scene | undefined
+let controls: OrbitControls | undefined
+let gui: GUI | undefined
 
 const rotationSpeed = Math.PI / 64
 
@@ -151,6 +164,8 @@ async function init() {
 
   window.onresize = function () {
     // resize composer
+    if (!renderer || !composer || !camera)
+      return
     renderer.setSize(window.innerWidth, window.innerHeight)
     composer.setSize(window.innerWidth, window.innerHeight)
     camera.aspect = window.innerWidth / window.innerHeight
@@ -208,6 +223,8 @@ async function init() {
   gui.add(controller, 'disable').onChange(onGUIChange)
 
   function animate() {
+    if (!clock || !stats || !group || !composer)
+      return
     const delta = clock.getDelta()
     stats.update()
     group.rotation.y += delta * rotationSpeed

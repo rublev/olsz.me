@@ -6,6 +6,8 @@ import GLYPHS from '@/assets/glyphs.json'
 const SCROLL_TOP_THRESHOLD = 10
 const DIRECTION_THRESHOLD = 30
 
+type ScrollDirection = 'up' | 'down' | null
+
 const isCollapsed = ref(false)
 const headerRef = ref(null)
 const socialRef = ref(null)
@@ -17,7 +19,7 @@ const textFading = ref(false)
 const widthShrinking = ref(false)
 
 const scrollAccumulator = ref(0)
-const currentDirection = ref(null)
+const currentDirection = ref<ScrollDirection>(null)
 
 const isDesktop = useMediaQuery('(min-width: 768px)')
 
@@ -74,7 +76,7 @@ function handleScroll() {
   const scrollDelta = currentScrollY - lastScrollY.value
 
   // figure out scroll direction
-  let intendedDirection = null
+  let intendedDirection: ScrollDirection = null
   if (scrollDelta > 0)
     intendedDirection = 'down'
   else if (scrollDelta < 0)
@@ -110,7 +112,7 @@ function handleScroll() {
   lastScrollY.value = currentScrollY
 }
 
-function measureWidth(refElement) {
+function measureWidth(refElement: Ref<HTMLElement | null>) {
   return refElement.value?.scrollWidth
 }
 

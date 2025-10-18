@@ -25,19 +25,22 @@ import sNoiseShader from '~/assets/shaders/snoise.glsl?raw' // Simplex noise fun
 import vertexShader from '~/assets/shaders/vertex.glsl?raw' // Creates wavy mesh distortion
 
 // Vue reactive reference to the canvas container div
-const canvasContainer = ref(null)
+const canvasContainer = ref<HTMLDivElement | null>(null)
 
 // Helper function: Generate random integer between min and max (inclusive)
-function randomInteger(min, max) {
+function randomInteger(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 // Helper function: Convert RGB values to Three.js Vector3 format
-function rgb(r, g, b) {
+function rgb(r: number, g: number, b: number) {
   return new THREE.Vector3(r, g, b)
 }
 
 onMounted(() => {
+  if (!canvasContainer.value)
+    return
+
   /*
    * THREE.JS SETUP
    * Initialize the 3D graphics system
@@ -91,12 +94,12 @@ onMounted(() => {
    */
 
   // Red channel: Electric magentas and hot pinks (boosted range)
-  const R = function (x, y, t) {
+  const R = function (x: number, y: number, t: number) {
     return Math.floor(240 + 15 * Math.cos((x * x - y * y) / 150 + t * 1.5))
   }
 
   // Green channel: Acid greens and electric limes (maximum saturation)
-  const G = function (x, y, t) {
+  const G = function (x: number, y: number, t: number) {
     return Math.floor(
       230
       + 25
@@ -105,7 +108,7 @@ onMounted(() => {
   }
 
   // Blue channel: Electric blues and cyber purples (intense range)
-  const B = function (x, y, t) {
+  const B = function (x: number, y: number, t: number) {
     return Math.floor(
       220
       + 35
@@ -132,12 +135,12 @@ onMounted(() => {
   const material = new THREE.ShaderMaterial({
     uniforms: {
       // Electric neon color palette - maximum saturation
-      u_bg: { type: 'v3', value: rgb(10, 5, 15) }, // Deep space background
-      u_bgMain: { type: 'v3', value: rgb(5, 0, 10) }, // Even darker for contrast
-      u_color1: { type: 'v3', value: rgb(255, 0, 255) }, // Electric magenta
-      u_color2: { type: 'v3', value: rgb(0, 255, 150) }, // Acid green
-      u_time: { type: 'f', value: 30 }, // Animation time counter
-      u_randomisePosition: { type: 'v2', value: randomisePosition }, // Organic movement offset
+      u_bg: { value: rgb(10, 5, 15) }, // Deep space background
+      u_bgMain: { value: rgb(5, 0, 10) }, // Even darker for contrast
+      u_color1: { value: rgb(255, 0, 255) }, // Electric magenta
+      u_color2: { value: rgb(0, 255, 150) }, // Acid green
+      u_time: { value: 30 }, // Animation time counter
+      u_randomisePosition: { value: randomisePosition }, // Organic movement offset
     },
     // Combine noise shader with our standard fragment shader (works great for
     // neon)
@@ -158,9 +161,9 @@ onMounted(() => {
   mesh.scale.multiplyScalar(4.2) // Larger for maximum impact
 
   // Dynamic neon orientation
-  mesh.rotationX = -0.7 // Moderate tilt
-  mesh.rotationY = 0.0
-  mesh.rotationZ = 0.08 // Slight dynamic angle
+  mesh.rotation.x = -0.7 // Moderate tilt
+  mesh.rotation.y = 0.0
+  mesh.rotation.z = 0.08 // Slight dynamic angle
 
   // Add the mesh to our 3D scene
   scene.add(mesh)
@@ -222,7 +225,7 @@ onMounted(() => {
     renderer.render(scene, camera)
 
     // PASS 2: Apply pixelate effect to the captured texture
-    pixelateMaterial.uniforms.tDiffuse.value = renderTarget.texture
+    pixelateMaterial.uniforms.tDiffuse!.value = renderTarget.texture
 
     // Render the pixelated result to the actual screen
     renderer.setRenderTarget(null)
@@ -234,27 +237,27 @@ onMounted(() => {
      */
 
     // Update organic movement with energetic neon timing
-    mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(
+    mesh.material.uniforms.u_randomisePosition!.value = new THREE.Vector2(
       j * 1.2,
       j * 1.2,
     )
 
     // Update electric colors using our intense neon color functions
-    mesh.material.uniforms.u_color1.value = new THREE.Vector3(
+    mesh.material.uniforms.u_color1!.value = new THREE.Vector3(
       R(x, y, t / 1.5), // Faster color changes for electric feel
       G(x, y, t / 1.5),
       B(x, y, t / 1.5),
     )
 
     // Also animate the second color for maximum dynamism
-    mesh.material.uniforms.u_color2.value = new THREE.Vector3(
+    mesh.material.uniforms.u_color2!.value = new THREE.Vector3(
       B(x + 16, y, t / 1.8), // Offset pattern for color variety
       R(x, y + 16, t / 1.8),
       G(x + 8, y + 8, t / 1.8),
     )
 
     // Update time for shader animations
-    mesh.material.uniforms.u_time.value = t
+    mesh.material.uniforms.u_time!.value = t
 
     /*
      * RAPID NEON COLOR CYCLING

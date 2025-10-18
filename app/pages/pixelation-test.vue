@@ -9,7 +9,7 @@ const downscale16Ref = ref(null)
 const manual8Ref = ref(null)
 const manual16Ref = ref(null)
 
-async function loadSVGAsImage() {
+async function loadSVGAsImage(): Promise<HTMLImageElement> {
   // Create a blob from the imported SVG text
   const blob = new Blob([logoColorSvg], {
     type: 'image/svg+xml;charset=utf-8',
@@ -30,15 +30,23 @@ async function loadSVGAsImage() {
   })
 }
 
-function drawOriginal(canvas, img) {
+function drawOriginal(canvas: HTMLCanvasElement, img: HTMLImageElement) {
   const ctx = canvas.getContext('2d')
+  if (!ctx)
+    return
   canvas.width = 200
   canvas.height = 200
   ctx.drawImage(img, 0, 0, 200, 200)
 }
 
-function pixelateDownscale(canvas, img, pixelSize) {
+function pixelateDownscale(
+  canvas: HTMLCanvasElement,
+  img: HTMLImageElement,
+  pixelSize: number,
+) {
   const ctx = canvas.getContext('2d')
+  if (!ctx)
+    return
   canvas.width = 200
   canvas.height = 200
 
@@ -51,6 +59,8 @@ function pixelateDownscale(canvas, img, pixelSize) {
   // Create temporary canvas to draw small version
   const tempCanvas = document.createElement('canvas')
   const tempCtx = tempCanvas.getContext('2d')
+  if (!tempCtx)
+    return
   tempCanvas.width = smallWidth
   tempCanvas.height = smallHeight
 
@@ -71,8 +81,14 @@ function pixelateDownscale(canvas, img, pixelSize) {
   )
 }
 
-function pixelateManual(canvas, img, blockSize) {
+function pixelateManual(
+  canvas: HTMLCanvasElement,
+  img: HTMLImageElement,
+  blockSize: number,
+) {
   const ctx = canvas.getContext('2d')
+  if (!ctx)
+    return
   canvas.width = 200
   canvas.height = 200
 
@@ -91,10 +107,10 @@ function pixelateManual(canvas, img, blockSize) {
     for (let x = 0; x < canvas.width; x += blockSize) {
       // Sample the color at the block's top-left corner
       const pixelIndex = (y * canvas.width + x) * 4
-      const r = data[pixelIndex]
-      const g = data[pixelIndex + 1]
-      const b = data[pixelIndex + 2]
-      const a = data[pixelIndex + 3]
+      const r = data[pixelIndex] ?? 0
+      const g = data[pixelIndex + 1] ?? 0
+      const b = data[pixelIndex + 2] ?? 0
+      const a = data[pixelIndex + 3] ?? 255
 
       ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a / 255})`
       ctx.fillRect(x, y, blockSize, blockSize)

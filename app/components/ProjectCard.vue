@@ -87,7 +87,7 @@ const textParallaxStyle = ref('')
 const lightingStyle = ref('')
 const isHovered = ref(false)
 const tiltEnabled = ref(false)
-const tiltTimeout = ref(null)
+const tiltTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 
 const noisePattern = computed(() => {
   // simple hash from title for consistent randomness
@@ -145,12 +145,12 @@ const textTransition = computed(() => ({
     : `transform ${ANIMATION_DURATION}ms ${ANIMATION_EASING}`,
 }))
 
-function handleMouseMove(event) {
+function handleMouseMove(event: MouseEvent) {
   // only tilt on desktop
   if (window.innerWidth <= MOBILE_BREAKPOINT)
     return
 
-  const card = event.currentTarget
+  const card = event.currentTarget as HTMLElement
   if (!card)
     return
 
@@ -229,7 +229,7 @@ function handleMouseLeave() {
     :style="{
       'transform': tiltStyle,
       'backgroundColor': isHovered
-        ? isBrightColor.value
+        ? isBrightColor
           ? props.brandColor
           : DARK_BG_COLOR
         : BLACK_BG_COLOR,

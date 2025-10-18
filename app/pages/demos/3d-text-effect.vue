@@ -184,15 +184,18 @@
 </template>
 
 <style lang="scss" scoped>
+@use "sass:math";
+@use "sass:list";
+
 @function textShadow($precision, $size, $color) {
   $value: null;
   $offset: 0;
-  $length: $size * (1 / $precision) - 1;
+  $length: $size * math.div(1, $precision) - 1;
 
   @for $i from 0 through $length {
     $offset: $offset + $precision;
     $shadow: $offset + px $offset + px $color;
-    $value: append($value, $shadow, comma);
+    $value: list.append($value, $shadow, comma);
   }
 
   @return $value;
@@ -201,13 +204,13 @@
 @function textShadowAnimated($precision, $size) {
   $value: null;
   $offset: 0;
-  $length: $size * (1 / $precision) - 1;
+  $length: $size * math.div(1, $precision) - 1;
 
   @for $i from 0 through $length {
     $offset: $offset + $precision;
     $layerNum: $i + 1;
     $shadow: $offset + px $offset + px var(--layer-#{$layerNum});
-    $value: append($value, $shadow, comma);
+    $value: list.append($value, $shadow, comma);
   }
 
   @return $value;

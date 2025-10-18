@@ -24,19 +24,22 @@ import sNoiseShader from '~/assets/shaders/snoise.glsl?raw' // Simplex noise fun
 import vertexShader from '~/assets/shaders/vertex.glsl?raw' // Creates wavy mesh distortion
 
 // Vue reactive reference to the canvas container div
-const canvasContainer = ref(null)
+const canvasContainer = ref<HTMLDivElement | null>(null)
 
 // Helper function: Generate random integer between min and max (inclusive)
-function randomInteger(min, max) {
+function randomInteger(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 // Helper function: Convert RGB values to Three.js Vector3 format
-function rgb(r, g, b) {
+function rgb(r: number, g: number, b: number) {
   return new THREE.Vector3(r, g, b)
 }
 
 onMounted(() => {
+  if (!canvasContainer.value)
+    return
+
   /*
    * THREE.JS SETUP
    * Initialize the 3D graphics system
@@ -90,12 +93,12 @@ onMounted(() => {
    */
 
   // Red channel: Vibrant magentas and hot pinks
-  const R = function (x, y, t) {
+  const R = function (x: number, y: number, t: number) {
     return Math.floor(220 + 35 * Math.cos((x * x - y * y) / 200 + t * 1.2))
   }
 
   // Green channel: Acid greens and electric limes
-  const G = function (x, y, t) {
+  const G = function (x: number, y: number, t: number) {
     return Math.floor(
       180
       + 75
@@ -104,7 +107,7 @@ onMounted(() => {
   }
 
   // Blue channel: Electric blues and deep purples
-  const B = function (x, y, t) {
+  const B = function (x: number, y: number, t: number) {
     return Math.floor(
       200
       + 55
@@ -132,12 +135,12 @@ onMounted(() => {
   const material = new THREE.ShaderMaterial({
     uniforms: {
       // Risograph-style color palette - vibrant and saturated
-      u_bg: { type: 'v3', value: rgb(255, 245, 235) }, // Cream paper background
-      u_bgMain: { type: 'v3', value: rgb(250, 240, 230) }, // Slightly darker paper
-      u_color1: { type: 'v3', value: rgb(255, 70, 150) }, // Hot pink ink
-      u_color2: { type: 'v3', value: rgb(50, 255, 120) }, // Electric green ink
-      u_time: { type: 'f', value: 30 }, // Animation time counter
-      u_randomisePosition: { type: 'v2', value: randomisePosition }, // Organic movement offset
+      u_bg: { value: rgb(255, 245, 235) }, // Cream paper background
+      u_bgMain: { value: rgb(250, 240, 230) }, // Slightly darker paper
+      u_color1: { value: rgb(255, 70, 150) }, // Hot pink ink
+      u_color2: { value: rgb(50, 255, 120) }, // Electric green ink
+      u_time: { value: 30 }, // Animation time counter
+      u_randomisePosition: { value: randomisePosition }, // Organic movement offset
     },
     // Combine noise shader with our risograph fragment shader
     fragmentShader: sNoiseShader + risographFragmentShader,
@@ -157,9 +160,9 @@ onMounted(() => {
   mesh.scale.multiplyScalar(3.5) // Slightly smaller for better composition
 
   // Subtle rotation for organic feel
-  mesh.rotationX = -0.8 // Less tilted
-  mesh.rotationY = 0.0
-  mesh.rotationZ = 0.05 // Very slight roll
+  mesh.rotation.x = -0.8 // Less tilted
+  mesh.rotation.y = 0.0
+  mesh.rotation.z = 0.05 // Very slight roll
 
   // Add the mesh to our 3D scene
   scene.add(mesh)
@@ -221,7 +224,7 @@ onMounted(() => {
     renderer.render(scene, camera)
 
     // PASS 2: Apply pixelate effect to the captured texture
-    pixelateMaterial.uniforms.tDiffuse.value = renderTarget.texture
+    pixelateMaterial.uniforms.tDiffuse!.value = renderTarget.texture
 
     // Render the pixelated result to the actual screen
     renderer.setRenderTarget(null)
@@ -233,20 +236,20 @@ onMounted(() => {
      */
 
     // Update organic movement with slower, more print-like motion
-    mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(
+    mesh.material.uniforms.u_randomisePosition!.value = new THREE.Vector2(
       j * 0.5,
       j * 0.5,
     )
 
     // Update ink colors using our vibrant risograph color functions
-    mesh.material.uniforms.u_color1.value = new THREE.Vector3(
+    mesh.material.uniforms.u_color1!.value = new THREE.Vector3(
       R(x, y, t / 3), // Slower color changes for print-like feel
       G(x, y, t / 3),
       B(x, y, t / 3),
     )
 
     // Update time for shader animations
-    mesh.material.uniforms.u_time.value = t
+    mesh.material.uniforms.u_time!.value = t
 
     /*
      * RISOGRAPH COLOR CYCLING

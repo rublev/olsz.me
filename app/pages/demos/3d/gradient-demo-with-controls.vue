@@ -23,7 +23,7 @@ import sNoiseShader from '~/assets/shaders/snoise.glsl?raw' // Simplex noise fun
 import vertexShader from '~/assets/shaders/vertex.glsl?raw' // Creates wavy mesh distortion
 
 // Vue reactive reference to the canvas container div
-const canvasContainer = ref(null)
+const canvasContainer = ref<HTMLDivElement | null>(null)
 
 // Reactive state for gradient controls
 const controls = reactive({
@@ -70,30 +70,35 @@ const controls = reactive({
 })
 
 // Helper function: Generate random integer between min and max (inclusive)
-function randomInteger(min, max) {
+function randomInteger(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 // Helper function: Convert RGB values to Three.js Vector3 format
 // Three.js expects colors as Vector3 objects for shader uniforms
-function rgb(r, g, b) {
+function rgb(r: number, g: number, b: number) {
   return new THREE.Vector3(r, g, b)
 }
 
 // Helper function: Convert hex color to RGB Vector3
-function hexToRgb(hex) {
+function hexToRgb(hex: string) {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
   return result
     ? new THREE.Vector3(
-      Number.parseInt(result[1], 16),
-      Number.parseInt(result[2], 16),
-      Number.parseInt(result[3], 16),
+      Number.parseInt(result[1]!, 16),
+      Number.parseInt(result[2]!, 16),
+      Number.parseInt(result[3]!, 16),
     )
     : new THREE.Vector3(255, 255, 255)
 }
 
 // Load a color preset
-function loadPreset(preset) {
+function loadPreset(preset: {
+  bg: string
+  bgMain: string
+  color1: string
+  color2: string
+}) {
   controls.colors.bg = preset.bg
   controls.colors.bgMain = preset.bgMain
   controls.colors.color1 = preset.color1
@@ -101,6 +106,9 @@ function loadPreset(preset) {
 }
 
 onMounted(() => {
+  if (!canvasContainer.value)
+    return
+
   /*
    * THREE.JS SETUP
    * Initialize the 3D graphics system
@@ -157,14 +165,14 @@ onMounted(() => {
 
   // Red channel: Creates flowing red patterns using cosine waves
   // Base of 192 + variation of 64 = colors range from 128-256 (bright)
-  const R = function (x, y, t) {
+  const R = function (x: number, y: number, t: number) {
     return Math.floor(192 + 64 * Math.cos((x * x - y * y) / 300 + t))
   }
 
   // Green channel: More complex pattern using sine with time-based frequency
   // modulation The cos(t/4) and sin(t/3) make the pattern evolve slowly over
   // time
-  const G = function (x, y, t) {
+  const G = function (x: number, y: number, t: number) {
     return Math.floor(
       192
       + 64
@@ -175,7 +183,7 @@ onMounted(() => {
   // Blue channel: Radial patterns centered at (100,
   // 100) with complex time modulation The sin(t/9) creates very slow,
   // deep oscillations in the pattern
-  const B = function (x, y, t) {
+  const B = function (x: number, y: number, t: number) {
     return Math.floor(
       192
       + 64
@@ -203,12 +211,12 @@ onMounted(() => {
   const material = new THREE.ShaderMaterial({
     uniforms: {
       // ORIGINAL
-      u_bg: { type: 'v3', value: rgb(255, 255, 0) }, // Background color (purple)
-      u_bgMain: { type: 'v3', value: rgb(255, 0, 0) }, // Main background (purple)
-      u_color1: { type: 'v3', value: rgb(0, 255, 0) }, // First gradient color (purple)
-      u_color2: { type: 'v3', value: rgb(0, 0, 255) }, // Second gradient color (darker purple)
-      u_time: { type: 'f', value: 30 }, // Animation time counter
-      u_randomisePosition: { type: 'v2', value: randomisePosition }, // Organic movement offset
+      u_bg: { value: rgb(255, 255, 0) }, // Background color (purple)
+      u_bgMain: { value: rgb(255, 0, 0) }, // Main background (purple)
+      u_color1: { value: rgb(0, 255, 0) }, // First gradient color (purple)
+      u_color2: { value: rgb(0, 0, 255) }, // Second gradient color (darker purple)
+      u_time: { value: 30 }, // Animation time counter
+      u_randomisePosition: { value: randomisePosition }, // Organic movement offset
       // NORMAL
       // u_bg: { type: 'v3', value: rgb(0, 0, 0) }, // Background color (purple)
       // u_bgMain: { type: 'v3', value: rgb(0, 0, 0) }, // Main background (purple)
@@ -237,9 +245,9 @@ onMounted(() => {
   mesh.scale.multiplyScalar(4) // Make it 4x bigger
 
   // Rotate it for a more dynamic angle
-  mesh.rotationX = -1.0 // Tilt it forward
-  mesh.rotationY = 0.0 // No left/right rotation
-  mesh.rotationZ = 0.1 // Slight roll for visual interest
+  mesh.rotation.x = -1.0 // Tilt it forward
+  mesh.rotation.y = 0.0 // No left/right rotation
+  mesh.rotation.z = 0.1 // Slight roll for visual interest
 
   // Add the mesh to our 3D scene
   scene.add(mesh)
@@ -306,7 +314,7 @@ onMounted(() => {
       renderer.render(scene, camera) // Render the gradient mesh
 
       // PASS 2: Apply pixelate effect to the captured texture
-      pixelateMaterial.uniforms.tDiffuse.value = renderTarget.texture // Pass texture to pixelate shader
+      pixelateMaterial.uniforms.tDiffuse!.value = renderTarget.texture // Pass texture to pixelate shader
 
       // Render the pixelated result to the actual screen
       renderer.setRenderTarget(null) // Draw to screen now
@@ -324,28 +332,28 @@ onMounted(() => {
      */
 
     // Update organic movement offset for vertex distortion
-    mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(j, j)
+    mesh.material.uniforms.u_randomisePosition!.value = new THREE.Vector2(j, j)
 
     // Update gradient colors based on selected mode
     if (controls.mode === 'mathematical') {
       // Use dynamic mathematical color functions for all colors
-      mesh.material.uniforms.u_color1.value = new THREE.Vector3(
+      mesh.material.uniforms.u_color1!.value = new THREE.Vector3(
         R(x, y, t / 2), // Red component
         G(x, y, t / 2), // Green component
         B(x, y, t / 2), // Blue component
       )
       // Apply variations for other colors to create more complex patterns
-      mesh.material.uniforms.u_color2.value = new THREE.Vector3(
+      mesh.material.uniforms.u_color2!.value = new THREE.Vector3(
         R(x + 16, y + 16, t / 2), // Offset for variation
         G(x + 16, y + 16, t / 2),
         B(x + 16, y + 16, t / 2),
       )
-      mesh.material.uniforms.u_bg.value = new THREE.Vector3(
+      mesh.material.uniforms.u_bg!.value = new THREE.Vector3(
         R(x + 8, y + 8, t / 3), // Different time scale
         G(x + 8, y + 8, t / 3),
         B(x + 8, y + 8, t / 3),
       )
-      mesh.material.uniforms.u_bgMain.value = new THREE.Vector3(
+      mesh.material.uniforms.u_bgMain!.value = new THREE.Vector3(
         R(x + 24, y + 24, t / 4), // Another variation
         G(x + 24, y + 24, t / 4),
         B(x + 24, y + 24, t / 4),
@@ -353,17 +361,17 @@ onMounted(() => {
     }
     else {
       // Use manual colors from color pickers
-      mesh.material.uniforms.u_bg.value = hexToRgb(controls.colors.bg)
-      mesh.material.uniforms.u_bgMain.value = hexToRgb(controls.colors.bgMain)
-      mesh.material.uniforms.u_color1.value = hexToRgb(controls.colors.color1)
-      mesh.material.uniforms.u_color2.value = hexToRgb(controls.colors.color2)
+      mesh.material.uniforms.u_bg!.value = hexToRgb(controls.colors.bg)
+      mesh.material.uniforms.u_bgMain!.value = hexToRgb(controls.colors.bgMain)
+      mesh.material.uniforms.u_color1!.value = hexToRgb(controls.colors.color1)
+      mesh.material.uniforms.u_color2!.value = hexToRgb(controls.colors.color2)
     }
 
     // Update time for shader animations (with speed control)
-    mesh.material.uniforms.u_time.value = t
+    mesh.material.uniforms.u_time!.value = t
 
     // Update pixelate intensity
-    pixelateMaterial.uniforms.intensity.value = controls.pixelateIntensity
+    pixelateMaterial.uniforms.intensity!.value = controls.pixelateIntensity
 
     /*
      * COLOR ANIMATION LOGIC

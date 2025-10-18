@@ -3,8 +3,11 @@ import html2canvas from 'html2canvas' // uninstalled this
 import * as THREE from 'three'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-const overlayCanvas = ref(null)
-let renderer, scene, camera, mesh
+const overlayCanvas = ref<HTMLCanvasElement | null>(null)
+let renderer: THREE.WebGLRenderer | null = null
+let scene: THREE.Scene | null = null
+let camera: THREE.OrthographicCamera | null = null
+let mesh: THREE.Mesh | null = null
 
 // Pixelation shader
 const PixelShader = {
@@ -33,11 +36,11 @@ const PixelShader = {
   `,
 }
 
-function initShader(texture) {
+function initShader(texture: THREE.Texture) {
   if (typeof window === 'undefined')
     return
 
-  renderer = new THREE.WebGLRenderer({ canvas: overlayCanvas.value })
+  renderer = new THREE.WebGLRenderer({ canvas: overlayCanvas.value! })
   renderer.setSize(window.innerWidth, window.innerHeight)
 
   scene = new THREE.Scene()
@@ -62,9 +65,10 @@ function initShader(texture) {
 }
 
 function handleResize() {
-  if (renderer && mesh) {
+  if (renderer && mesh && scene && camera) {
     renderer.setSize(window.innerWidth, window.innerHeight)
-    mesh.material.uniforms.resolution.value.set(
+    const material = mesh.material as THREE.ShaderMaterial
+    material.uniforms.resolution!.value.set(
       window.innerWidth,
       window.innerHeight,
     )

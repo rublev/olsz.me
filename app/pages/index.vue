@@ -3,9 +3,9 @@ import GLYPHS from '@/assets/glyphs.json'
 </script>
 
 <template>
-  <div class="flex max-w-2xl" style="border: 2px solid red">
+  <div class="flex max-w-2xl gap-4">
     <!-- SIDEBAR -->
-    <div class="flex flex-col gap-4" style="border: 2px solid red">
+    <div class="flex flex-col gap-4">
       <!-- 10x -->
       <a
         href="https://app.10xmanagement.com/clients/marcel-olszewski-16302/profile"

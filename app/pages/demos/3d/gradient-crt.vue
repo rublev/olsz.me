@@ -25,19 +25,22 @@ import sNoiseShader from '~/assets/shaders/snoise.glsl?raw' // Simplex noise fun
 import vertexShader from '~/assets/shaders/vertex.glsl?raw' // Creates wavy mesh distortion
 
 // Vue reactive reference to the canvas container div
-const canvasContainer = ref(null)
+const canvasContainer = ref<HTMLDivElement | null>(null)
 
 // Helper function: Generate random integer between min and max (inclusive)
-function randomInteger(min, max) {
+function randomInteger(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 // Helper function: Convert RGB values to Three.js Vector3 format
-function rgb(r, g, b) {
+function rgb(r: number, g: number, b: number) {
   return new THREE.Vector3(r, g, b)
 }
 
 onMounted(() => {
+  if (!canvasContainer.value)
+    return
+
   /*
    * THREE.JS SETUP
    * Initialize the 3D graphics system
@@ -91,12 +94,12 @@ onMounted(() => {
    */
 
   // Red channel: Warm amber and orange phosphor tones
-  const R = function (x, y, t) {
+  const R = function (x: number, y: number, t: number) {
     return Math.floor(180 + 75 * Math.cos((x * x - y * y) / 400 + t * 0.8))
   }
 
   // Green channel: Classic green monitor phosphor
-  const G = function (x, y, t) {
+  const G = function (x: number, y: number, t: number) {
     return Math.floor(
       160
       + 80
@@ -105,7 +108,7 @@ onMounted(() => {
   }
 
   // Blue channel: Deep blue phosphor with subtle variation
-  const B = function (x, y, t) {
+  const B = function (x: number, y: number, t: number) {
     return Math.floor(
       140
       + 60
@@ -132,12 +135,12 @@ onMounted(() => {
   const material = new THREE.ShaderMaterial({
     uniforms: {
       // CRT-style color palette - warm phosphor tones
-      u_bg: { type: 'v3', value: rgb(20, 25, 30) }, // Dark screen background
-      u_bgMain: { type: 'v3', value: rgb(15, 20, 25) }, // Even darker bezel area
-      u_color1: { type: 'v3', value: rgb(255, 180, 60) }, // Warm amber phosphor
-      u_color2: { type: 'v3', value: rgb(80, 220, 100) }, // Classic green phosphor
-      u_time: { type: 'f', value: 30 }, // Animation time counter
-      u_randomisePosition: { type: 'v2', value: randomisePosition }, // Organic movement offset
+      u_bg: { value: rgb(20, 25, 30) }, // Dark screen background
+      u_bgMain: { value: rgb(15, 20, 25) }, // Even darker bezel area
+      u_color1: { value: rgb(255, 180, 60) }, // Warm amber phosphor
+      u_color2: { value: rgb(80, 220, 100) }, // Classic green phosphor
+      u_time: { value: 30 }, // Animation time counter
+      u_randomisePosition: { value: randomisePosition }, // Organic movement offset
     },
     // Combine noise shader with our CRT fragment shader
     fragmentShader: sNoiseShader + crtFragmentShader,
@@ -157,9 +160,9 @@ onMounted(() => {
   mesh.scale.multiplyScalar(3.8) // Appropriate size for monitor simulation
 
   // CRT monitor orientation
-  mesh.rotationX = -0.9 // Slightly tilted like an old desktop monitor
-  mesh.rotationY = 0.0
-  mesh.rotationZ = 0.02 // Very subtle rotation
+  mesh.rotation.x = -0.9 // Slightly tilted like an old desktop monitor
+  mesh.rotation.y = 0.0
+  mesh.rotation.z = 0.02 // Very subtle rotation
 
   // Add the mesh to our 3D scene
   scene.add(mesh)
@@ -221,7 +224,7 @@ onMounted(() => {
     renderer.render(scene, camera)
 
     // PASS 2: Apply pixelate effect to the captured texture
-    pixelateMaterial.uniforms.tDiffuse.value = renderTarget.texture
+    pixelateMaterial.uniforms.tDiffuse!.value = renderTarget.texture
 
     // Render the pixelated result to the actual screen
     renderer.setRenderTarget(null)
@@ -233,20 +236,20 @@ onMounted(() => {
      */
 
     // Update organic movement with CRT-appropriate timing
-    mesh.material.uniforms.u_randomisePosition.value = new THREE.Vector2(
+    mesh.material.uniforms.u_randomisePosition!.value = new THREE.Vector2(
       j * 0.7,
       j * 0.7,
     )
 
     // Update phosphor colors using our CRT color functions
-    mesh.material.uniforms.u_color1.value = new THREE.Vector3(
+    mesh.material.uniforms.u_color1!.value = new THREE.Vector3(
       R(x, y, t / 2.5), // Phosphor refresh timing
       G(x, y, t / 2.5),
       B(x, y, t / 2.5),
     )
 
     // Update time for shader animations
-    mesh.material.uniforms.u_time.value = t
+    mesh.material.uniforms.u_time!.value = t
 
     /*
      * CRT PHOSPHOR CYCLING

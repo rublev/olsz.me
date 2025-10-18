@@ -16,23 +16,30 @@ const props = defineProps({
   },
 })
 
-const canvasRef = ref(null)
+const canvasRef = ref<HTMLCanvasElement | null>(null)
 
-function createVignetteGradient(width, height, intensity, color) {
+function createVignetteGradient(
+  width: number,
+  height: number,
+  intensity: number,
+  color: string,
+) {
   // Create a temporary canvas for the gradient
   const tempCanvas = document.createElement('canvas')
   const tempCtx = tempCanvas.getContext('2d')
+  if (!tempCtx)
+    return tempCanvas
   tempCanvas.width = width
   tempCanvas.height = height
 
   // Parse color to RGB for gradient stops
-  const hexToRgb = (hex) => {
+  const hexToRgb = (hex: string) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
     return result
       ? {
-          r: Number.parseInt(result[1], 16),
-          g: Number.parseInt(result[2], 16),
-          b: Number.parseInt(result[3], 16),
+          r: Number.parseInt(result[1]!, 16),
+          g: Number.parseInt(result[2]!, 16),
+          b: Number.parseInt(result[3]!, 16),
         }
       : null
   }
@@ -107,6 +114,8 @@ function pixelateVignette() {
 
   const canvas = canvasRef.value
   const ctx = canvas.getContext('2d')
+  if (!ctx)
+    return
 
   // Set canvas to full viewport size
   const width = window.innerWidth
@@ -132,6 +141,8 @@ function pixelateVignette() {
   // Create small temp canvas
   const tempCanvas = document.createElement('canvas')
   const tempCtx = tempCanvas.getContext('2d')
+  if (!tempCtx)
+    return
   tempCanvas.width = smallWidth
   tempCanvas.height = smallHeight
   tempCtx.imageSmoothingEnabled = false
@@ -143,10 +154,11 @@ function pixelateVignette() {
   ctx.drawImage(tempCanvas, 0, 0, smallWidth, smallHeight, 0, 0, width, height)
 }
 
-let resizeTimeout = null
+let resizeTimeout: ReturnType<typeof setTimeout> | null = null
 function handleResize() {
   // Debounce resize events
-  clearTimeout(resizeTimeout)
+  if (resizeTimeout)
+    clearTimeout(resizeTimeout)
   resizeTimeout = setTimeout(() => {
     pixelateVignette()
   }, 100)
@@ -159,7 +171,8 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
-  clearTimeout(resizeTimeout)
+  if (resizeTimeout)
+    clearTimeout(resizeTimeout)
 })
 </script>
 

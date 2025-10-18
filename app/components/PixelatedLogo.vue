@@ -2,6 +2,13 @@
 import { onMounted, ref } from 'vue'
 import logoColorSvg from '@/assets/icons/logo-color.svg?raw'
 
+type PixelateFunction = (
+  canvas: HTMLCanvasElement,
+  img: HTMLImageElement,
+  pixelSize: number,
+  targetHeight: number,
+) => void
+
 const props = defineProps({
   pixelSize: {
     type: Number,
@@ -20,7 +27,7 @@ const props = defineProps({
 const canvasRef = ref(null)
 const canvasWidth = ref(0)
 
-async function loadSVGAsImage() {
+async function loadSVGAsImage(): Promise<HTMLImageElement> {
   const blob = new Blob([logoColorSvg], {
     type: 'image/svg+xml;charset=utf-8',
   })
@@ -38,8 +45,15 @@ async function loadSVGAsImage() {
 }
 
 // DOWNSCALE METHOD - smoother edges, better for gradients
-function pixelateDownscale(canvas, img, pixelSize, targetHeight) {
+const pixelateDownscale: PixelateFunction = (
+  canvas,
+  img,
+  pixelSize,
+  targetHeight,
+) => {
   const ctx = canvas.getContext('2d')
+  if (!ctx)
+    return
 
   // SVG dimensions from viewBox: 70x41
   const svgWidth = 70
@@ -65,6 +79,8 @@ function pixelateDownscale(canvas, img, pixelSize, targetHeight) {
   // Create temporary canvas to draw small version
   const tempCanvas = document.createElement('canvas')
   const tempCtx = tempCanvas.getContext('2d')
+  if (!tempCtx)
+    return
   tempCanvas.width = smallWidth
   tempCanvas.height = smallHeight
 
@@ -79,8 +95,15 @@ function pixelateDownscale(canvas, img, pixelSize, targetHeight) {
 }
 
 // MANUAL SAMPLING METHOD - more "retro" chunky pixel look
-function pixelateManual(canvas, img, pixelSize, targetHeight) {
+const pixelateManual: PixelateFunction = (
+  canvas,
+  img,
+  pixelSize,
+  targetHeight,
+) => {
   const ctx = canvas.getContext('2d')
+  if (!ctx)
+    return
 
   // SVG dimensions from viewBox: 70x41
   const svgWidth = 70
@@ -112,10 +135,10 @@ function pixelateManual(canvas, img, pixelSize, targetHeight) {
     for (let x = 0; x < width; x += pixelSize) {
       // Sample the color at the block's top-left corner
       const pixelIndex = (y * width + x) * 4
-      const r = data[pixelIndex]
-      const g = data[pixelIndex + 1]
-      const b = data[pixelIndex + 2]
-      const a = data[pixelIndex + 3]
+      const r = data[pixelIndex] ?? 0
+      const g = data[pixelIndex + 1] ?? 0
+      const b = data[pixelIndex + 2] ?? 0
+      const a = data[pixelIndex + 3] ?? 255
 
       ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a / 255})`
       ctx.fillRect(x, y, pixelSize, pixelSize)
