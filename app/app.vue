@@ -8,6 +8,8 @@ useHead({
 
 <template>
   <NuxtRouteAnnouncer />
+  <SvgFilters />
+
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

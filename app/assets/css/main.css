@@ -89,3 +89,23 @@
     text-shadow: 0 0 2px lime;
   }
 }
+
+@layer utilities {
+  /* Hidden class for SVG filter definitions */
+  .svg-filter--hidden {
+    opacity: 0;
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+  }
+
+  /* Xerox effect - photocopy distortion filter */
+  .xerox {
+    filter: url(#x);
+  }
+}
