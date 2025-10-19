@@ -32,6 +32,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Gohu Font";
+  src: url("@/assets/fonts/GohuFontuni14NerdFontMono-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-mondwest:
     "PP Mondwest", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
@@ -48,6 +56,9 @@
   --font-pressstart:
     "Press Start 2P", SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
+  --font-gohu:
+    "Gohu Font", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 
   --color-navy: oklch(14.263% 0.02828 238.93);
   --color-matrix: oklch(86.645% 0.29481 142.511);
