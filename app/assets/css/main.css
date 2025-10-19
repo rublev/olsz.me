@@ -42,6 +42,12 @@
   --font-sans:
     "PP NeueBit", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
+  --font-monda:
+    "Monda", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  --font-pressstart:
+    "Press Start 2P", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 
   --color-navy: oklch(14.263% 0.02828 238.93);
 }
