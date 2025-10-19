@@ -4,18 +4,6 @@ import GLYPHS from '@/assets/glyphs.json'
 
 <template>
   <div class="flex max-w-2xl gap-4">
-    <div style="filter: drop-shadow(5px 5px 0px #ff0000);">
-      <PixelRounded
-        :radius="6"
-        :multiplier="2"
-        border-color="lime"
-        :border-width="4"
-      >
-        <div class="bg-black p-2 text-4xl font-bold">
-          Pixel test
-        </div>
-      </PixelRounded>
-    </div>
     <!-- SIDEBAR -->
     <div class="flex flex-col gap-4">
       <!-- 10x -->
@@ -62,7 +50,7 @@ import GLYPHS from '@/assets/glyphs.json'
     <div class="flex-1 space-y-4" style="border: 2px solid yellow">
       <!-- top header section -->
       <div class="flex flex-col gap-2.5">
-        <h1 id="fag" class="font-mondwest text-5xl font-bold">
+        <h1 class="font-mondwest text-5xl font-bold">
           Hey, I'm Marcel {{ GLYPHS.katakana.shi }}
         </h1>
         <p class="font-mondwest text-2xl font-normal">

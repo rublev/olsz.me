@@ -259,15 +259,18 @@ const borderPath = computed(() => {
 })
 
 const outerStyle = computed(() => {
-  const style: Record<string, string> = {
+  return {
     clipPath: `polygon(${outerPath.value})`,
   }
+})
 
-  if (props.dropShadow) {
-    style.filter = `drop-shadow(${props.dropShadowX}px ${props.dropShadowY}px 0px ${props.dropShadowColor})`
+const wrapperStyle = computed(() => {
+  if (!props.dropShadow)
+    return {}
+
+  return {
+    filter: `drop-shadow(${props.dropShadowX}px ${props.dropShadowY}px 0px ${props.dropShadowColor})`,
   }
-
-  return style
 })
 
 const innerStyle = computed(() => {
@@ -277,7 +280,6 @@ const innerStyle = computed(() => {
   return {
     clipPath: `polygon(${innerPath.value})`,
     border: `${props.borderWidth * props.multiplier}px solid transparent`,
-    display: 'block',
   }
 })
 
@@ -293,46 +295,33 @@ const borderStyle = computed(() => {
 </script>
 
 <template>
+  <div v-if="dropShadow" :style="wrapperStyle">
+    <div
+      class="pixel-rounded"
+      :class="{ 'pixel-rounded--wrapper': hasBorder }"
+      :style="outerStyle"
+    >
+      <div v-if="hasBorder" class="pixel-rounded__inner" :style="innerStyle">
+        <slot />
+      </div>
+      <slot v-else />
+      <div
+        v-if="hasBorder"
+        class="pixel-rounded__border"
+        :style="borderStyle"
+      />
+    </div>
+  </div>
   <div
+    v-else
     class="pixel-rounded"
     :class="{ 'pixel-rounded--wrapper': hasBorder }"
     :style="outerStyle"
   >
-    <!-- eslint-disable-next-line better-tailwindcss/no-unregistered-classes -->
     <div v-if="hasBorder" class="pixel-rounded__inner" :style="innerStyle">
       <slot />
     </div>
     <slot v-else />
-    <!-- eslint-disable-next-line better-tailwindcss/no-unregistered-classes -->
     <div v-if="hasBorder" class="pixel-rounded__border" :style="borderStyle" />
   </div>
 </template>
-
-<style scoped>
-.pixel-rounded {
-  overflow: hidden;
-  display: inline-block;
-  width: fit-content;
-  height: fit-content;
-}
-
-.pixel-rounded--wrapper {
-  position: relative;
-}
-
-.pixel-rounded__inner {
-  position: relative;
-}
-
-.pixel-rounded__border {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: block;
-  pointer-events: none;
-  margin: calc(var(--border-width, 0) * -1px);
-}
-</style>

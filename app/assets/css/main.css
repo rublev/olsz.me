@@ -90,6 +90,25 @@
   }
 }
 
+@layer components {
+  /* PixelRounded component styles */
+  .pixel-rounded {
+    @apply inline-block h-fit w-fit overflow-hidden;
+  }
+
+  .pixel-rounded--wrapper {
+    @apply relative;
+  }
+
+  .pixel-rounded__inner {
+    @apply relative block;
+  }
+
+  .pixel-rounded__border {
+    @apply pointer-events-none absolute inset-0 block;
+  }
+}
+
 @layer utilities {
   /* Hidden class for SVG filter definitions */
   .svg-filter--hidden {
