@@ -261,6 +261,7 @@ const borderPath = computed(() => {
 const outerStyle = computed(() => {
   return {
     clipPath: `polygon(${outerPath.value})`,
+    background: `${props.borderColor}`,
   }
 })
 
