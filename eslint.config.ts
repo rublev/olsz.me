@@ -37,7 +37,7 @@ export default antfu(
       'better-tailwindcss/no-unregistered-classes': [
         'error',
         {
-          ignore: ['^pixel-rounded', '^xerox(-sm)?$', '^svg-filter--hidden$'],
+          ignore: ['^pixel-rounded', '^xerox$', '^svg-filter--hidden$'],
         },
       ],
       /**
