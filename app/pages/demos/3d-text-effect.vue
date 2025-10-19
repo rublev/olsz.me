@@ -95,7 +95,7 @@
           >
           <a
             href="https://techcrunch.com/2018/03/13/y-combinator-alum-daily-coding-problem-acquired-by-alpine-data-labs/"
-            class="text-xs text-green-500 underline transition-all duration-200 hover:rounded hover:bg-green-500 hover:text-white hover:no-underline dark:text-green-500 dark:hover:text-white"
+            class="text-xs text-matrix underline transition-all duration-200 hover:rounded hover:bg-green-500 hover:text-white hover:no-underline dark:text-matrix dark:hover:text-white"
           >
             (acq)</a
           >
@@ -120,7 +120,7 @@
           >
           <a
             href="https://www.coindesk.com/business/2021/11/24/coinbase-acquires-crypto-wallet-firm-brd-for-undisclosed-amount"
-            class="text-xs text-green-500 underline transition-all duration-200 hover:rounded hover:bg-green-500 hover:text-white hover:no-underline dark:text-green-500 dark:hover:text-white"
+            class="text-xs text-matrix underline transition-all duration-200 hover:rounded hover:bg-green-500 hover:text-white hover:no-underline dark:text-matrix dark:hover:text-white"
           >
             (acq, Coinbase)
           </a>

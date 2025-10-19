@@ -3,7 +3,7 @@
 <template>
   <!-- SVG Filters for xerox effect -->
   <!-- Source: https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/ -->
-  <svg class="hidden" xmlns="http://www.w3.org/2000/svg">
+  <svg class="svg-filter--hidden" xmlns="http://www.w3.org/2000/svg">
     <filter id="x">
       <feTurbulence baseFrequency="0.01 0.02" numOctaves="2" result="t0" />
       <feDisplacementMap
