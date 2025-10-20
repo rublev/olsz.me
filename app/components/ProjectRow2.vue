@@ -53,7 +53,11 @@ defineProps<Props>()
           {{ title }}
           <template v-if="companyUrl && companyTitle">
             <span> @ </span>
-            <a :href="companyUrl" target="_blank" class="underline">
+            <a
+              :href="companyUrl"
+              target="_blank"
+              class="underline"
+            >
               {{ companyTitle }}
             </a>
           </template>
@@ -79,7 +83,11 @@ defineProps<Props>()
         bg-black
       "
     >
-      <Icon name="svg:github" class="h-full w-auto p-1.5" color="lime" />
+      <Icon
+        name="svg:github"
+        class="h-full w-auto p-1.5"
+        color="lime"
+      />
     </a>
     <!-- Product Hunt Icon (outside box) -->
     <a
@@ -91,7 +99,11 @@ defineProps<Props>()
         bg-black
       "
     >
-      <Icon name="svg:flame" class="h-full w-auto p-1.5" color="lime" />
+      <Icon
+        name="svg:flame"
+        class="h-full w-auto p-1.5"
+        color="lime"
+      />
     </a>
 
     <!-- Flame Icon (outside box) -->
@@ -104,7 +116,11 @@ defineProps<Props>()
         bg-black
       "
     >
-      <Icon name="svg:trophy" class="h-full w-auto p-1.5" color="lime" />
+      <Icon
+        name="svg:trophy"
+        class="h-full w-auto p-1.5"
+        color="lime"
+      />
     </a>
   </div>
 </template>

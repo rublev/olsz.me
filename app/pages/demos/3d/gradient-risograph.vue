@@ -289,5 +289,8 @@ onMounted(() => {
     RISOGRAPH CANVAS CONTAINER
     This div holds our Three.js canvas for the risograph print simulation
   -->
-  <div ref="canvasContainer" class="absolute top-0 left-0 h-full w-full" />
+  <div
+    ref="canvasContainer"
+    class="absolute top-0 left-0 h-full w-full"
+  />
 </template>

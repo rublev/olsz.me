@@ -53,12 +53,19 @@ defineProps<Props>()
               <span class="">
                 @
               </span>
-              <a :href="companyUrl" target="_blank" class="hover:underline">
+              <a
+                :href="companyUrl"
+                target="_blank"
+                class="hover:underline"
+              >
                 {{ companyTitle }}
               </a>
             </template>
             <template v-if="suffix">
-              <span class="ml-2" v-html="suffix" />
+              <span
+                class="ml-2"
+                v-html="suffix"
+              />
             </template>
           </div>
 

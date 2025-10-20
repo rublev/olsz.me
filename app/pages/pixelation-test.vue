@@ -169,7 +169,10 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           No pixelation
         </p>
-        <canvas ref="originalRef" class="w-full" />
+        <canvas
+          ref="originalRef"
+          class="w-full"
+        />
       </div>
 
       <!-- Downscale Method - 4x -->
@@ -180,7 +183,10 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           Mild pixelation
         </p>
-        <canvas ref="downscale4Ref" class="w-full" />
+        <canvas
+          ref="downscale4Ref"
+          class="w-full"
+        />
       </div>
 
       <!-- Downscale Method - 8x -->
@@ -191,7 +197,10 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           Medium pixelation
         </p>
-        <canvas ref="downscale8Ref" class="w-full" />
+        <canvas
+          ref="downscale8Ref"
+          class="w-full"
+        />
       </div>
 
       <!-- Downscale Method - 16x -->
@@ -202,7 +211,10 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           Heavy pixelation
         </p>
-        <canvas ref="downscale16Ref" class="w-full" />
+        <canvas
+          ref="downscale16Ref"
+          class="w-full"
+        />
       </div>
 
       <!-- Manual Sampling - 8px blocks -->
@@ -213,7 +225,10 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           Block-based pixelation
         </p>
-        <canvas ref="manual8Ref" class="w-full" />
+        <canvas
+          ref="manual8Ref"
+          class="w-full"
+        />
       </div>
 
       <!-- Manual Sampling - 16px blocks -->
@@ -224,7 +239,10 @@ onMounted(async () => {
         <p class="mb-2 text-sm text-gray-400">
           Large block pixelation
         </p>
-        <canvas ref="manual16Ref" class="w-full" />
+        <canvas
+          ref="manual16Ref"
+          class="w-full"
+        />
       </div>
     </div>
 

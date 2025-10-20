@@ -129,7 +129,10 @@ const JOBS: {
         />
       </a>
       <!-- github -->
-      <a href="https://github.com/rublev" target="_blank">
+      <a
+        href="https://github.com/rublev"
+        target="_blank"
+      >
         <Icon
           name="svg:github"
           class="h-auto w-6"
@@ -138,7 +141,10 @@ const JOBS: {
         />
       </a>
       <!-- linkedin -->
-      <a href="https://www.linkedin.com/in/marcelolszewski/" target="_blank">
+      <a
+        href="https://www.linkedin.com/in/marcelolszewski/"
+        target="_blank"
+      >
         <Icon
           name="svg:linkedin"
           class="h-auto w-6"

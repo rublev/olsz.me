@@ -40,6 +40,10 @@
     </main>
 
     <!-- vignette overlay -->
-    <PixelatedVignette :pixel-size="8" :intensity="0.075" color="#000000" />
+    <PixelatedVignette
+      :pixel-size="8"
+      :intensity="0.075"
+      color="#000000"
+    />
   </div>
 </template>

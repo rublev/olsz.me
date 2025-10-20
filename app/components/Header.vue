@@ -174,8 +174,14 @@ onUnmounted(() => {
           "
           :class="[textFading ? 'opacity-0' : 'opacity-100']"
         >
-          <a href="/" class="flex shrink-0 items-center">
-            <PixelatedLogo :height="22" :pixel-size="4" />
+          <a
+            href="/"
+            class="flex shrink-0 items-center"
+          >
+            <PixelatedLogo
+              :height="22"
+              :pixel-size="4"
+            />
             <!-- <Icon
               mode="css"
               name="svg:logo-color"
@@ -256,7 +262,10 @@ onUnmounted(() => {
               hover:text-pink-500
             "
           >
-            <Icon name="mdi:github" class="h-5 w-5" />
+            <Icon
+              name="mdi:github"
+              class="h-5 w-5"
+            />
           </a>
           <a
             href="https://app.10xmanagement.com/clients/marcel-olszewski-16302/profile"
@@ -266,7 +275,10 @@ onUnmounted(() => {
               hover:text-pink-500
             "
           >
-            <Icon name="svg:logo-10x" class="h-5" />
+            <Icon
+              name="svg:logo-10x"
+              class="h-5"
+            />
           </a>
           <span class="text-gray-500">
             |

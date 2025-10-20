@@ -299,7 +299,10 @@ const borderStyle = computed(() => {
 </script>
 
 <template>
-  <div v-if="dropShadow" :style="wrapperStyle">
+  <div
+    v-if="dropShadow"
+    :style="wrapperStyle"
+  >
     <div
       class="pixel-rounded"
       :class="{
@@ -308,7 +311,11 @@ const borderStyle = computed(() => {
       }"
       :style="outerStyle"
     >
-      <div v-if="hasBorder" class="pixel-rounded__inner" :style="innerStyle">
+      <div
+        v-if="hasBorder"
+        class="pixel-rounded__inner"
+        :style="innerStyle"
+      >
         <slot />
       </div>
       <slot v-else />
@@ -328,10 +335,18 @@ const borderStyle = computed(() => {
     }"
     :style="outerStyle"
   >
-    <div v-if="hasBorder" class="pixel-rounded__inner" :style="innerStyle">
+    <div
+      v-if="hasBorder"
+      class="pixel-rounded__inner"
+      :style="innerStyle"
+    >
       <slot />
     </div>
     <slot v-else />
-    <div v-if="hasBorder" class="pixel-rounded__border" :style="borderStyle" />
+    <div
+      v-if="hasBorder"
+      class="pixel-rounded__border"
+      :style="borderStyle"
+    />
   </div>
 </template>

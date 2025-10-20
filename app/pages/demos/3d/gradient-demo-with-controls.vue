@@ -503,7 +503,11 @@ onMounted(() => {
       <!-- Main Enable/Disable Toggle -->
       <div class="mb-4">
         <label class="flex items-center gap-2">
-          <input v-model="controls.enabled" type="checkbox" class="h-4 w-4">
+          <input
+            v-model="controls.enabled"
+            type="checkbox"
+            class="h-4 w-4"
+          >
           <span> Enable Effect </span>
         </label>
       </div>
@@ -546,7 +550,10 @@ onMounted(() => {
       </div>
 
       <!-- Manual Color Controls (only shown in manual mode) -->
-      <div v-if="controls.mode === 'manual'" class="mb-4">
+      <div
+        v-if="controls.mode === 'manual'"
+        class="mb-4"
+      >
         <h3 class="mb-3 text-sm font-medium">
           Colors
         </h3>

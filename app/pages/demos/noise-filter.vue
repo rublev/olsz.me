@@ -4,7 +4,10 @@
       grid place-items-center border-[10px] border-red-500 bg-black text-white
     "
   >
-    <svg xmlns="http://www.w3.org/2000/svg" class="absolute -m-px h-px w-px">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="absolute -m-px h-px w-px"
+    >
       <defs>
         <filter id="noise">
           <feOffset
@@ -13,7 +16,11 @@
             dy="-8"
             result="offset"
           />
-          <feGaussianBlur in="offset" stdDeviation="64" result="blur" />
+          <feGaussianBlur
+            in="offset"
+            stdDeviation="64"
+            result="blur"
+          />
           <feTurbulence
             result="waves"
             type="turbulence"

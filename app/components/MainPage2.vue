@@ -261,7 +261,10 @@ function scrollDown() {
           <p class="text-xl">
             Hey, I'm Marcel {{ GLYPHS.katakana.shi }}
           </p>
-          <p style="overflow-wrap: anywhere" class="leading-snug font-light">
+          <p
+            style="overflow-wrap: anywhere"
+            class="leading-snug font-light"
+          >
             Full Stack developer/designer working mostly with early to mid-stage
             startups. Currently working on a few fun projects and looking for my
             next exciting role!
