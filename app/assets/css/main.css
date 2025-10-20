@@ -34,7 +34,48 @@
 
 @font-face {
   font-family: "Gohu Font";
-  src: url("@/assets/fonts/GohuFontuni14NerdFontMono-Regular.woff2") format("woff2");
+  src: url("@/assets/fonts/GohuFontuni14NerdFontMono-Regular.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gohu Font Vector";
+  src: url("@/assets/fonts/gohu-vector.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gohu Font Vector 2";
+  src: url("@/assets/fonts/gohufont-uni-14.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gohu Font 11";
+  src: url("@/assets/fonts/gohufont-uni-11.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "4b";
+  src: url("@/assets/fonts/4b.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "atari";
+  src: url("@/assets/fonts/atari.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -58,6 +99,21 @@
     "Liberation Mono", "Courier New", monospace;
   --font-gohu:
     "Gohu Font", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --font-gohu-vector:
+    "Gohu Font Vector", SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --font-gohu-vector2:
+    "Gohu Font Vector 2", SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --font-gohu-11:
+    "Gohu Font 11", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --font-4b:
+    "4b", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --font-atari:
+    "atari", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
 
   --color-navy: oklch(14.263% 0.02828 238.93);
