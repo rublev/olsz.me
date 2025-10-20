@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useHead({
   bodyAttrs: {
-    class: 'min-h-screen bg-background font-sans text-foreground',
+    class: 'min-h-dvh bg-background font-sans text-foreground',
   },
 })
 </script>

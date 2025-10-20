@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="relative min-h-screen">
+  <div class="relative min-h-dvh">
     <!-- cool darkened -->
     <!-- <div class="absolute z-1 h-full w-full bg-black mix-blend-overlay" /> -->
     <!-- <div class="absolute z-1 h-full w-full bg-matrix mix-blend-saturation" /> -->
@@ -30,7 +30,7 @@
     <!-- content -->
     <main
       class="
-        relative z-100 flex min-h-screen flex-grow items-center justify-center
+        relative z-100 flex min-h-dvh flex-grow items-center justify-center
         md:mr-12
       "
     >

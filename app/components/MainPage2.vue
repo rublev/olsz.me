@@ -127,12 +127,21 @@ const JOBS: {
     },
   ],
 }
+
+function scrollDown() {
+  window.scrollBy({
+    top: window.innerHeight,
+    behavior: 'smooth',
+  })
+}
 </script>
 
 <template>
   <div class="flex w-auto flex-col gap-3">
     <!-- MOBILE WHOLE PAGER -->
-    <div class="flex min-h-screen flex-col items-start justify-end gap-3 p-8">
+    <div
+      class="flex min-h-dvh flex-col items-start justify-end gap-3 p-4 pb-24"
+    >
       <!-- top header section -->
       <div
         class="
@@ -144,11 +153,14 @@ const JOBS: {
           :multiplier="2"
           :border-width="1"
           border-color="lime"
+          class="max-h-[64px] max-w-[64px]"
         >
           <div class="bg-matrix">
             <img
               src="~/assets/images/me-pixelized@4x.png"
-              class="selection-black h-[64px] w-auto mix-blend-hard-light"
+              class="
+                selection-black h-[64px] w-auto scale-200 mix-blend-hard-light
+              "
               style="image-rendering: optimizequality"
             >
           </div>
@@ -159,7 +171,15 @@ const JOBS: {
             text-sm
           "
         >
-          <p class="font-pressstart text-base lowercase">
+          <p
+            class="font-pressstart text-base lowercase"
+            style="
+              text-shadow:
+                0px 0px 1px black,
+                1px 1px 1px black,
+                2px 2px 1px black;
+            "
+          >
             hello,<br>
             I'm Marcel {{ GLYPHS.katakana.shi }}
           </p>
@@ -171,11 +191,9 @@ const JOBS: {
         "
         style="
           text-shadow:
+            -1px -1px 1px black,
             0px 0px 1px black,
-            1px 1px 1px black,
-            2px 2px 1px black,
-            3px 3px 1px black,
-            4px 4px 1px black;
+            1px 1px 1px black;
         "
       >
         Full Stack developer/designer working mostly with early to mid-stage
@@ -191,7 +209,8 @@ const JOBS: {
         :drop-shadow-x="5"
         :drop-shadow-y="5"
         drop-shadow-color="#000000"
-        class="self-end"
+        class="cursor-pointer self-end"
+        @click="scrollDown"
       >
         <div class="flex items-center px-2 pb-0.5 pl-3 text-black">
           <p class="mr-1 font-pressstart text-sm">
@@ -208,12 +227,13 @@ const JOBS: {
     <!-- SIDEBAR -->
     <Sidebar />
     <!-- CONTENT -->
-    <div class="flex w-auto flex-col gap-3">
+    <div class="flex w-auto flex-col gap-3 p-4 pt-0">
       <!-- top header section -->
       <div
         class="
-          flex items-stretch gap-3 bg-transparent font-neuebit text-4xl
+          hidden items-stretch gap-3 bg-transparent font-neuebit text-4xl
           font-bold
+          md:flex
         "
       >
         <PixelRounded
@@ -266,11 +286,12 @@ const JOBS: {
             <div class="flex items-center gap-2 pl-1">
               <div
                 class="
-                  selection-black font-4b text-sm leading-none tracking-wider
-                  text-black
+                  selection-black pt-0.5 pl-1 font-4b text-sm leading-none
+                  tracking-tighter text-black
+                  md:font-normal md:tracking-wider
                 "
               >
-                currently:
+                currently
               </div>
             </div>
             <ProjectRow2
@@ -305,8 +326,9 @@ const JOBS: {
             <div class="flex items-center gap-2 pl-1">
               <div
                 class="
-                  selection-black font-4b text-sm leading-none tracking-wider
-                  text-black
+                  selection-black pt-0.5 pl-1 font-4b text-sm leading-none
+                  tracking-tighter text-black
+                  md:font-normal md:tracking-wider
                 "
               >
                 worked on
@@ -344,8 +366,9 @@ const JOBS: {
             <div class="flex items-center gap-2 pl-1">
               <div
                 class="
-                  selection-black font-4b text-sm leading-none tracking-wider
-                  text-black
+                  selection-black pt-0.5 pl-1 font-4b text-sm leading-none
+                  tracking-tighter text-black
+                  md:font-normal md:tracking-wider
                 "
               >
                 other projects

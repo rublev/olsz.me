@@ -25,14 +25,31 @@ defineProps<Props>()
 
 <template>
   <div class="flex items-stretch">
-    <div class="flex w-full items-center gap-2 bg-black p-2 pr-3">
+    <div
+      class="
+        flex w-full items-center gap-3 bg-black p-2 pr-3
+        md:gap-2
+      "
+    >
       <!-- Left Icon -->
-      <Icon :name="icon" class="h-4 w-4 flex-shrink-0" color="lime" />
+      <Icon
+        :name="icon"
+        class="
+          h-6 w-6 flex-shrink-0
+          md:h-4 md:w-4
+        "
+        color="lime"
+      />
 
       <!-- Content -->
       <div class="flex-1">
         <!-- Title and Company -->
-        <div class="font-4b text-sm leading-1">
+        <div
+          class="
+            font-4b text-sm leading-none
+            md:leading-1
+          "
+        >
           {{ title }}
           <template v-if="companyUrl && companyTitle">
             <span> @ </span>

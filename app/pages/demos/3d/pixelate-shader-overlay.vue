@@ -101,7 +101,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-yellow-200 to-blue-200">
+  <div class="min-h-dvh bg-gradient-to-br from-yellow-200 to-blue-200">
     <div class="p-12 text-2xl">
       <h1 class="mb-4 text-4xl font-bold">
         Hello World
