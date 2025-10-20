@@ -26,6 +26,12 @@
     "body": ["style=\"border: ${1:2}px solid ${2:red};\"${0}"],
     "description": "Insert inline border style with thickness and color",
   },
+  "Inline Style": {
+    "scope": "vue,html,typescript,javascript,css",
+    "prefix": "st",
+    "body": ["style=\"${1:property}:${2:val};\"${0}"],
+    "description": "Insert inline style with property and value",
+  },
   "PixelRounded Component": {
     "scope": "vue,html,typescript,javascript",
     "prefix": "pixel",
