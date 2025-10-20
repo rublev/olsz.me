@@ -130,105 +130,83 @@ const JOBS: {
 </script>
 
 <template>
-  <div class="flex w-auto gap-3">
-    <!-- SIDEBAR -->
-    <div class="flex flex-col items-center gap-3">
-      <!-- 10x -->
+  <div class="flex w-auto flex-col gap-3">
+    <!-- MOBILE WHOLE PAGER -->
+    <div class="flex min-h-screen flex-col items-start justify-end gap-3 p-8">
+      <!-- top header section -->
+      <div
+        class="
+          flex items-center gap-3 bg-transparent font-neuebit text-4xl font-bold
+        "
+      >
+        <PixelRounded
+          :radius="8"
+          :multiplier="2"
+          :border-width="1"
+          border-color="lime"
+        >
+          <div class="bg-matrix">
+            <img
+              src="~/assets/images/me-pixelized@4x.png"
+              class="selection-black h-[64px] w-auto mix-blend-hard-light"
+              style="image-rendering: optimizequality"
+            >
+          </div>
+        </PixelRounded>
+        <div
+          class="
+            selection-black flex flex-1 flex-col justify-center gap-3 font-gohu
+            text-sm
+          "
+        >
+          <p class="font-pressstart text-base lowercase">
+            hello,<br>
+            I'm Marcel {{ GLYPHS.katakana.shi }}
+          </p>
+        </div>
+      </div>
+      <p
+        class="
+          font-gohu text-sm leading-snug font-light tracking-tight lowercase
+        "
+        style="
+          text-shadow:
+            0px 0px 1px black,
+            1px 1px 1px black,
+            2px 2px 1px black,
+            3px 3px 1px black,
+            4px 4px 1px black;
+        "
+      >
+        Full Stack developer/designer working mostly with early to mid-stage
+        startups. Currently working on a few fun projects and looking for my
+        next exciting role!
+      </p>
       <PixelRounded
-        :radius="4"
+        :radius="6"
         :multiplier="2"
         :border-width="1"
         border-color="lime"
         drop-shadow
-        :drop-shadow-x="2"
-        :drop-shadow-y="2"
-        drop-shadow-color="lime"
+        :drop-shadow-x="5"
+        :drop-shadow-y="5"
+        drop-shadow-color="#000000"
+        class="self-end"
       >
-        <a
-          href="https://app.10xmanagement.com/clients/marcel-olszewski-16302/profile"
-          target="_blank"
-          class="flex h-8 w-8 items-center justify-center bg-black p-1"
-        >
+        <div class="flex items-center px-2 pb-0.5 pl-3 text-black">
+          <p class="mr-1 font-pressstart text-sm">
+            more
+          </p>
           <Icon
-            name="svg:10x-pixelated"
-            color="white"
-            class="h-auto w-5"
+            name="svg:chevron-down"
+            class="mt-0.25 h-4 w-auto"
             style="shape-rendering: crispEdges"
           />
-        </a>
-      </PixelRounded>
-      <!-- github -->
-      <PixelRounded
-        :radius="4"
-        :multiplier="2"
-        :border-width="1"
-        border-color="lime"
-        drop-shadow
-        :drop-shadow-x="2"
-        :drop-shadow-y="2"
-        drop-shadow-color="lime"
-      >
-        <a
-          href="https://github.com/rublev"
-          target="_blank"
-          class="flex h-8 w-8 items-center justify-center bg-black p-1"
-        >
-          <Icon
-            name="svg:github"
-            color="white"
-            class="h-auto w-5"
-            style="shape-rendering: crispEdges"
-          />
-        </a>
-      </PixelRounded>
-      <!-- linkedin -->
-      <PixelRounded
-        :radius="4"
-        :multiplier="2"
-        :border-width="1"
-        border-color="lime"
-        drop-shadow
-        :drop-shadow-x="2"
-        :drop-shadow-y="2"
-        drop-shadow-color="lime"
-      >
-        <a
-          href="https://www.linkedin.com/in/marcelolszewski/"
-          target="_blank"
-          class="flex h-8 w-8 items-center justify-center bg-black p-1"
-        >
-          <Icon
-            name="svg:linkedin"
-            color="white"
-            class="h-auto w-5"
-            style="shape-rendering: crispEdges"
-          />
-        </a>
-      </PixelRounded>
-      <!-- email -->
-      <PixelRounded
-        :radius="4"
-        :multiplier="2"
-        :border-width="1"
-        border-color="lime"
-        drop-shadow
-        :drop-shadow-x="2"
-        :drop-shadow-y="2"
-        drop-shadow-color="lime"
-      >
-        <a
-          href="mailto:hi@olsz.me"
-          class="flex h-8 w-8 items-center justify-center bg-black p-1"
-        >
-          <Icon
-            name="svg:email"
-            color="white"
-            class="h-auto w-5"
-            style="shape-rendering: crispEdges"
-          />
-        </a>
+        </div>
       </PixelRounded>
     </div>
+    <!-- SIDEBAR -->
+    <Sidebar />
     <!-- CONTENT -->
     <div class="flex w-auto flex-col gap-3">
       <!-- top header section -->
@@ -267,9 +245,6 @@ const JOBS: {
             Full Stack developer/designer working mostly with early to mid-stage
             startups. Currently working on a few fun projects and looking for my
             next exciting role!
-          </p>
-          <p class="font-bold text-matrix">
-            Reach out!
           </p>
         </div>
       </div>

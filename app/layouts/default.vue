@@ -19,7 +19,10 @@
       <img
         src="/assets/animations/orpheus.gif"
         alt=""
-        class="h-full w-full min-w-[1280px] object-cover object-center"
+        class="
+          h-full w-auto object-cover object-left
+          md:h-full md:min-w-[1280px] md:object-center
+        "
         style="image-rendering: pixelated"
       >
     </div>
@@ -27,8 +30,8 @@
     <!-- content -->
     <main
       class="
-        relative z-100 mr-12 flex min-h-screen flex-grow items-center
-        justify-center
+        relative z-100 flex min-h-screen flex-grow items-center justify-center
+        md:mr-12
       "
     >
       <!-- <Header /> -->

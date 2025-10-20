@@ -41,6 +41,7 @@ export default antfu(
             '^pixel-rounded',
             '^xerox$',
             '^svg-filter--hidden$',
+            '^typewriter-text$',
             '^selection',
           ],
         },
