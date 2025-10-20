@@ -18,6 +18,8 @@ interface Props {
   dropShadowY?: number
   /** Drop shadow color */
   dropShadowColor?: string
+  /** Apply full width (w-full) to the component */
+  full?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,6 +31,7 @@ const props = withDefaults(defineProps<Props>(), {
   dropShadowX: 5,
   dropShadowY: 5,
   dropShadowColor: '#000000',
+  full: false,
 })
 
 const hasBorder = computed(() => props.borderWidth > 0)
@@ -299,7 +302,10 @@ const borderStyle = computed(() => {
   <div v-if="dropShadow" :style="wrapperStyle">
     <div
       class="pixel-rounded"
-      :class="{ 'pixel-rounded--wrapper': hasBorder }"
+      :class="{
+        'pixel-rounded--wrapper': hasBorder,
+        'w-full': full && hasBorder,
+      }"
       :style="outerStyle"
     >
       <div v-if="hasBorder" class="pixel-rounded__inner" :style="innerStyle">
@@ -316,7 +322,10 @@ const borderStyle = computed(() => {
   <div
     v-else
     class="pixel-rounded"
-    :class="{ 'pixel-rounded--wrapper': hasBorder }"
+    :class="{
+      'pixel-rounded--wrapper': hasBorder,
+      'w-full': full && hasBorder,
+    }"
     :style="outerStyle"
   >
     <div v-if="hasBorder" class="pixel-rounded__inner" :style="innerStyle">
