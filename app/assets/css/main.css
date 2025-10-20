@@ -130,7 +130,7 @@
 
 /* dark */
 .dark {
-  --background: var(--color-black);
+  --background: var(--color-navy);
 }
 
 @theme inline {
@@ -160,6 +160,7 @@
   }
 
   ::selection {
+    /* background-color: rgba(0, 50, 0, 0.99); safari fix */
     background-color: lime;
     color: black;
     text-shadow: 0 0 2px lime;
@@ -203,5 +204,17 @@
   /* Xerox effect - photocopy distortion filter */
   .xerox {
     filter: url(#x);
+  }
+
+  .selection-black::selection {
+    background-color: black;
+    color: lime;
+    text-shadow: 0 0 2px black;
+  }
+
+  .selection-lime::selection {
+    background-color: lime;
+    color: black;
+    text-shadow: 0 0 2px lime;
   }
 }
