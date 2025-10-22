@@ -151,11 +151,7 @@ function scrollDown() {
       "
     >
       <!-- top header section -->
-      <div
-        class="
-          flex items-center gap-6 bg-transparent font-neuebit text-4xl font-bold
-        "
-      >
+      <div class="flex items-center gap-6 bg-transparent text-4xl font-bold">
         <PixelRounded
           :radius="8"
           :multiplier="2"
@@ -257,8 +253,7 @@ function scrollDown() {
       <!-- top header section -->
       <div
         class="
-          hidden items-stretch gap-6 bg-transparent pr-3 font-neuebit text-4xl
-          font-bold
+          hidden items-stretch gap-6 bg-transparent pr-3 text-4xl font-bold
           md:flex
         "
       >

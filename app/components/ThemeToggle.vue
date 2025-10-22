@@ -1,6 +1,5 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
-import GLYPHS from '@/assets/glyphs.json'
 
 const isDark = ref(false)
 const isReady = ref(false)
@@ -34,27 +33,25 @@ onMounted(() => {
   <button
     v-if="isReady"
     class="
-      fixed top-8 right-8 z-40 cursor-pointer font-neuebit text-4xl
+      fixed top-8 right-8 z-40 cursor-pointer
       hover:cursor-pointer
     "
     @click="toggleTheme"
   >
-    <span class="relative block">
+    <span class="relative block h-[22px] w-[21px]">
       <!-- Sun (light mode) -->
-      <span
+      <Icon
+        name="svg:sun"
         class="transition-all duration-700"
         :class="isDark ? 'text-pink-500' : 'text-yellow-500'"
         :style="{ opacity: sunOpacity }"
-      >
-        {{ GLYPHS.neuebit.sun_filled }}
-      </span>
+      />
       <!-- Moon (dark mode - fades in on top) -->
-      <span
+      <Icon
+        name="svg:moon"
         class="absolute inset-0 text-pink-500 transition-opacity duration-700"
         :style="{ opacity: moonOpacity }"
-      >
-        {{ GLYPHS.neuebit.moon_left }}
-      </span>
+      />
     </span>
   </button>
 </template>

@@ -5,28 +5,12 @@
 }
 
 @font-face {
-  font-family: "PP NeueBit";
-  src: url("@/assets/fonts/PPNeueBit-Regular-subset.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "PP NeueBit";
-  src: url("@/assets/fonts/PPNeueBit-Bold-subset.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "Gohu Font";
   src: url("@/assets/fonts/GohuFontuni14NerdFontMono-Regular-subset.woff2")
     format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
@@ -34,16 +18,10 @@
   src: url("@/assets/fonts/4b-subset.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @theme {
-  --font-neuebit:
-    "PP NeueBit", sfmono-regular, menlo, monaco, consolas, "Liberation Mono",
-    "Courier New", monospace;
-  --font-sans:
-    "PP NeueBit", sfmono-regular, menlo, monaco, consolas, "Liberation Mono",
-    "Courier New", monospace;
   --font-monda:
     "Monda", ui-sans-serif, system-ui, -apple-system, blinkmacsystemfont,
     "Segoe UI", roboto, sans-serif;
