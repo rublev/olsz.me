@@ -35,7 +35,7 @@ defineProps<Props>()
       <Icon
         :name="icon"
         class="
-          h-6 w-6 flex-shrink-0
+          h-6 w-6 shrink-0
           md:h-4 md:w-4
         "
         color="lime"

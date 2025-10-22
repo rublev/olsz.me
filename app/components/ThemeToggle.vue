@@ -32,26 +32,27 @@ onMounted(() => {
 <template>
   <button
     v-if="isReady"
-    class="
-      fixed top-8 right-8 z-40 cursor-pointer
-      hover:cursor-pointer
-    "
+    class="fixed top-8 right-8 z-500 cursor-pointer"
     @click="toggleTheme"
   >
-    <span class="relative block h-[22px] w-[21px]">
+    <div class="relative block">
       <!-- Sun (light mode) -->
       <Icon
         name="svg:sun"
-        class="transition-all duration-700"
+        class="h-8 w-8 transition-all duration-700"
         :class="isDark ? 'text-pink-500' : 'text-yellow-500'"
         :style="{ opacity: sunOpacity }"
+        style="shape-rendering: crispEdges"
       />
       <!-- Moon (dark mode - fades in on top) -->
       <Icon
         name="svg:moon"
-        class="absolute inset-0 text-pink-500 transition-opacity duration-700"
+        class="
+          absolute inset-0 h-8 w-8 text-pink-500 transition-opacity duration-700
+        "
         :style="{ opacity: moonOpacity }"
+        style="shape-rendering: crispEdges"
       />
-    </span>
+    </div>
   </button>
 </template>

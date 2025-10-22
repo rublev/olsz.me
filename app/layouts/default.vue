@@ -121,7 +121,7 @@ onMounted(() => {
       <PixelatedVignette
         :pixel-size="8"
         :intensity="0.075"
-        color="#010b14"
+        color="#000000"
       />
     </div>
 

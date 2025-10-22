@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* prevent FOUC, first priority! */
+/* stylelint-disable-next-line selector-id-pattern */
+#__nuxt,
+body,
+html {
+  /* --color-navy */
+
+  /* background: rgb(1, 11, 20); */
+  background: rgb(0 0 0);
+}
+
 @theme {
   --dark: class;
 }
@@ -34,9 +45,9 @@
   --font-4b:
     "4b", sfmono-regular, menlo, monaco, consolas, "Liberation Mono",
     "Courier New", monospace;
-  --color-navy: oklch(14.263% 0.0283 238.93deg);
 
-  /* --color-navy: #00ff00; */
+  /* --color-navy: oklch(14.263% 0.0283 238.93deg); */
+  --color-navy: #000;
   --color-matrix: oklch(86.645% 0.2948 142.511deg);
   --leading-half: 0.5em;
 }

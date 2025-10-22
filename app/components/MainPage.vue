@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import GLYPHS from '@/assets/glyphs.json'
-
 interface Job {
   icon: string
   title: string
@@ -59,7 +57,7 @@ const JOBS: {
     },
     {
       icon: 'svg:wallet',
-      title: 'tech employee wealth manager',
+      title: 'tech employee wealth mgmt app',
       companyUrl: 'https://withcompound.com',
       companyTitle: 'withcompound.com',
       tags: ['react', 'typescript'],
@@ -198,14 +196,12 @@ function scrollDown() {
             "
           >
             hello,<br>
-            I'm Marcel {{ GLYPHS.katakana.shi }}
+            I'm Marcel &#x30b7;
           </p>
         </div>
       </div>
       <p
-        class="
-          font-gohu text-sm leading-snug font-light tracking-tight lowercase
-        "
+        class="font-gohu text-sm leading-snug font-light lowercase"
         style="
           text-shadow:
             -1px -1px 1px black,
@@ -213,7 +209,7 @@ function scrollDown() {
             1px 1px 1px black;
         "
       >
-        Full Stack developer/designer working mostly with early to mid-stage
+        Full Stack developer & designer working mostly with early to mid-stage
         startups. Currently working on a few fun projects and looking for my
         next exciting role!
       </p>
@@ -293,12 +289,10 @@ function scrollDown() {
                 2px 2px 1px black;
             "
           >
-            hello, I'm Marcel {{ GLYPHS.katakana.shi }}
+            hello, I'm Marcel &#x30b7;
           </p>
           <p
-            class="
-              font-gohu text-sm leading-snug font-light tracking-tight lowercase
-            "
+            class="font-gohu text-sm leading-snug font-light lowercase"
             style="
               overflow-wrap: anywhere;
               text-shadow:
@@ -307,9 +301,9 @@ function scrollDown() {
                 1px 1px 1px black;
             "
           >
-            Full Stack developer/designer working mostly with early to mid-stage
-            startups. Currently working on a few fun projects and looking for my
-            next exciting role!
+            Full Stack developer & designer working mostly with early to
+            mid-stage startups. Currently working on a few fun projects and
+            looking for my next exciting role!
           </p>
         </div>
       </div>

@@ -24,6 +24,7 @@ useHead({
   <NuxtRouteAnnouncer />
   <SvgFilters />
 
+  <NuxtLoadingIndicator />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

@@ -175,7 +175,7 @@ onUnmounted(() => {
           "
           :class="[textFading ? 'opacity-0' : 'opacity-100']"
         >
-          <MobileSidebar />
+          <SocialLinks mobile />
         </div>
       </header>
       <header
