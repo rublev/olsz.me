@@ -34,7 +34,7 @@ onMounted(() => {
   <button
     v-if="isReady"
     class="
-      fixed top-8 right-8 z-[40] cursor-pointer font-neuebit text-4xl
+      fixed top-8 right-8 z-40 cursor-pointer font-neuebit text-4xl
       hover:cursor-pointer
     "
     @click="toggleTheme"

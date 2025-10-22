@@ -128,7 +128,7 @@ onMounted(() => {
     <!-- content -->
     <main
       class="
-        relative z-[400] flex min-h-svh flex-grow items-center justify-center
+        relative z-400 flex min-h-svh grow items-center justify-center
         md:mr-12
       "
     >

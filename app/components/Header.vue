@@ -171,7 +171,7 @@ onUnmounted(() => {
         <div
           class="
             flex items-center justify-start gap-3 transition-opacity
-            duration-[1000ms] ease-in-out
+            duration-1000 ease-in-out
           "
           :class="[textFading ? 'opacity-0' : 'opacity-100']"
         >
@@ -198,8 +198,8 @@ onUnmounted(() => {
       >
         <div
           class="
-            flex-shrink-0 items-center justify-start gap-3 transition-opacity
-            duration-[1000ms] ease-in-out
+            shrink-0 items-center justify-start gap-3 transition-opacity
+            duration-1000 ease-in-out
             md:gap-4
           "
           :class="[textFading ? 'opacity-0' : 'opacity-100']"
