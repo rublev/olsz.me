@@ -5,24 +5,8 @@
 }
 
 @font-face {
-  font-family: "PP Mondwest";
-  src: url("@/assets/fonts/PPMondwest-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "PP Mondwest";
-  src: url("@/assets/fonts/PPMondwest-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "PP NeueBit";
-  src: url("@/assets/fonts/PPNeueBit-Regular.woff2") format("woff2");
+  src: url("@/assets/fonts/PPNeueBit-Regular-subset.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -30,7 +14,7 @@
 
 @font-face {
   font-family: "PP NeueBit";
-  src: url("@/assets/fonts/PPNeueBit-Bold.woff2") format("woff2");
+  src: url("@/assets/fonts/PPNeueBit-Bold-subset.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -38,7 +22,7 @@
 
 @font-face {
   font-family: "Gohu Font";
-  src: url("@/assets/fonts/GohuFontuni14NerdFontMono-Regular.woff2")
+  src: url("@/assets/fonts/GohuFontuni14NerdFontMono-Regular-subset.woff2")
     format("woff2");
   font-weight: 400;
   font-style: normal;
@@ -46,84 +30,36 @@
 }
 
 @font-face {
-  font-family: "Gohu Font Vector";
-  src: url("@/assets/fonts/gohu-vector.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Gohu Font Vector 2";
-  src: url("@/assets/fonts/gohufont-uni-14.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Gohu Font 11";
-  src: url("@/assets/fonts/gohufont-uni-11.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "4b";
-  src: url("@/assets/fonts/4b.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "atari";
-  src: url("@/assets/fonts/atari.woff2") format("woff2");
+  src: url("@/assets/fonts/4b-subset.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @theme {
-  --font-mondwest:
-    "PP Mondwest", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, sans-serif;
   --font-neuebit:
-    "PP NeueBit", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "PP NeueBit", sfmono-regular, menlo, monaco, consolas, "Liberation Mono",
     "Courier New", monospace;
   --font-sans:
-    "PP NeueBit", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "PP NeueBit", sfmono-regular, menlo, monaco, consolas, "Liberation Mono",
     "Courier New", monospace;
   --font-monda:
-    "Monda", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, sans-serif;
+    "Monda", ui-sans-serif, system-ui, -apple-system, blinkmacsystemfont,
+    "Segoe UI", roboto, sans-serif;
   --font-pressstart:
-    "Press Start 2P", SFMono-Regular, Menlo, Monaco, Consolas,
+    "Press Start 2P", sfmono-regular, menlo, monaco, consolas,
     "Liberation Mono", "Courier New", monospace;
   --font-gohu:
-    "Gohu Font", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
-  --font-gohu-vector:
-    "Gohu Font Vector", SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-  --font-gohu-vector2:
-    "Gohu Font Vector 2", SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-  --font-gohu-11:
-    "Gohu Font 11", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Gohu Font", sfmono-regular, menlo, monaco, consolas, "Liberation Mono",
     "Courier New", monospace;
   --font-4b:
-    "4b", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "4b", sfmono-regular, menlo, monaco, consolas, "Liberation Mono",
     "Courier New", monospace;
-  --font-atari:
-    "atari", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+  --color-navy: oklch(14.263% 0.0283 238.93deg);
 
-  --color-navy: oklch(14.263% 0.02828 238.93);
   /* --color-navy: #00ff00; */
-  --color-matrix: oklch(86.645% 0.29481 142.511);
-
+  --color-matrix: oklch(86.645% 0.2948 142.511deg);
   --leading-half: 0.5em;
 }
 
@@ -149,20 +85,28 @@
     position: relative;
     min-height: 100dvh;
   }
+
   /* body { */
+
   /* basically just disabled tailwinds "antialiased" class */
+
   /* -webkit-font-smoothing: subpixel-antialiased !important; */
 
   /* this makes the fonts lighter and more pixely in firefox */
+
   /* -moz-osx-font-smoothing: grayscale !important; */
+
   /* chrome equivalent */
+
   /* text-rendering: geometricPrecision !important; */
 
   /**
     * makes it ultra shit and pixelated on safari+chrome (not FF) and only looks
     * good at 24-26px fonts
     */
+
   /* -webkit-font-smoothing: none !important; */
+
   /* } */
 
   a {
@@ -183,22 +127,22 @@
     @apply block h-fit w-fit overflow-hidden;
   }
 
-  .pixel-rounded--wrapper {
+  .pixel-rounded-wrapper {
     @apply relative;
   }
 
-  .pixel-rounded__inner {
+  .pixel-rounded-inner {
     @apply relative block;
   }
 
-  .pixel-rounded__border {
+  .pixel-rounded-border {
     @apply pointer-events-none absolute inset-x-0 block;
   }
 }
 
 @layer utilities {
   /* Hidden class for SVG filter definitions */
-  .svg-filter--hidden {
+  .svg-filter-hidden {
     opacity: 0;
     position: absolute;
     left: -9999px;
@@ -213,7 +157,7 @@
 
   /* Xerox effect - photocopy distortion filter */
   .xerox {
-    filter: url(#x);
+    filter: url("#x");
   }
 
   .selection-black::selection {

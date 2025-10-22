@@ -306,14 +306,14 @@ const borderStyle = computed(() => {
     <div
       class="pixel-rounded"
       :class="{
-        'pixel-rounded--wrapper': hasBorder,
+        'pixel-rounded-wrapper': hasBorder,
         'w-full': full && hasBorder,
       }"
       :style="outerStyle"
     >
       <div
         v-if="hasBorder"
-        class="pixel-rounded__inner"
+        class="pixel-rounded-inner"
         :style="innerStyle"
       >
         <slot />
@@ -321,7 +321,7 @@ const borderStyle = computed(() => {
       <slot v-else />
       <div
         v-if="hasBorder"
-        class="pixel-rounded__border"
+        class="pixel-rounded-border"
         :style="borderStyle"
       />
     </div>
@@ -330,14 +330,14 @@ const borderStyle = computed(() => {
     v-else
     class="pixel-rounded"
     :class="{
-      'pixel-rounded--wrapper': hasBorder,
+      'pixel-rounded-wrapper': hasBorder,
       'w-full': full && hasBorder,
     }"
     :style="outerStyle"
   >
     <div
       v-if="hasBorder"
-      class="pixel-rounded__inner"
+      class="pixel-rounded-inner"
       :style="innerStyle"
     >
       <slot />
@@ -345,7 +345,7 @@ const borderStyle = computed(() => {
     <slot v-else />
     <div
       v-if="hasBorder"
-      class="pixel-rounded__border"
+      class="pixel-rounded-border"
       :style="borderStyle"
     />
   </div>

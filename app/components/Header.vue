@@ -213,7 +213,8 @@ onUnmounted(() => {
             <a
               href="/resume"
               class="
-                font-pressstart text-matrix transition-all duration-200
+                font-pressstart font-light text-matrix transition-all
+                duration-200
                 hover:text-pink-500
               "
             >

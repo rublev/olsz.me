@@ -1,17 +1,9 @@
 {
-  "mondwest": {
+  "neuebit": {
     "sun_filled": "\u2600",
-    "sun_empty": "\u263C",
-    "moon_left": "\u263D",
-    "moon_right": "\u263E",
-    "sun_behind_cloud": "\u26C5",
-    "cloud": "\u2601",
-    "arrow_left_right": "\u2194",
-    "arrow_bidirectional": "\u21CC",
-    "alembic": "\u2697"
+    "moon_left": "\u263D"
   },
   "katakana": {
     "shi": "\u30B7"
-  },
-  "neuebit": {}
+  }
 }

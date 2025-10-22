@@ -24,90 +24,85 @@ defineProps<Props>()
 </script>
 
 <template>
-  <div class="flex items-center">
-    <PixelRounded
-      :radius="4"
-      :multiplier="2"
-      :border-width="1"
-      border-color="lime"
-      drop-shadow
-      drop-shadow-color="lime"
-      :drop-shadow-x="2"
-      :drop-shadow-y="2"
+  <div class="flex items-stretch">
+    <div
+      class="
+        flex w-full items-center gap-3 bg-black p-2 pr-3
+        md:gap-2
+      "
     >
-      <div class="xerox flex items-center gap-2 bg-black p-2 text-matrix">
-        <!-- Left Icon -->
-        <Icon
-          :name="icon"
-          class="h-full w-6 flex-shrink-0"
-          style="shape-rendering: crispEdges1"
-          color="lime"
-        />
+      <!-- Left Icon -->
+      <Icon
+        :name="icon"
+        class="
+          h-6 w-6 flex-shrink-0
+          md:h-4 md:w-4
+        "
+        color="lime"
+      />
 
-        <!-- Content -->
-        <div class="flex-1 text-[28px] leading-[0.75em] font-bold">
-          <!-- Title and Company -->
-          <div class="">
-            {{ title }}
-            <template v-if="companyUrl && companyTitle">
-              <span class="">
-                @
-              </span>
-              <a
-                :href="companyUrl"
-                target="_blank"
-                class="hover:underline"
-              >
-                {{ companyTitle }}
-              </a>
-            </template>
-            <template v-if="suffix">
-              <span
-                class="ml-2"
-                v-html="suffix"
-              />
-            </template>
-          </div>
-
-          <!-- Tech Tags -->
-          <div class="hidden font-monda text-sm leading-[0.7em]">
-            {{ tags.join(" / ") }}
-          </div>
-        </div>
-
-        <!-- GitHub Icon (inside box, far right) -->
-        <a
-          v-if="githubUrl"
-          :href="githubUrl"
-          target="_blank"
+      <!-- Content -->
+      <div class="flex-1">
+        <!-- Title and Company -->
+        <div
           class="
-            flex-shrink-0 text-white transition-colors
-            hover:text-purple-500
+            pt-0.5 font-4b text-sm leading-none
+            md:leading-1
           "
         >
-          <Icon
-            name="svg:github"
-            class="h-6 w-6 border-2 border-black bg-black"
-            style="shape-rendering: crispEdges"
-          />
-        </a>
-      </div>
-    </PixelRounded>
+          {{ title }}
+          <template v-if="companyUrl && companyTitle">
+            <span> @ </span>
+            <a
+              :href="companyUrl"
+              target="_blank"
+              class="underline"
+            >
+              {{ companyTitle }}
+            </a>
+          </template>
+          <template v-if="suffix">
+            <span v-html="suffix" />
+          </template>
+        </div>
 
+        <!-- Tech Tags -->
+        <!-- <div class="font-4b text-sm leading-none">
+            {{ tags.join(" / ") }}
+          </div> -->
+      </div>
+    </div>
+
+    <!-- GitHub Icon (inside box, far right) -->
+    <a
+      v-if="githubUrl"
+      :href="githubUrl"
+      target="_blank"
+      class="
+        flex w-full max-w-8 items-center justify-center border-l-2 border-matrix
+        bg-black
+      "
+    >
+      <Icon
+        name="svg:github"
+        class="h-full w-auto p-1.5"
+        color="lime"
+      />
+    </a>
     <!-- Product Hunt Icon (outside box) -->
     <a
       v-if="productHuntUrl"
       :href="productHuntUrl"
       target="_blank"
       class="
-        flex-shrink-0 text-yellow-500 transition-colors
-        hover:text-yellow-400
+        flex w-full max-w-8 items-center justify-center border-l-2 border-matrix
+        bg-black
       "
     >
       <Icon
-        name="svg:trophy"
-        class="h-6 w-6"
-        style="shape-rendering: crispEdges1"
+        name="svg:flame"
+        class="h-full w-auto p-1.5"
+        color="lime"
       />
     </a>
 
@@ -117,14 +112,14 @@ defineProps<Props>()
       :href="flameUrl"
       target="_blank"
       class="
-        flex-shrink-0 text-red-500 transition-colors
-        hover:text-red-400
+        flex w-full max-w-8 items-center justify-center border-l-2 border-matrix
+        bg-black
       "
     >
       <Icon
-        name="svg:flame"
-        class="h-6 w-6"
-        style="shape-rendering: crispEdges1"
+        name="svg:trophy"
+        class="h-full w-auto p-1.5"
+        color="lime"
       />
     </a>
   </div>

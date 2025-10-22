@@ -29,8 +29,8 @@ const JOBS: {
     {
       icon: 'svg:mugen',
       title: 'fastest offline-first infinite canvas',
-      companyUrl: 'https://mugen.town',
-      companyTitle: 'mugen.town ムゲン',
+      companyUrl: 'https://mugen.cafe',
+      companyTitle: 'mugen.cafe ',
       tags: ['c++', 'wasm', 'crdts', 'pixijs', 'webgpu', 'typescript'],
       githubUrl: 'https://github.com/rublev',
     },
@@ -71,7 +71,15 @@ const JOBS: {
       companyTitle: 'paytrie.com',
       tags: ['react', 'typescript'],
       suffix:
-        '<a href="https://consensys.io" target="_blank" class="hover:underline">@ consensys.io</a>',
+        ' <a href="https://consensys.io" target="_blank" class="hover:underline">@ consensys.io↗</a>',
+    },
+    {
+      icon: 'svg:code',
+      title: 'programming  questions',
+      companyUrl: 'https://paytrie.com',
+      companyTitle: 'dailycodingproblem.com',
+      tags: ['react', 'typescript'],
+      productHuntUrl: 'https://google.com',
     },
     {
       icon: 'svg:card',
@@ -80,8 +88,7 @@ const JOBS: {
       companyTitle: 'brd.com',
       tags: ['react', 'go'],
       githubUrl: 'https://github.com/rublev',
-      suffix:
-        'acq by <a href="https://www.coindesk.com/business/2021/11/24/coinbase-acquires-crypto-wallet-firm-brd-for-undisclosed-amount" target="_blank" class="hover:underline">coinbase↗</a>',
+      flameUrl: 'string',
     },
     {
       icon: 'svg:bank',
@@ -108,148 +115,331 @@ const JOBS: {
       title: 'piklink',
       tags: ['web3', 'decentralized', 'instagram', 'clone', 'blockstack'],
     },
+    {
+      icon: 'svg:retro-camera',
+      title: 'supaglobal',
+      tags: ['web3', 'decentralized', 'instagram', 'clone', 'blockstack'],
+    },
+    {
+      icon: 'svg:retro-camera',
+      title: 'monumental crane',
+      tags: ['web3', 'decentralized', 'instagram', 'clone', 'blockstack'],
+    },
   ],
+}
+
+function scrollDown() {
+  window.scrollBy({
+    top: window.innerHeight,
+    behavior: 'smooth',
+  })
 }
 </script>
 
 <template>
-  <div class="flex w-full max-w-2xl gap-5">
-    <!-- SIDEBAR -->
-    <div class="flex flex-col gap-4">
-      <!-- 10x -->
-      <a
-        href="https://app.10xmanagement.com/clients/marcel-olszewski-16302/profile"
-        target="_blank"
-      >
-        <Icon
-          name="svg:10x-pixelated"
-          class="h-auto w-6"
-          color="white"
-          style="shape-rendering: crispEdges1"
-        />
-      </a>
-      <!-- github -->
-      <a
-        href="https://github.com/rublev"
-        target="_blank"
-      >
-        <Icon
-          name="svg:github"
-          class="h-auto w-6"
-          color="white"
-          style="shape-rendering: crispEdges1"
-        />
-      </a>
-      <!-- linkedin -->
-      <a
-        href="https://www.linkedin.com/in/marcelolszewski/"
-        target="_blank"
-      >
-        <Icon
-          name="svg:linkedin"
-          class="h-auto w-6"
-          color="white"
-          style="shape-rendering: crispEdges1"
-        />
-      </a>
-      <!-- email -->
-      <a href="mailto:hi@olsz.me">
-        <Icon
-          name="svg:email"
-          class="h-auto w-6"
-          color="white"
-          style="shape-rendering: crispEdges1"
-        />
-      </a>
-    </div>
-    <!-- CONTENT -->
-    <div class="flex-1 space-y-4">
+  <div
+    class="
+      flex w-auto flex-col gap-6
+      md:flex-row md:py-4
+    "
+  >
+    <!-- MOBILE WHOLE PAGER -->
+    <div
+      class="
+        flex min-h-svh flex-col items-start justify-end gap-5 p-4 pb-24
+        md:hidden
+      "
+    >
       <!-- top header section -->
-      <div class="flex flex-col font-mondwest">
-        <h1 class="text-5xl font-bold">
-          Hey, I'm Marcel {{ GLYPHS.katakana.shi }}
-        </h1>
-        <p class="text-2xl font-normal">
-          Frontend & design oriented full-stack developer
-        </p>
+      <div
+        class="
+          flex items-center gap-6 bg-transparent font-neuebit text-4xl font-bold
+        "
+      >
+        <PixelRounded
+          :radius="8"
+          :multiplier="2"
+          :border-width="1"
+          border-color="lime"
+          drop-shadow
+          :drop-shadow-x="4"
+          :drop-shadow-y="4"
+          drop-shadow-color="lime"
+        >
+          <div
+            class="
+              flex h-[64px] w-[64px] items-center justify-center overflow-hidden
+              bg-matrix
+            "
+            style="border: 2px solid black"
+          >
+            <NuxtImg
+              src="/assets/images/me.png"
+              width="64"
+              height="64"
+              densities="1x 2x"
+              class="
+                selection-black h-[64px] w-auto scale-200 mix-blend-hard-light
+              "
+              style="image-rendering: optimizequality"
+              preload
+            />
+          </div>
+        </PixelRounded>
+        <div
+          class="
+            selection-black flex flex-1 flex-col justify-center gap-3 font-gohu
+            text-sm
+          "
+        >
+          <p
+            class="font-pressstart text-base font-light lowercase"
+            style="
+              text-shadow:
+                0px 0px 1px black,
+                1px 1px 1px black,
+                2px 2px 1px black;
+            "
+          >
+            hello,<br>
+            I'm Marcel {{ GLYPHS.katakana.shi }}
+          </p>
+        </div>
       </div>
-
-      <!-- CURRENTLY -->
-      <section class="flex flex-col gap-2">
-        <h2
-          class="
-            self-start bg-black font-pressstart text-xl leading-none font-bold
-            text-matrix text-shadow-2xs
-          "
-        >
-          >currently
-        </h2>
-        <ProjectRow
-          v-for="(job, index) in JOBS.current"
-          :key="`current-${index}`"
-          :icon="job.icon"
-          :title="job.title"
-          :company-url="job.companyUrl"
-          :company-title="job.companyTitle"
-          :tags="job.tags"
-          :github-url="job.githubUrl"
-          :suffix="job.suffix"
-          :product-hunt-url="job.productHuntUrl"
-          :flame-url="job.flameUrl"
-        />
-      </section>
-
-      <!-- THINGS I'VE WORKED ON -->
-      <section class="flex flex-col gap-2">
-        <h2
-          class="
-            xerox self-start bg-black px-2 font-pressstart text-xl font-bold
-            text-matrix text-shadow-2xs
-          "
-        >
-          >worked on
-        </h2>
-        <ProjectRow
-          v-for="(job, index) in JOBS.past"
-          :key="`past-${index}`"
-          :icon="job.icon"
-          :title="job.title"
-          :company-url="job.companyUrl"
-          :company-title="job.companyTitle"
-          :tags="job.tags"
-          :github-url="job.githubUrl"
-          :suffix="job.suffix"
-          :product-hunt-url="job.productHuntUrl"
-          :flame-url="job.flameUrl"
-        />
-      </section>
-
-      <!-- OTHER PROJECTS -->
-      <section class="space-y-3">
-        <h2
-          class="
-            inline-block bg-matrix pt-0.75 pr-0.75 pl-0.75 font-pressstart
-            text-xl leading-none font-bold text-black
-          "
-        >
-          >other projects
-        </h2>
-        <div class="space-y-3">
-          <ProjectRow
-            v-for="(job, index) in JOBS.other"
-            :key="`other-${index}`"
-            :icon="job.icon"
-            :title="job.title"
-            :company-url="job.companyUrl"
-            :company-title="job.companyTitle"
-            :tags="job.tags"
-            :github-url="job.githubUrl"
-            :suffix="job.suffix"
-            :product-hunt-url="job.productHuntUrl"
-            :flame-url="job.flameUrl"
+      <p
+        class="
+          font-gohu text-sm leading-snug font-light tracking-tight lowercase
+        "
+        style="
+          text-shadow:
+            -1px -1px 1px black,
+            0px 0px 1px black,
+            1px 1px 1px black;
+        "
+      >
+        Full Stack developer/designer working mostly with early to mid-stage
+        startups. Currently working on a few fun projects and looking for my
+        next exciting role!
+      </p>
+      <PixelRounded
+        :radius="6"
+        :multiplier="2"
+        :border-width="1"
+        border-color="lime"
+        drop-shadow
+        :drop-shadow-x="5"
+        :drop-shadow-y="5"
+        drop-shadow-color="#000000"
+        class="cursor-pointer self-end"
+        @click="scrollDown"
+      >
+        <div class="flex items-center px-2 pb-0.5 pl-3 text-black">
+          <p class="mr-1 font-pressstart text-sm font-light">
+            more
+          </p>
+          <Icon
+            name="svg:chevron-down"
+            class="mt-0.25 h-4 w-auto"
+            style="shape-rendering: crispEdges"
           />
         </div>
-      </section>
+      </PixelRounded>
+    </div>
+    <!-- SIDEBAR -->
+    <Sidebar />
+    <!-- CONTENT -->
+    <div
+      class="
+        flex min-h-dvh w-auto flex-col gap-6 pt-0
+        md:min-h-auto
+      "
+    >
+      <!-- top header section -->
+      <div
+        class="
+          hidden items-stretch gap-6 bg-transparent pr-3 font-neuebit text-4xl
+          font-bold
+          md:flex
+        "
+      >
+        <PixelRounded
+          :radius="8"
+          :multiplier="2"
+          :border-width="1"
+          border-color="lime"
+        >
+          <div class="bg-matrix">
+            <NuxtImg
+              src="/assets/images/me.png"
+              width="128"
+              height="128"
+              densities="1x 2x"
+              class="
+                selection-black -mb-1 h-[128px] w-auto bg-black
+                mix-blend-hard-light
+              "
+              style="image-rendering: optimizequality"
+              preload
+            />
+          </div>
+        </PixelRounded>
+        <div
+          class="
+            selection-black flex w-0 flex-1 flex-col justify-center gap-3
+            font-gohu text-sm
+          "
+        >
+          <p
+            class="font-pressstart text-base font-light lowercase"
+            style="
+              text-shadow:
+                0px 0px 1px black,
+                1px 1px 1px black,
+                2px 2px 1px black;
+            "
+          >
+            hello, I'm Marcel {{ GLYPHS.katakana.shi }}
+          </p>
+          <p
+            class="
+              font-gohu text-sm leading-snug font-light tracking-tight lowercase
+            "
+            style="
+              overflow-wrap: anywhere;
+              text-shadow:
+                -1px -1px 1px black,
+                0px 0px 1px black,
+                1px 1px 1px black;
+            "
+          >
+            Full Stack developer/designer working mostly with early to mid-stage
+            startups. Currently working on a few fun projects and looking for my
+            next exciting role!
+          </p>
+        </div>
+      </div>
+
+      <div class="flex w-full flex-col gap-3">
+        <!-- CURRENTLY -->
+        <PixelRounded
+          :radius="8"
+          :multiplier="2"
+          :border-width="1"
+          border-color="lime"
+          drop-shadow
+          :drop-shadow-x="5"
+          :drop-shadow-y="5"
+          drop-shadow-color="black"
+          full
+        >
+          <section class="flex flex-col gap-0.5 p-0">
+            <div class="flex items-center gap-2 pl-1">
+              <div
+                class="
+                  selection-black pt-0.5 pl-1 font-4b text-sm leading-none
+                  tracking-tighter text-black
+                  md:font-normal md:tracking-wider
+                "
+              >
+                currently
+              </div>
+            </div>
+            <ProjectRow
+              v-for="(job, index) in JOBS.current"
+              :key="`current-${index}`"
+              :icon="job.icon"
+              :title="job.title"
+              :company-url="job.companyUrl"
+              :company-title="job.companyTitle"
+              :tags="job.tags"
+              :github-url="job.githubUrl"
+              :suffix="job.suffix"
+              :product-hunt-url="job.productHuntUrl"
+              :flame-url="job.flameUrl"
+            />
+          </section>
+        </PixelRounded>
+
+        <!-- THINGS I'VE WORKED ON -->
+        <PixelRounded
+          :radius="8"
+          :multiplier="2"
+          :border-width="1"
+          border-color="lime"
+          drop-shadow
+          :drop-shadow-x="5"
+          :drop-shadow-y="5"
+          drop-shadow-color="black"
+          full
+        >
+          <section class="flex flex-col gap-0.5 p-0">
+            <div class="flex items-center gap-2 pl-1">
+              <div
+                class="
+                  selection-black pt-0.5 pl-1 font-4b text-sm leading-none
+                  tracking-tighter text-black
+                  md:font-normal md:tracking-wider
+                "
+              >
+                worked on
+              </div>
+            </div>
+            <ProjectRow
+              v-for="(job, index) in JOBS.past"
+              :key="`past-${index}`"
+              :icon="job.icon"
+              :title="job.title"
+              :company-url="job.companyUrl"
+              :company-title="job.companyTitle"
+              :tags="job.tags"
+              :github-url="job.githubUrl"
+              :suffix="job.suffix"
+              :product-hunt-url="job.productHuntUrl"
+              :flame-url="job.flameUrl"
+            />
+          </section>
+        </PixelRounded>
+
+        <!-- OTHER PROJECTS -->
+        <PixelRounded
+          :radius="8"
+          :multiplier="2"
+          :border-width="1"
+          border-color="lime"
+          drop-shadow
+          :drop-shadow-x="5"
+          :drop-shadow-y="5"
+          drop-shadow-color="black"
+          full
+        >
+          <section class="flex flex-col gap-0.5 p-0">
+            <div class="flex items-center gap-2 pl-1">
+              <div
+                class="
+                  selection-black pt-0.5 pl-1 font-4b text-sm leading-none
+                  tracking-tighter text-black
+                  md:font-normal md:tracking-wider
+                "
+              >
+                other projects
+              </div>
+            </div>
+            <ProjectRow
+              v-for="(job, index) in JOBS.other"
+              :key="`other-${index}`"
+              :icon="job.icon"
+              :title="job.title"
+              :company-url="job.companyUrl"
+              :company-title="job.companyTitle"
+              :tags="job.tags"
+              :github-url="job.githubUrl"
+              :suffix="job.suffix"
+              :product-hunt-url="job.productHuntUrl"
+              :flame-url="job.flameUrl"
+            />
+          </section>
+        </PixelRounded>
+      </div>
     </div>
   </div>
 </template>

@@ -47,9 +47,11 @@ export default defineNuxtConfig({
   },
   css: ['./app/assets/css/main.css'],
   icon: {
-    // makes bundle smaller only include mdi icons
-    serverBundle: {
-      collections: ['mdi'],
+    serverBundle: false, // Disable server-side icon bundling to reduce SSR bundle
+    clientBundle: {
+      // Only bundle icons that are actually used on the client
+      scan: true,
+      sizeLimitKb: 512,
     },
     mode: 'svg',
     customCollections: [

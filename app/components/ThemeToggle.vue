@@ -34,7 +34,7 @@ onMounted(() => {
   <button
     v-if="isReady"
     class="
-      fixed top-8 right-8 z-[40] cursor-pointer font-mondwest text-4xl
+      fixed top-8 right-8 z-[40] cursor-pointer font-neuebit text-4xl
       hover:cursor-pointer
     "
     @click="toggleTheme"
@@ -46,14 +46,14 @@ onMounted(() => {
         :class="isDark ? 'text-pink-500' : 'text-yellow-500'"
         :style="{ opacity: sunOpacity }"
       >
-        {{ GLYPHS.mondwest.sun_filled }}
+        {{ GLYPHS.neuebit.sun_filled }}
       </span>
       <!-- Moon (dark mode - fades in on top) -->
       <span
         class="absolute inset-0 text-pink-500 transition-opacity duration-700"
         :style="{ opacity: moonOpacity }"
       >
-        {{ GLYPHS.mondwest.moon_left }}
+        {{ GLYPHS.neuebit.moon_left }}
       </span>
     </span>
   </button>

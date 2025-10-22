@@ -38,11 +38,13 @@ export default antfu(
         'error',
         {
           ignore: [
-            '^pixel-rounded',
-            '^xerox$',
-            '^svg-filter--hidden$',
-            '^typewriter-text$',
+            '^pixel-',
+            '^pixelRounded',
             '^selection',
+            '^svg-filter--hidden$',
+            '^svg-filter-hidden$',
+            '^typewriter-text$',
+            '^xerox$',
           ],
         },
       ],
