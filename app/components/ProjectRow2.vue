@@ -46,7 +46,7 @@ defineProps<Props>()
         <!-- Title and Company -->
         <div
           class="
-            font-4b text-sm leading-none
+            pt-0.5 font-4b text-sm leading-none
             md:leading-1
           "
         >

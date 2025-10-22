@@ -6,19 +6,23 @@ const props = defineProps({
     type: Number,
     default: 8,
   },
+  height: {
+    type: Number,
+    default: 120, // Height of the gradient in pixels
+  },
   intensity: {
     type: Number,
-    default: 0.6, // 0 to 1, how dark the edges are
+    default: 0.075, // 0 to 1, how opaque the gradient is
   },
   color: {
     type: String,
-    default: '#010b14',
+    default: '#000000',
   },
 })
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 
-function createVignetteGradient(
+function createHeaderGradient(
   width: number,
   height: number,
   intensity: number,
@@ -32,7 +36,7 @@ function createVignetteGradient(
   tempCanvas.width = width
   tempCanvas.height = height
 
-  // Parse color to RGB for gradient stops
+  // Parse color to RGB
   const hexToRgb = (hex: string) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
     return result
@@ -46,61 +50,23 @@ function createVignetteGradient(
 
   const rgb = hexToRgb(color) || { r: 0, g: 0, b: 0 }
 
-  // Create squircle/rectangular vignette by drawing from edges
+  // Create gradient: solid at top, transparent at bottom
   const imageData = tempCtx.createImageData(width, height)
   const data = imageData.data
-
-  // Fixed pixel distances for consistent fade regardless of size
-  const outerEdgePixels = 5
-  const fadeWidthPixels = 150
 
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       const index = (y * width + x) * 4
 
-      // Calculate pixel distance from edges
-      const distXPixels = Math.min(x, width - x)
-      const distYPixels = Math.min(y, height - y)
-      const edgeDistPixels = Math.min(distXPixels, distYPixels)
+      // Calculate alpha based on vertical position
+      // 0 (transparent) at top, intensity (solid) at bottom
+      // Use exponential curve for more pronounced fade
+      const normalizedY = y / height
+      const alpha = normalizedY ** 0.5 * intensity
 
-      let alpha = 0
-
-      if (edgeDistPixels < outerEdgePixels) {
-        // Very thin outer edge - solid color
-        alpha = 1
-        data[index] = rgb.r
-        data[index + 1] = rgb.g
-        data[index + 2] = rgb.b
-      }
-      else if (edgeDistPixels < outerEdgePixels + fadeWidthPixels) {
-        // Middle ring - fade out
-        const t = (edgeDistPixels - outerEdgePixels) / fadeWidthPixels
-
-        if (t < 0.3) {
-          // Still mostly solid
-          const fadeProgress = t / 0.3
-          alpha = 1 - (1 - intensity) * fadeProgress
-          data[index] = rgb.r
-          data[index + 1] = rgb.g
-          data[index + 2] = rgb.b
-        }
-        else {
-          // Fading to transparent
-          const fadeOut = (t - 0.3) / 0.7
-          alpha = intensity * (1 - fadeOut)
-          data[index] = rgb.r
-          data[index + 1] = rgb.g
-          data[index + 2] = rgb.b
-        }
-      }
-      else {
-        // Center - transparent
-        alpha = 0
-        data[index] = 0
-        data[index + 1] = 0
-        data[index + 2] = 0
-      }
-
+      data[index] = rgb.r
+      data[index + 1] = rgb.g
+      data[index + 2] = rgb.b
       data[index + 3] = alpha * 255
     }
   }
@@ -109,7 +75,7 @@ function createVignetteGradient(
   return tempCanvas
 }
 
-function pixelateVignette() {
+function pixelateGradient() {
   if (!canvasRef.value)
     return
 
@@ -118,24 +84,15 @@ function pixelateVignette() {
   if (!ctx)
     return
 
-  // Clear inline styles first to let aspect-ratio recalculate
-  canvas.style.width = ''
-  canvas.style.height = ''
-
-  // Get the actual rendered dimensions from CSS
-  const rect = canvas.getBoundingClientRect()
-  const width = rect.width + 10
-  const height = rect.height + 10
-
-  // Set CSS dimensions to override aspect-ratio constraint
-  canvas.style.width = `${width}px`
-  canvas.style.height = `${height}px`
+  // Set canvas to full width, custom height
+  const width = window.innerWidth
+  const height = props.height
 
   canvas.width = width
   canvas.height = height
 
-  // Create the gradient vignette
-  const vignetteCanvas = createVignetteGradient(
+  // Create the gradient
+  const gradientCanvas = createHeaderGradient(
     width,
     height,
     props.intensity,
@@ -157,8 +114,8 @@ function pixelateVignette() {
   tempCanvas.height = smallHeight
   tempCtx.imageSmoothingEnabled = false
 
-  // Draw vignette small
-  tempCtx.drawImage(vignetteCanvas, 0, 0, smallWidth, smallHeight)
+  // Draw gradient small
+  tempCtx.drawImage(gradientCanvas, 0, 0, smallWidth, smallHeight)
 
   // Scale back up for pixelated effect
   ctx.drawImage(tempCanvas, 0, 0, smallWidth, smallHeight, 0, 0, width, height)
@@ -170,12 +127,12 @@ function handleResize() {
   if (resizeTimeout)
     clearTimeout(resizeTimeout)
   resizeTimeout = setTimeout(() => {
-    pixelateVignette()
+    pixelateGradient()
   }, 100)
 }
 
 onMounted(() => {
-  pixelateVignette()
+  pixelateGradient()
   window.addEventListener('resize', handleResize)
 })
 
@@ -189,12 +146,7 @@ onUnmounted(() => {
 <template>
   <canvas
     ref="canvasRef"
-    class="pointer-events-none absolute left-1/2 z-10 h-full"
-    style="
-      image-rendering: pixelated;
-      aspect-ratio: 270 / 180;
-      transform: translate(calc(-50% - 2px), -0px);
-      max-width: calc(100vw + 4px);
-    "
+    class="pointer-events-none absolute inset-x-0 bottom-full z-10"
+    :style="`image-rendering: pixelated; height: ${height}px`"
   />
 </template>

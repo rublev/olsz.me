@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --dark: class;
+}
+
 @font-face {
   font-family: "PP Mondwest";
   src: url("@/assets/fonts/PPMondwest-Regular.woff2") format("woff2");
@@ -117,6 +121,7 @@
     "Courier New", monospace;
 
   --color-navy: oklch(14.263% 0.02828 238.93);
+  /* --color-navy: #00ff00; */
   --color-matrix: oklch(86.645% 0.29481 142.511);
 
   --leading-half: 0.5em;
@@ -139,6 +144,11 @@
 }
 
 @layer base {
+  html,
+  body {
+    position: relative;
+    min-height: 100dvh;
+  }
   /* body { */
   /* basically just disabled tailwinds "antialiased" class */
   /* -webkit-font-smoothing: subpixel-antialiased !important; */
@@ -182,7 +192,7 @@
   }
 
   .pixel-rounded__border {
-    @apply pointer-events-none absolute inset-0 block;
+    @apply pointer-events-none absolute inset-x-0 block;
   }
 }
 

@@ -137,15 +137,23 @@ function scrollDown() {
 </script>
 
 <template>
-  <div class="flex w-auto flex-col gap-3">
+  <div
+    class="
+      flex w-auto flex-col gap-3
+      md:flex-row md:py-4
+    "
+  >
     <!-- MOBILE WHOLE PAGER -->
     <div
-      class="flex min-h-dvh flex-col items-start justify-end gap-3 p-4 pb-24"
+      class="
+        flex min-h-svh flex-col items-start justify-end gap-5 p-4 pb-24
+        md:hidden
+      "
     >
       <!-- top header section -->
       <div
         class="
-          flex items-center gap-3 bg-transparent font-neuebit text-4xl font-bold
+          flex items-center gap-6 bg-transparent font-neuebit text-4xl font-bold
         "
       >
         <PixelRounded
@@ -153,16 +161,29 @@ function scrollDown() {
           :multiplier="2"
           :border-width="1"
           border-color="lime"
-          class="max-h-[64px] max-w-[64px]"
+          drop-shadow
+          :drop-shadow-x="4"
+          :drop-shadow-y="4"
+          drop-shadow-color="lime"
         >
-          <div class="bg-matrix">
-            <img
-              src="~/assets/images/me-pixelized@4x.png"
+          <div
+            class="
+              flex h-[64px] w-[64px] items-center justify-center overflow-hidden
+              bg-matrix
+            "
+            style="border: 2px solid black"
+          >
+            <NuxtImg
+              src="/assets/images/me.png"
+              width="64"
+              height="64"
+              densities="1x 2x"
               class="
                 selection-black h-[64px] w-auto scale-200 mix-blend-hard-light
               "
               style="image-rendering: optimizequality"
-            >
+              preload
+            />
           </div>
         </PixelRounded>
         <div
@@ -199,6 +220,20 @@ function scrollDown() {
         Full Stack developer/designer working mostly with early to mid-stage
         startups. Currently working on a few fun projects and looking for my
         next exciting role!
+      </p>
+      <!-- ALTERNATIVE -->
+      <p
+        class="hidden font-neuebit text-2xl leading-none font-bold"
+        style="
+          text-shadow:
+            0px 0px 1px black,
+            1px 1px 1px black,
+            2px 2px 1px black;
+        "
+      >
+        Full Stack developer&designer working mostly with early to mid-stage
+        startups. <br>Working on a few fun projects and looking for my next
+        exciting role!
       </p>
       <PixelRounded
         :radius="6"
@@ -243,13 +278,18 @@ function scrollDown() {
           border-color="lime"
         >
           <div class="bg-matrix">
-            <img
-              src="~/assets/images/me-pixelized@4x.png"
+            <NuxtImg
+              src="/assets/images/me.png"
+              width="128"
+              height="128"
+              densities="1x 2x"
               class="
-                selection-black -mb-1 h-[128px] w-auto mix-blend-hard-light
+                selection-black -mb-1 h-[128px] w-auto bg-black
+                mix-blend-hard-light
               "
               style="image-rendering: optimizequality"
-            >
+              preload
+            />
           </div>
         </PixelRounded>
         <div
