@@ -5,21 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pixelated Border Demo</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      padding: 40px;
-      background: #1a1a1a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: 0;
+      background: #ff00ff;
       min-height: 100vh;
       font-family: monospace;
     }
 
     .demo-box {
-      width: 600px;
-      height: 400px;
-      background: #2a2a2a;
+      width: 100vw;
+      height: 100vh;
+      background: #00ffff;
 
       /* 9-patch border image */
       border: 155px solid transparent;
@@ -28,16 +31,23 @@
       border-image-width: 155px;
       border-image-repeat: repeat;
 
-      /* Keep pixels crisp */
+      /* Keep pixels crisp - no anti-aliasing */
       image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
       image-rendering: crisp-edges;
+      -ms-interpolation-mode: nearest-neighbor;
+
+      /* Prevent subpixel rendering */
+      transform: translateZ(0);
+      backface-visibility: hidden;
 
       /* Center content */
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 24px;
+      color: #000;
+      font-size: 32px;
+      font-weight: bold;
     }
   </style>
 </head>

@@ -16,7 +16,7 @@ const totalSize = edgeSize + centerSize + edgeSize // 318px
 const width = totalSize
 const height = totalSize
 
-let svgContent = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">\n`
+let svgContent = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">\n`
 
 // Generate each 8×8 pixel block
 const cols = Math.ceil(width / pixelSize)
