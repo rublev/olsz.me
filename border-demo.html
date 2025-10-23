@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixelated Border Demo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: monospace;
+    }
+
+    .demo-box {
+      width: 600px;
+      height: 400px;
+      background: #2a2a2a;
+
+      /* 9-patch border image */
+      border: 155px solid transparent;
+      border-image-source: url('vignette-9patch.svg');
+      border-image-slice: 155;
+      border-image-width: 155px;
+      border-image-repeat: repeat;
+
+      /* Keep pixels crisp */
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+
+      /* Center content */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-box">
+    Pixelated 9-Patch Border
+  </div>
+</body>
+</html>
