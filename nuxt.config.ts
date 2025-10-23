@@ -5,22 +5,13 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [
-        // Basic favicon
+        /*
+        * compressed all favicons (5 sizes) into one file:
+          magick favicon-16x16-lime.png favicon-32x32-border.png \
+          favicon-64x64-border.png favicon-128x128-border.png \
+          favicon-256x256-border.png -colors 256 favicon.ico
+        */
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-
-        // Standard sizes
-        {
-          rel: 'icon',
-          type: 'image/png',
-          sizes: '16x16',
-          href: '/favicon-16x16.png',
-        },
-        {
-          rel: 'icon',
-          type: 'image/png',
-          sizes: '32x32',
-          href: '/favicon-32x32.png',
-        },
       ],
     },
   },

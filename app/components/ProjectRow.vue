@@ -46,7 +46,7 @@ defineProps<Props>()
         <!-- Title and Company -->
         <div
           class="
-            pt-0.5 font-4b text-sm leading-none
+            pt-0.5 font-04b03 text-sm leading-none
             md:leading-1
           "
         >
@@ -67,7 +67,7 @@ defineProps<Props>()
         </div>
 
         <!-- Tech Tags -->
-        <!-- <div class="font-4b text-sm leading-none">
+        <!-- <div class="font-04b03 text-sm leading-none">
             {{ tags.join(" / ") }}
           </div> -->
       </div>

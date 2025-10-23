@@ -32,7 +32,7 @@ onMounted(() => {
 <template>
   <button
     v-if="isReady"
-    class="fixed top-8 right-8 z-500 cursor-pointer"
+    class="fixed top-8 right-8 z-550 cursor-pointer"
     @click="toggleTheme"
   >
     <div class="relative block">
