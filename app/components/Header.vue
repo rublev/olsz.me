@@ -132,19 +132,16 @@ onUnmounted(() => {
 <template>
   <div
     class="
-      fixed inset-x-0 right-0 bottom-0 left-0 z-20 flex flex-col items-center
+      fixed inset-x-0 right-0 bottom-0 left-0 z-650 flex flex-col items-center
       bg-navy px-4 pt-0 pb-4 font-gohu transition-opacity duration-600
       md:relative md:bg-transparent md:p-4 md:opacity-100 md:before:hidden
     "
     :class="[isCollapsed ? 'opacity-0' : 'opacity-100']"
   >
     <!-- Pixelated gradient above header (mobile only) -->
-    <PixelatedHeaderGradient
-      :pixel-size="8"
-      :height="40"
-      :intensity="1"
+    <PixelatedBorder
+      mode="gradient"
       color="#010b14"
-      class="md:hidden"
     />
 
     <div

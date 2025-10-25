@@ -79,9 +79,15 @@ onMounted(() => {
 <template>
   <div class="relative min-h-svh">
     <!-- background animations -->
-    <div
+    <!-- <div
       class="
         pointer-events-none fixed inset-0 z-0 flex items-start justify-center
+      "
+    > -->
+    <div
+      class="
+        pointer-events-none fixed inset-x-0 z-0 mx-auto flex aspect-270/180
+        h-full w-auto items-start justify-center
       "
     >
       <!-- Day animation (light mode - always visible as base layer) -->
@@ -91,7 +97,7 @@ onMounted(() => {
         alt=""
         class="
           w-auto object-cover
-          md:min-w-[1280px]
+          md:min-w-7xl
         "
         :style="{
           imageRendering: 'pixelated',
@@ -107,7 +113,7 @@ onMounted(() => {
         class="
           absolute left-1/2 w-auto -translate-x-1/2 object-cover
           transition-opacity duration-700
-          md:min-w-[1280px]
+          md:min-w-7xl
         "
         :style="{
           imageRendering: 'pixelated',
@@ -116,21 +122,22 @@ onMounted(() => {
           opacity: nightOpacity,
         }"
       >
-
       <!-- vignette overlay pinned to orpheus -->
-      <PixelatedVignette
+      <!-- <PixelatedVignette
         :pixel-size="8"
-        :intensity="0.075"
-        color="#000000"
-      />
+        color="#010B14"
+      /> -->
     </div>
+    <!-- vignette color tests -->
+    <PixelatedBorder
+      mode="vignette"
+      sides="all"
+      color="#010b14"
+    />
 
     <!-- content -->
     <main
-      class="
-        relative z-500 flex min-h-svh grow items-center justify-center
-        md:mr-12
-      "
+      class="relative z-500 flex min-h-svh grow items-center justify-center"
     >
       <Header class="md:hidden" />
       <slot />
