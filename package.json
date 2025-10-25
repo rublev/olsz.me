@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxi build",
     "clean": "rm -rf .nuxt .output .turbo dist",
     "dev": "pnpm clean && nuxt dev",
     "dev-host": "pnpm clean && nuxt dev --host --no-qr",
@@ -16,7 +16,7 @@
     "lint:preview": "eslint . --config eslint.config.ts",
     "lint:style": "stylelint **/*.{vue,css} --fix --ignore-path .stylelintignore",
     "preview": "pnpm clean && nuxt preview",
-    "preview-build": "pnpm clean && nuxt build && nuxt preview",
+    "preview-build": "pnpm clean && pnpm build && nuxt preview",
     "sort-package-json": "pnpm dlx sort-package-json",
     "typecheck": "nuxt typecheck"
   },
