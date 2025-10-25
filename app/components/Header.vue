@@ -8,43 +8,20 @@ const DIRECTION_THRESHOLD = 30
 type ScrollDirection = 'up' | 'down' | null
 
 const isCollapsed = ref(false)
-const headerRef = ref(null)
-const socialRef = ref(null)
 const lastScrollY = ref(0)
-const naturalWidth = ref()
-const socialNaturalWidth = ref()
 
 const textFading = ref(false)
-const widthShrinking = ref(false)
 
 const scrollAccumulator = ref(0)
 const currentDirection = ref<ScrollDirection>(null)
 
 const isDesktop = useMediaQuery('(min-width: 768px)')
 
-// THEME SWITCHER
-const isDark = ref(false)
-
-/* function toggleTheme() {
-  isDark.value = !isDark.value
-  const newTheme = isDark.value ? 'dark' : 'light'
-
-  sessionStorage.setItem('theme', newTheme)
-
-  if (isDark.value) {
-    document.documentElement.classList.add('dark')
-  }
-  else {
-    document.documentElement.classList.remove('dark')
-  }
-} */
-
 function collapse() {
   if (isCollapsed.value)
     return
 
   textFading.value = true
-  widthShrinking.value = true
   isCollapsed.value = true
 }
 
@@ -52,7 +29,6 @@ function expand() {
   if (!isCollapsed.value)
     return
 
-  widthShrinking.value = false
   textFading.value = false
   isCollapsed.value = false
 }
@@ -111,17 +87,8 @@ function handleScroll() {
   lastScrollY.value = currentScrollY
 }
 
-function measureWidth(refElement: Ref<HTMLElement | null>) {
-  return refElement.value?.scrollWidth
-}
-
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
-  naturalWidth.value = measureWidth(headerRef)
-  socialNaturalWidth.value = measureWidth(socialRef)
-
-  // Initialize isDark from current state
-  isDark.value = document.documentElement.classList.contains('dark')
 })
 
 onUnmounted(() => {
@@ -133,7 +100,7 @@ onUnmounted(() => {
   <div
     class="
       fixed inset-x-0 right-0 bottom-0 left-0 z-650 flex flex-col items-center
-      bg-navy px-4 pt-0 pb-4 font-gohu transition-opacity duration-600
+      bg-navy px-8 pt-0 pb-4 font-gohu transition-opacity duration-600
       md:relative md:bg-transparent md:p-4 md:opacity-100 md:before:hidden
     "
     :class="[isCollapsed ? 'opacity-0' : 'opacity-100']"
@@ -150,21 +117,7 @@ onUnmounted(() => {
         md:max-w-2xl md:px-4
       "
     >
-      <header
-        ref="socialRef"
-        class=""
-        :style="{
-          width: isDesktop
-            ? 'auto'
-            : widthShrinking
-              ? '0px'
-              : socialNaturalWidth
-                ? `${socialNaturalWidth}px`
-                : 'auto',
-          gap: widthShrinking ? '0' : '8px',
-          transition: 'all 400ms ease-in-out',
-        }"
-      >
+      <header class="flex items-center justify-start gap-3">
         <div
           class="
             flex items-center justify-start gap-3 transition-opacity
@@ -176,22 +129,10 @@ onUnmounted(() => {
         </div>
       </header>
       <header
-        ref="headerRef"
         class="
-          flex items-center justify-start text-white
+          flex items-center justify-start gap-3 text-white
           md:w-auto
         "
-        :style="{
-          width: isDesktop
-            ? 'auto'
-            : widthShrinking
-              ? '0px'
-              : naturalWidth
-                ? `${naturalWidth}px`
-                : 'auto',
-          gap: widthShrinking ? '0' : '8px',
-          transition: 'all 400ms ease-in-out',
-        }"
       >
         <div
           class="

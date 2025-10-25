@@ -2,8 +2,42 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   app: {
     head: {
+      title: 'Marcel - Full Stack Developer & Designer',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          name: 'description',
+          content:
+            'Full Stack developer & designer working mostly with early to mid-stage startups. Currently working on a few fun projects and looking for my next exciting role!',
+        },
+        // Open Graph
+        { property: 'og:type', content: 'website' },
+        {
+          property: 'og:title',
+          content: 'Marcel - Full Stack Developer & Designer',
+        },
+        {
+          property: 'og:description',
+          content:
+            'Full Stack developer & designer working mostly with early to mid-stage startups. Currently working on a few fun projects and looking for my next exciting role!',
+        },
+        { property: 'og:site_name', content: 'Marcel' },
+        // Twitter Card
+        { name: 'twitter:card', content: 'summary_large_image' },
+        {
+          name: 'twitter:title',
+          content: 'Marcel - Full Stack Developer & Designer',
+        },
+        {
+          name: 'twitter:description',
+          content:
+            'Full Stack developer & designer working mostly with early to mid-stage startups. Currently working on a few fun projects and looking for my next exciting role!',
+        },
+      ],
       link: [
         /*
         * compressed all favicons (5 sizes) into one file:
@@ -15,13 +49,7 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: [
-    '@nuxt/eslint',
-    '@nuxt/fonts',
-    '@nuxt/image', // why does this add +20mb to my bundle size?
-    '@nuxt/icon',
-    '@vueuse/nuxt',
-  ],
+  modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@vueuse/nuxt'],
   // ignore: ['app/pages/demos/**'],
   vueuse: {
     // Only auto-import specific VueUse functions you actually use

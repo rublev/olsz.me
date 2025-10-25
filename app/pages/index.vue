@@ -137,7 +137,7 @@ function scrollDown() {
 <template>
   <div
     class="
-      relative z-600 flex w-auto flex-col gap-6 p-4
+      relative z-1000 flex w-auto flex-col gap-6 p-4
       md:flex-row md:p-0 md:py-4
     "
   >
@@ -167,15 +167,13 @@ function scrollDown() {
             "
             style="border: 2px solid black"
           >
-            <NuxtImg
+            <img
               src="/assets/images/me.png"
               width="64"
               height="64"
-              densities="1x 2x"
               class="selection-black h-16 w-auto scale-200 mix-blend-hard-light"
               style="image-rendering: optimizequality"
-              preload
-            />
+            >
           </div>
         </PixelRounded>
         <div
@@ -258,17 +256,15 @@ function scrollDown() {
           border-color="lime"
         >
           <div class="bg-matrix">
-            <NuxtImg
+            <img
               src="/assets/images/me.png"
               width="128"
               height="128"
-              densities="1x 2x"
               class="
                 selection-black -mb-1 h-32 w-auto bg-black mix-blend-hard-light
               "
               style="image-rendering: optimizequality"
-              preload
-            />
+            >
           </div>
         </PixelRounded>
         <div

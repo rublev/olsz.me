@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxi build",
+    "build": "nuxt build",
     "clean": "rm -rf .nuxt .output .turbo dist",
     "dev": "pnpm clean && nuxt dev",
     "dev-host": "pnpm clean && nuxt dev --host --no-qr",
@@ -30,7 +30,6 @@
     "@nuxt/eslint": "1.9.0",
     "@nuxt/fonts": "0.11.4",
     "@nuxt/icon": "^2.1.0",
-    "@nuxt/image": "^1.11.0",
     "@tailwindcss/vite": "^4.1.16",
     "@vueuse/core": "14.0.0",
     "@vueuse/nuxt": "14.0.0",
