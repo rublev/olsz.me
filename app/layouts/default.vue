@@ -79,11 +79,6 @@ onMounted(() => {
 <template>
   <div class="relative min-h-svh">
     <!-- background animations -->
-    <!-- <div
-      class="
-        pointer-events-none fixed inset-0 z-0 flex items-start justify-center
-      "
-    > -->
     <div
       class="
         pointer-events-none fixed inset-x-0 z-0 mx-auto flex aspect-270/180
@@ -122,12 +117,8 @@ onMounted(() => {
           opacity: nightOpacity,
         }"
       >
-      <!-- vignette overlay pinned to orpheus -->
-      <!-- <PixelatedVignette
-        :pixel-size="8"
-        color="#010B14"
-      /> -->
     </div>
+
     <!-- vignette color tests -->
     <PixelatedBorder
       mode="vignette"
