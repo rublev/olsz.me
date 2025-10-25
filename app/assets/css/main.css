@@ -5,7 +5,7 @@
 #__nuxt,
 body,
 html {
-  background: var(--color-navy);
+  background: rgb(1 11 20);
 }
 
 @theme {

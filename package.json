@@ -15,8 +15,8 @@
     "lint:js": "eslint . --fix --config eslint.config.ts",
     "lint:preview": "eslint . --config eslint.config.ts",
     "lint:style": "stylelint **/*.{vue,css} --fix --ignore-path .stylelintignore",
-    "preview": "nuxt preview",
-    "preview-build": "nuxt build && nuxt preview",
+    "preview": "pnpm clean && nuxt preview",
+    "preview-build": "pnpm clean && nuxt build && nuxt preview",
     "sort-package-json": "pnpm dlx sort-package-json",
     "typecheck": "nuxt typecheck"
   },
