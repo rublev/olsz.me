@@ -5,10 +5,7 @@
 #__nuxt,
 body,
 html {
-  /* --color-navy */
-
-  /* background: rgb(1, 11, 20); */
-  background: rgb(0 0 0);
+  background: var(--color-navy);
 }
 
 @theme {
@@ -42,10 +39,8 @@ html {
   --font-04b03:
     "04b03", sfmono-regular, menlo, monaco, consolas, "Liberation Mono",
     "Courier New", monospace;
-
-  /* --color-navy: oklch(14.263% 0.0283 238.93deg); */
-  --color-navy: #000;
-  --color-matrix: oklch(86.645% 0.2948 142.511deg);
+  --color-navy: rgb(1 11 20);
+  --color-matrix: rgb(0 255 0);
   --leading-half: 0.5em;
 }
 
