@@ -116,13 +116,15 @@ const JOBS: {
     },
     {
       icon: 'svg:retro-camera',
-      title: 'piklink',
+      title: 'decentralized web3 instagram clone',
       tags: ['web3', 'decentralized', 'instagram', 'clone', 'blockstack'],
-      githubUrl: 'https://github.com/rublev/piklinik',
+      githubUrl: 'https://github.com/rublev/piklink',
     },
     {
       icon: 'svg:crane',
-      title: 'monumental crane',
+      title: '3d crane demo',
+      companyUrl: 'https://monumental.co',
+      companyTitle: 'monumental.co',
       tags: ['web3', 'decentralized', 'instagram', 'clone', 'blockstack'],
       githubUrl: 'https://github.com/rublev/crane',
     },
