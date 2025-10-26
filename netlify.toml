@@ -1,0 +1,13 @@
+[build]
+  command = "pnpm run build"
+  publish = ".output/public"
+
+[build.environment]
+  NODE_VERSION = "20"
+  PNPM_VERSION = "10.19.0"
+
+# SPA redirect for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
