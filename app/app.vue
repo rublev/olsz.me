@@ -1,20 +1,17 @@
 <script setup lang="ts">
+const { isDark } = useTheme()
+
 useHead({
   bodyAttrs: {
     class: 'min-h-svh bg-background font-sans text-foreground',
   },
-  script: [
+  link: [
     {
-      innerHTML: `
-        (function() {
-          const theme = sessionStorage.getItem('theme') ||
-                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-          if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-          }
-        })();
-      `,
-      tagPosition: 'head',
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: computed(() =>
+        isDark.value ? '/favicon-magenta.ico' : '/favicon-lime.ico',
+      ),
     },
   ],
 })

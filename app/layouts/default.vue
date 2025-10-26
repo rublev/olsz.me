@@ -171,14 +171,21 @@ onBeforeUnmount(() => {
 
     <!-- content -->
     <main
-      class="relative z-500 flex min-h-svh grow items-center justify-center"
+      class="
+        inset-0 z-500 mx-auto flex items-start justify-center
+        md:fixed
+        xl:max-w-[calc(100vh*1.5)] xl:min-w-7xl
+      "
+      style="overflow: scroll"
     >
-      <slot />
-      <!-- <Footer class="mt-auto" /> -->
+      <!-- Theme toggle -->
+      <ThemeToggle />
+      <div
+        class="relative z-500 flex min-h-svh grow items-center justify-center"
+      >
+        <slot />
+      </div>
     </main>
-
-    <!-- Theme toggle -->
-    <ThemeToggle />
 
     <!-- Loading overlay -->
     <div

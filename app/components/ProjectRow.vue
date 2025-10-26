@@ -1,22 +1,22 @@
 <script setup lang="ts">
 interface Props {
-  /** Icon name for the left icon (e.g., 'svg:rocket') */
+  /* Icon name for the left icon (e.g., 'svg:rocket') */
   icon: string
-  /** First part of the job string (e.g., 'building startups') */
+  /* First part of the job string (e.g., 'building startups') */
   title: string
-  /** Company URL */
+  /* Company URL */
   companyUrl?: string
-  /** Company title/domain (e.g., 'stratosphere.digital') */
+  /* Company title/domain (e.g., 'stratosphere.digital') */
   companyTitle?: string
-  /** Technology tags */
+  /* Technology tags */
   tags: string[]
-  /** Optional GitHub repository URL */
+  /* Optional GitHub repository URL */
   githubUrl?: string
-  /** Optional suffix string (e.g., 'acq by <a>coinbase</a>') */
+  /* Optional suffix string (e.g., 'acq by <a>coinbase</a>') */
   suffix?: string
-  /** Optional Product Hunt URL */
+  /* Optional Product Hunt URL */
   productHuntUrl?: string
-  /** Optional flame icon URL (for featured/special projects) */
+  /* Optional flame icon URL (for featured/special projects) */
   flameUrl?: string
 }
 
@@ -65,11 +65,6 @@ defineProps<Props>()
             <span v-html="suffix" />
           </template>
         </div>
-
-        <!-- Tech Tags -->
-        <!-- <div class="font-04b03 text-sm leading-none">
-            {{ tags.join(" / ") }}
-          </div> -->
       </div>
     </div>
 

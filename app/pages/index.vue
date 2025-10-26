@@ -137,7 +137,8 @@ function scrollDown() {
 <template>
   <div
     class="
-      relative z-1000 flex w-auto flex-col gap-6 p-4
+      relative z-1000 flex h-full min-h-dvh w-auto flex-col items-center
+      justify-center self-start p-4
       md:flex-row md:p-0 md:py-12
     "
   >
@@ -149,7 +150,10 @@ function scrollDown() {
       "
     >
       <!-- top header section -->
-      <div class="flex items-center gap-6 bg-transparent text-4xl font-bold">
+      <div
+        data-mobile-header
+        class="flex items-center gap-6 bg-transparent text-4xl font-bold"
+      >
         <PixelRounded
           :radius="8"
           :multiplier="2"
@@ -233,194 +237,197 @@ function scrollDown() {
         </div>
       </PixelRounded>
     </div>
-    <!-- SIDEBAR -->
-    <Sidebar />
-    <!-- CONTENT -->
-    <div
-      class="
-        flex min-h-dvh w-auto flex-col gap-6 pt-0
-        md:min-h-auto
-      "
-    >
-      <!-- top header section -->
+    <div class="flex items-start gap-6">
+      <!-- SIDEBAR -->
+      <Sidebar />
+      <!-- CONTENT -->
       <div
         class="
-          hidden items-stretch gap-6 bg-transparent pr-3 text-4xl font-bold
-          md:flex
+          flex min-h-dvh w-auto flex-col gap-6 pt-0
+          md:min-h-auto
         "
       >
-        <PixelRounded
-          :radius="8"
-          :multiplier="2"
-          :border-width="1"
-          border-color="lime"
-        >
-          <div class="bg-matrix">
-            <img
-              src="/assets/images/me.png"
-              width="128"
-              height="128"
-              class="
-                selection-black -mb-1 h-32 w-auto bg-black mix-blend-hard-light
-              "
-              style="image-rendering: optimizequality"
-            >
-          </div>
-        </PixelRounded>
+        <!-- top header section -->
         <div
           class="
-            selection-black flex w-0 flex-1 flex-col justify-center gap-3
-            font-gohu text-sm
+            hidden items-stretch gap-6 bg-transparent pr-3 text-4xl font-bold
+            md:flex
           "
         >
-          <p
-            class="font-pressstart text-base font-light lowercase"
-            style="
-              text-shadow:
-                0px 0px 1px black,
-                1px 1px 1px black,
-                2px 2px 1px black;
+          <PixelRounded
+            :radius="8"
+            :multiplier="2"
+            :border-width="1"
+            border-color="lime"
+          >
+            <div class="bg-matrix">
+              <img
+                src="/assets/images/me.png"
+                width="128"
+                height="128"
+                class="
+                  selection-black -mb-1 h-32 w-auto bg-black
+                  mix-blend-hard-light
+                "
+                style="image-rendering: optimizequality"
+              >
+            </div>
+          </PixelRounded>
+          <div
+            class="
+              selection-black flex w-0 flex-1 flex-col justify-center gap-3
+              font-gohu text-sm
             "
           >
-            hello, I'm Marcel &#x30b7;
-          </p>
-          <p
-            class="font-gohu text-sm leading-snug font-light lowercase"
-            style="
-              overflow-wrap: anywhere;
-              text-shadow:
-                -1px -1px 1px black,
-                0px 0px 1px black,
-                1px 1px 1px black;
-            "
-          >
-            Full Stack developer & designer working mostly with early to
-            mid-stage startups. Currently working on a few fun projects and
-            looking for my next exciting role!
-          </p>
+            <p
+              class="font-pressstart text-base font-light lowercase"
+              style="
+                text-shadow:
+                  0px 0px 1px black,
+                  1px 1px 1px black,
+                  2px 2px 1px black;
+              "
+            >
+              hello, I'm Marcel &#x30b7;
+            </p>
+            <p
+              class="font-gohu text-sm leading-snug font-light lowercase"
+              style="
+                overflow-wrap: anywhere;
+                text-shadow:
+                  -1px -1px 1px black,
+                  0px 0px 1px black,
+                  1px 1px 1px black;
+              "
+            >
+              Full Stack developer & designer working mostly with early to
+              mid-stage startups. Currently working on a few fun projects and
+              looking for my next exciting role!
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div class="flex w-full flex-col gap-3">
-        <!-- CURRENTLY -->
-        <PixelRounded
-          :radius="8"
-          :multiplier="2"
-          :border-width="1"
-          border-color="lime"
-          drop-shadow
-          :drop-shadow-x="5"
-          :drop-shadow-y="5"
-          drop-shadow-color="black"
-          full
-        >
-          <section class="flex flex-col gap-0.5 p-0">
-            <div class="flex items-center gap-2 pl-1">
-              <div
-                class="
-                  selection-black pt-0.5 pl-1 font-04b03 text-sm leading-none
-                  tracking-tighter text-black
-                  md:font-normal md:tracking-wider
-                "
-              >
-                currently
+        <div class="flex w-full flex-col gap-3">
+          <!-- CURRENTLY -->
+          <PixelRounded
+            :radius="8"
+            :multiplier="2"
+            :border-width="1"
+            border-color="lime"
+            drop-shadow
+            :drop-shadow-x="5"
+            :drop-shadow-y="5"
+            drop-shadow-color="black"
+            full
+          >
+            <section class="flex flex-col gap-0.5 p-0">
+              <div class="flex items-center gap-2 pl-1">
+                <div
+                  class="
+                    selection-black pt-0.5 pl-1 font-04b03 text-sm leading-none
+                    tracking-tighter text-black
+                    md:font-normal md:tracking-wider
+                  "
+                >
+                  currently
+                </div>
               </div>
-            </div>
-            <ProjectRow
-              v-for="(job, index) in JOBS.current"
-              :key="`current-${index}`"
-              :icon="job.icon"
-              :title="job.title"
-              :company-url="job.companyUrl"
-              :company-title="job.companyTitle"
-              :tags="job.tags"
-              :github-url="job.githubUrl"
-              :suffix="job.suffix"
-              :product-hunt-url="job.productHuntUrl"
-              :flame-url="job.flameUrl"
-            />
-          </section>
-        </PixelRounded>
+              <ProjectRow
+                v-for="(job, index) in JOBS.current"
+                :key="`current-${index}`"
+                :icon="job.icon"
+                :title="job.title"
+                :company-url="job.companyUrl"
+                :company-title="job.companyTitle"
+                :tags="job.tags"
+                :github-url="job.githubUrl"
+                :suffix="job.suffix"
+                :product-hunt-url="job.productHuntUrl"
+                :flame-url="job.flameUrl"
+              />
+            </section>
+          </PixelRounded>
 
-        <!-- THINGS I'VE WORKED ON -->
-        <PixelRounded
-          :radius="8"
-          :multiplier="2"
-          :border-width="1"
-          border-color="lime"
-          drop-shadow
-          :drop-shadow-x="5"
-          :drop-shadow-y="5"
-          drop-shadow-color="black"
-          full
-        >
-          <section class="flex flex-col gap-0.5 p-0">
-            <div class="flex items-center gap-2 pl-1">
-              <div
-                class="
-                  selection-black pt-0.5 pl-1 font-04b03 text-sm leading-none
-                  tracking-tighter text-black
-                  md:font-normal md:tracking-wider
-                "
-              >
-                worked on
+          <!-- THINGS I'VE WORKED ON -->
+          <PixelRounded
+            :radius="8"
+            :multiplier="2"
+            :border-width="1"
+            border-color="lime"
+            drop-shadow
+            :drop-shadow-x="5"
+            :drop-shadow-y="5"
+            drop-shadow-color="black"
+            full
+          >
+            <section class="flex flex-col gap-0.5 p-0">
+              <div class="flex items-center gap-2 pl-1">
+                <div
+                  class="
+                    selection-black pt-0.5 pl-1 font-04b03 text-sm leading-none
+                    tracking-tighter text-black
+                    md:font-normal md:tracking-wider
+                  "
+                >
+                  worked on
+                </div>
               </div>
-            </div>
-            <ProjectRow
-              v-for="(job, index) in JOBS.past"
-              :key="`past-${index}`"
-              :icon="job.icon"
-              :title="job.title"
-              :company-url="job.companyUrl"
-              :company-title="job.companyTitle"
-              :tags="job.tags"
-              :github-url="job.githubUrl"
-              :suffix="job.suffix"
-              :product-hunt-url="job.productHuntUrl"
-              :flame-url="job.flameUrl"
-            />
-          </section>
-        </PixelRounded>
+              <ProjectRow
+                v-for="(job, index) in JOBS.past"
+                :key="`past-${index}`"
+                :icon="job.icon"
+                :title="job.title"
+                :company-url="job.companyUrl"
+                :company-title="job.companyTitle"
+                :tags="job.tags"
+                :github-url="job.githubUrl"
+                :suffix="job.suffix"
+                :product-hunt-url="job.productHuntUrl"
+                :flame-url="job.flameUrl"
+              />
+            </section>
+          </PixelRounded>
 
-        <!-- OTHER PROJECTS -->
-        <PixelRounded
-          :radius="8"
-          :multiplier="2"
-          :border-width="1"
-          border-color="lime"
-          drop-shadow
-          :drop-shadow-x="5"
-          :drop-shadow-y="5"
-          drop-shadow-color="black"
-          full
-        >
-          <section class="flex flex-col gap-0.5 p-0">
-            <div class="flex items-center gap-2 pl-1">
-              <div
-                class="
-                  selection-black pt-0.5 pl-1 font-04b03 text-sm leading-none
-                  tracking-tighter text-black
-                  md:font-normal md:tracking-wider
-                "
-              >
-                other projects
+          <!-- OTHER PROJECTS -->
+          <PixelRounded
+            :radius="8"
+            :multiplier="2"
+            :border-width="1"
+            border-color="lime"
+            drop-shadow
+            :drop-shadow-x="5"
+            :drop-shadow-y="5"
+            drop-shadow-color="black"
+            full
+          >
+            <section class="flex flex-col gap-0.5 p-0">
+              <div class="flex items-center gap-2 pl-1">
+                <div
+                  class="
+                    selection-black pt-0.5 pl-1 font-04b03 text-sm leading-none
+                    tracking-tighter text-black
+                    md:font-normal md:tracking-wider
+                  "
+                >
+                  other projects
+                </div>
               </div>
-            </div>
-            <ProjectRow
-              v-for="(job, index) in JOBS.other"
-              :key="`other-${index}`"
-              :icon="job.icon"
-              :title="job.title"
-              :company-url="job.companyUrl"
-              :company-title="job.companyTitle"
-              :tags="job.tags"
-              :github-url="job.githubUrl"
-              :suffix="job.suffix"
-              :product-hunt-url="job.productHuntUrl"
-              :flame-url="job.flameUrl"
-            />
-          </section>
-        </PixelRounded>
+              <ProjectRow
+                v-for="(job, index) in JOBS.other"
+                :key="`other-${index}`"
+                :icon="job.icon"
+                :title="job.title"
+                :company-url="job.companyUrl"
+                :company-title="job.companyTitle"
+                :tags="job.tags"
+                :github-url="job.githubUrl"
+                :suffix="job.suffix"
+                :product-hunt-url="job.productHuntUrl"
+                :flame-url="job.flameUrl"
+              />
+            </section>
+          </PixelRounded>
+        </div>
       </div>
     </div>
   </div>

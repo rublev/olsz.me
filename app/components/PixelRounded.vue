@@ -2,23 +2,14 @@
 import { computed } from 'vue'
 
 interface Props {
-  /** Radius of the corner before scaling (like CSS border-radius) */
   radius?: number
-  /** Pixel multiplier - 1 visual pixel will be this many on-screen pixels */
   multiplier?: number
-  /** Width of the border before scaling */
   borderWidth?: number
-  /** Color of the border */
   borderColor?: string
-  /** Enable drop shadow */
   dropShadow?: boolean
-  /** Drop shadow X offset in pixels */
   dropShadowX?: number
-  /** Drop shadow Y offset in pixels */
   dropShadowY?: number
-  /** Drop shadow color */
   dropShadowColor?: string
-  /** Apply full width (w-full) to the component */
   full?: boolean
 }
 
@@ -36,10 +27,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const hasBorder = computed(() => props.borderWidth > 0)
 
-// ============================================================================
-// Coordinate generation functions (ported from main.js)
-// ============================================================================
-
+/* Coordinate generation functions (ported from main.js) */
 function generatePoints(radius: number, pixelSize: number, offset = 0) {
   const coords: Array<{ x: number, y: number }> = []
 
@@ -231,10 +219,7 @@ function generateInnerPath(
   return generatePath(corners, reverse)
 }
 
-// ============================================================================
-// Computed styles
-// ============================================================================
-
+/* Computed styles */
 const outerPath = computed(() => {
   return generateOuterPath(props.radius, props.multiplier)
 })

@@ -48,13 +48,12 @@ export default antfu(
           ],
         },
       ],
-      /**
-       * if using prettier enable this and set eslint + prettier print width to
+      /* if using prettier enable this and set eslint + prettier print width to
        * the same size:
        * https://github.com/schoero/eslint-plugin-better-tailwindcss/issues/45
        * https://github.com/schoero/eslint-plugin-better-tailwindcss/issues/57
+       * 'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
        */
-      // 'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
     },
   },
   {
@@ -92,7 +91,7 @@ export default antfu(
     },
   },
   nuxt(),
-  // vue rules / should come after antfu
+  /* vue rules / should come after antfu */
   {
     files: ['**/*.vue'],
     rules: {
