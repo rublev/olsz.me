@@ -99,7 +99,7 @@ onUnmounted(() => {
 <template>
   <div
     class="
-      fixed inset-x-0 right-0 bottom-0 left-0 z-650 flex flex-col items-center
+      fixed inset-x-0 right-0 bottom-0 left-0 z-1001 flex flex-col items-center
       bg-navy px-8 pt-0 pb-4 font-gohu transition-opacity duration-600
       md:relative md:bg-transparent md:p-4 md:opacity-100 md:before:hidden
     "
@@ -109,6 +109,8 @@ onUnmounted(() => {
     <PixelatedBorder
       mode="gradient"
       color="#010b14"
+      sides="bottom"
+      class="bottom-full"
     />
 
     <div

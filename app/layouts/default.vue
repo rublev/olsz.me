@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const orpheusHeight = ref<string>('100vh')
 const isDark = ref(false)
@@ -10,20 +10,26 @@ const isReady = ref(false)
 // Keep day always visible, fade night in/out on top
 const nightOpacity = computed(() => (isDark.value ? 1 : 0))
 
-onMounted(() => {
-  // Create a temporary element to measure 100lvh (large viewport height)
+// Function to calculate and update orpheus height
+function updateOrpheusHeight() {
   const temp = document.createElement('div')
   temp.style.height = '100lvh'
   temp.style.position = 'absolute'
   temp.style.visibility = 'hidden'
   document.body.appendChild(temp)
 
-  // Get the computed height in pixels
   const lvhHeight = temp.getBoundingClientRect().height
   document.body.removeChild(temp)
 
-  // Lock to this pixel value so it never changes
   orpheusHeight.value = `${lvhHeight}px`
+}
+
+onMounted(() => {
+  // Initial height calculation
+  updateOrpheusHeight()
+
+  // Update height on window resize
+  window.addEventListener('resize', updateOrpheusHeight)
 
   // Initialize dark mode state
   isDark.value = document.documentElement.classList.contains('dark')
@@ -74,6 +80,11 @@ onMounted(() => {
     }
   }
 })
+
+onBeforeUnmount(() => {
+  // Clean up resize listener
+  window.removeEventListener('resize', updateOrpheusHeight)
+})
 </script>
 
 <template>
@@ -81,8 +92,7 @@ onMounted(() => {
     <!-- background animations -->
     <div
       class="
-        pointer-events-none fixed inset-x-0 z-0 mx-auto flex aspect-270/180
-        h-full w-auto items-start justify-center
+        pointer-events-none fixed inset-0 z-0 flex items-start justify-center
       "
     >
       <!-- Day animation (light mode - always visible as base layer) -->
@@ -119,18 +129,50 @@ onMounted(() => {
       >
     </div>
 
-    <!-- vignette color tests -->
+    <!-- vignette working -->
     <PixelatedBorder
       mode="vignette"
-      sides="all"
       color="#010b14"
+      class="
+        invisible z-1001
+        xl:visible
+      "
     />
+
+    <PixelatedBorder
+      mode="gradient"
+      sides="left right"
+      color="#010b14"
+      class="xl:invisible"
+    />
+
+    <!-- vignette color tests 2 -->
+    <PixelatedBorder
+      mode="gradient"
+      color="#010b14"
+      sides="top"
+      class="
+        fixed z-1000
+        xl:invisible
+      "
+    />
+
+    <PixelatedBorder
+      mode="gradient"
+      color="#010b14"
+      sides="bottom"
+      class="
+        fixed z-999
+        xl:invisible
+      "
+    />
+
+    <Header class="md:hidden" />
 
     <!-- content -->
     <main
       class="relative z-500 flex min-h-svh grow items-center justify-center"
     >
-      <Header class="md:hidden" />
       <slot />
       <!-- <Footer class="mt-auto" /> -->
     </main>

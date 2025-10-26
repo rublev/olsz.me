@@ -138,7 +138,7 @@ function scrollDown() {
   <div
     class="
       relative z-1000 flex w-auto flex-col gap-6 p-4
-      md:flex-row md:p-0 md:py-4
+      md:flex-row md:p-0 md:py-12
     "
   >
     <!-- MOBILE WHOLE PAGER -->
