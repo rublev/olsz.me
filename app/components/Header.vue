@@ -151,7 +151,8 @@ onUnmounted(() => {
             "
           >
             <a
-              href="/resume"
+              href="/resume.pdf"
+              target="_blank"
               class="
                 font-pressstart font-light text-matrix transition-all
                 duration-200

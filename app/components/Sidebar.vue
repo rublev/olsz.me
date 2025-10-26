@@ -113,7 +113,8 @@
       drop-shadow-color="lime"
     >
       <a
-        href="mailto:hi@olsz.me"
+        href="/resume.pdf"
+        target="_blank"
         class="
           flex h-8 w-8 items-center justify-center bg-black p-1 font-pressstart
           text-xs
