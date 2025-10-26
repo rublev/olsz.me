@@ -100,7 +100,7 @@ onUnmounted(() => {
   <div
     class="
       fixed inset-x-0 right-0 bottom-0 left-0 z-1001 flex flex-col items-center
-      bg-black px-8 pt-0 pb-4 font-gohu transition-opacity duration-600
+      bg-black px-6 pt-0 pb-4 font-gohu transition-opacity duration-600
       md:relative md:bg-transparent md:p-4 md:opacity-100 md:before:hidden
     "
     :class="[isCollapsed ? 'opacity-0' : 'opacity-100']"
