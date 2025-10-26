@@ -1,13 +1,13 @@
 [build]
-  command = "pnpm run generate"
-  publish = "dist"
+command = "pnpm run generate"
+publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20"
-  PNPM_VERSION = "10.19.0"
+NODE_VERSION = "20"
+PNPM_VERSION = "10.19.0"
 
 # SPA redirect for client-side routing
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+from = "/*"
+to = "/index.html"
+status = 200

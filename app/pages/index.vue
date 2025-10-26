@@ -9,6 +9,7 @@ interface Job {
   suffix?: string
   productHuntUrl?: string
   flameUrl?: string
+  disabled?: boolean
 }
 
 const JOBS: {
@@ -28,9 +29,10 @@ const JOBS: {
       icon: 'svg:mugen',
       title: 'fastest offline-first infinite canvas',
       companyUrl: 'https://mugen.cafe',
-      companyTitle: 'mugen.cafe ',
+      companyTitle: 'mugen.cafe',
       tags: ['c++', 'wasm', 'crdts', 'pixijs', 'webgpu', 'typescript'],
       githubUrl: 'https://github.com/rublev',
+      disabled: true,
     },
     {
       icon: 'svg:remote-yes',
@@ -38,6 +40,7 @@ const JOBS: {
       companyUrl: 'https://remote-yes.com',
       companyTitle: 'remote-yes.com',
       tags: ['vue', 'typescript', 'gcp'],
+      disabled: true,
     },
   ],
   past: [
@@ -73,11 +76,12 @@ const JOBS: {
     },
     {
       icon: 'svg:code',
-      title: 'programming  questions',
-      companyUrl: 'https://paytrie.com',
+      title: 'programming questions',
+      companyUrl: 'https://dailycodingproblem.com',
       companyTitle: 'dailycodingproblem.com',
       tags: ['react', 'typescript'],
-      productHuntUrl: 'https://google.com',
+      productHuntUrl:
+        'https://www.producthunt.com/products/daily-coding-problem/launches/daily-coding-problem',
     },
     {
       icon: 'svg:card',
@@ -85,8 +89,9 @@ const JOBS: {
       companyUrl: 'https://brd.com',
       companyTitle: 'brd.com',
       tags: ['react', 'go'],
-      githubUrl: 'https://github.com/rublev',
-      flameUrl: 'string',
+      githubUrl: 'https://github.com/breadwallet',
+      flameUrl:
+        'https://www.coindesk.com/business/2021/11/24/coinbase-acquires-crypto-wallet-firm-brd-for-undisclosed-amount',
     },
     {
       icon: 'svg:bank',
@@ -101,27 +106,25 @@ const JOBS: {
       icon: 'svg:eye',
       title: 'openxr recenter override',
       tags: ['c++', 'python'],
-      githubUrl: 'https://github.com/rublev',
+      githubUrl: 'https://github.com/rublev/OpenXR-RecenterOverride',
     },
     {
       icon: 'svg:folder-open',
-      title: 'old portfolio site',
+      title: 'current portfolio site',
       tags: ['vue', 'typescript'],
+      githubUrl: 'https://github.com/rublev/olsz.me',
     },
     {
       icon: 'svg:retro-camera',
       title: 'piklink',
       tags: ['web3', 'decentralized', 'instagram', 'clone', 'blockstack'],
+      githubUrl: 'https://github.com/rublev/piklinik',
     },
     {
-      icon: 'svg:retro-camera',
-      title: 'supaglobal',
-      tags: ['web3', 'decentralized', 'instagram', 'clone', 'blockstack'],
-    },
-    {
-      icon: 'svg:retro-camera',
+      icon: 'svg:crane',
       title: 'monumental crane',
       tags: ['web3', 'decentralized', 'instagram', 'clone', 'blockstack'],
+      githubUrl: 'https://github.com/rublev/crane',
     },
   ],
 }
@@ -344,6 +347,7 @@ function scrollDown() {
                 :suffix="job.suffix"
                 :product-hunt-url="job.productHuntUrl"
                 :flame-url="job.flameUrl"
+                :disabled="job.disabled"
               />
             </section>
           </PixelRounded>
@@ -384,6 +388,7 @@ function scrollDown() {
                 :suffix="job.suffix"
                 :product-hunt-url="job.productHuntUrl"
                 :flame-url="job.flameUrl"
+                :disabled="job.disabled"
               />
             </section>
           </PixelRounded>
@@ -424,6 +429,7 @@ function scrollDown() {
                 :suffix="job.suffix"
                 :product-hunt-url="job.productHuntUrl"
                 :flame-url="job.flameUrl"
+                :disabled="job.disabled"
               />
             </section>
           </PixelRounded>

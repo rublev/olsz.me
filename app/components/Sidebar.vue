@@ -66,7 +66,7 @@
       drop-shadow-color="lime"
     >
       <a
-        href="https://www.linkedin.com/in/marcelolszewski/"
+        href="https://www.linkedin.com/in/molsz/"
         target="_blank"
         class="flex h-8 w-8 items-center justify-center bg-black p-1"
       >
