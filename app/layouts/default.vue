@@ -132,7 +132,7 @@ onBeforeUnmount(() => {
     <!-- vignette working -->
     <PixelatedBorder
       mode="vignette"
-      color="#010b14"
+      color="#000000"
       class="
         invisible z-1001
         xl:visible
@@ -142,14 +142,14 @@ onBeforeUnmount(() => {
     <PixelatedBorder
       mode="gradient"
       sides="left right"
-      color="#010b14"
+      color="#000000"
       class="xl:invisible"
     />
 
     <!-- vignette color tests 2 -->
     <PixelatedBorder
       mode="gradient"
-      color="#010b14"
+      color="#000000"
       sides="top"
       class="
         fixed z-1000
@@ -159,7 +159,7 @@ onBeforeUnmount(() => {
 
     <PixelatedBorder
       mode="gradient"
-      color="#010b14"
+      color="#000000"
       sides="bottom"
       class="
         fixed z-999

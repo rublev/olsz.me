@@ -5,7 +5,8 @@
 #__nuxt,
 body,
 html {
-  background: rgb(1 11 20); /* #010b14 */
+  /* background: rgb(1 11 20); #010b14 */
+  background: rgb(0 0 0);
 }
 
 @theme {
@@ -46,13 +47,13 @@ html {
 
 /* light */
 :root {
-  --background: var(--color-navy);
+  --background: var(--color-black);
   --foreground: var(--color-white);
 }
 
 /* dark */
 .dark {
-  --background: var(--color-navy);
+  --background: var(--color-black);
 }
 
 @theme inline {

@@ -108,7 +108,7 @@ onUnmounted(() => {
     <!-- Pixelated gradient above header (mobile only) -->
     <PixelatedBorder
       mode="gradient"
-      color="#010b14"
+      color="#000000"
       sides="bottom"
       class="bottom-full"
     />

@@ -19,7 +19,7 @@ interface Props {
 // Props with defaults
 const props = withDefaults(defineProps<Props>(), {
   mode: 'vignette',
-  color: '#010b14',
+  color: '#000000',
   sides: 'all',
   debug: false,
   class: '',
