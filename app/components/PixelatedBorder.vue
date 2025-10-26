@@ -81,7 +81,7 @@ function toRgba(hex: string, alpha: number): string {
   <div
     v-if="mode === 'vignette'"
     class="
-      fixed inset-0 mx-auto max-w-[calc(100vh*1.5)]
+      pointer-events-none fixed inset-0 mx-auto max-w-[calc(100vh*1.5)]
       xl:min-w-7xl
     "
     :class="props.class"
