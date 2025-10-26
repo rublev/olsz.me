@@ -76,7 +76,7 @@ const props = withDefaults(defineProps<Props>(), {
       drop-shadow-color="lime"
     >
       <a
-        href="https://www.linkedin.com/in/marcelolszewski/"
+        href="https://www.linkedin.com/in/molsz/"
         target="_blank"
         class="flex h-8 w-8 items-center justify-center bg-black p-1"
       >
@@ -109,28 +109,6 @@ const props = withDefaults(defineProps<Props>(), {
           class="h-auto w-5"
           style="shape-rendering: crispEdges"
         />
-      </a>
-    </PixelRounded>
-    <!-- cv -->
-    <PixelRounded
-      :radius="4"
-      :multiplier="2"
-      :border-width="1"
-      border-color="lime"
-      drop-shadow
-      :drop-shadow-x="2"
-      :drop-shadow-y="2"
-      drop-shadow-color="lime"
-    >
-      <a
-        href="/resume.pdf"
-        target="_blank"
-        class="
-          flex h-8 w-8 items-center justify-center bg-black p-1 font-pressstart
-          text-xs
-        "
-      >
-        CV
       </a>
     </PixelRounded>
   </div>
