@@ -150,7 +150,7 @@ function scrollDown() {
     <!-- MOBILE WHOLE PAGER -->
     <div
       class="
-        flex min-h-svh flex-col items-start justify-end gap-5 p-2 pb-24
+        flex min-h-svh flex-col items-start justify-end gap-5 p-2 pb-26
         md:hidden
       "
     >
