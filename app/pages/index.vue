@@ -151,7 +151,6 @@ function scrollDown() {
     <div
       class="
         flex min-h-svh flex-col items-start justify-end gap-5 p-2 pb-24
-        sm:p-4
         md:hidden
       "
     >
