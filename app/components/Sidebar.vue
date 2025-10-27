@@ -116,11 +116,11 @@
         href="/resume.pdf"
         target="_blank"
         class="
-          flex h-8 w-8 items-center justify-center bg-black p-1 font-pressstart
-          text-xs
+          flex h-8 w-8 items-center justify-center bg-black pl-0.5
+          font-pressstart text-xs
         "
       >
-        CV
+        cv
       </a>
     </PixelRounded>
   </div>

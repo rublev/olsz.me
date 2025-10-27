@@ -243,7 +243,12 @@ function scrollDown() {
         </div>
       </PixelRounded>
     </div>
-    <div class="flex items-start gap-6">
+    <div
+      class="
+        flex items-start gap-6 pb-14
+        md:pb-0
+      "
+    >
       <!-- SIDEBAR -->
       <Sidebar />
       <!-- CONTENT -->
