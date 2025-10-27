@@ -86,7 +86,7 @@ const JOBS: {
     {
       icon: 'svg:card',
       title: 'a delightful crypto wallet',
-      companyUrl: 'https://brd.com',
+      companyUrl: 'https://web.archive.org/web/20201109003514/https://brd.com/',
       companyTitle: 'brd.com',
       tags: ['react', 'go'],
       githubUrl: 'https://github.com/breadwallet',
