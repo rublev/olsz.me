@@ -228,6 +228,7 @@ function scrollDown() {
         :drop-shadow-y="5"
         drop-shadow-color="#000000"
         class="cursor-pointer self-end"
+        data-umami-event="scroll-more"
         @click="scrollDown"
       >
         <div class="flex items-center px-2 pb-0.5 pl-3 text-black">

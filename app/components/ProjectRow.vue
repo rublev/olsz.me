@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+
 interface Props {
   /* Icon name for the left icon (e.g., 'svg:rocket') */
   icon: string
@@ -22,7 +24,18 @@ interface Props {
   disabled?: boolean
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
+
+// Create a clean slug for event tracking
+const projectSlug = computed(() => {
+  // Prefer companyTitle, fall back to title
+  const source = props.companyTitle || props.title
+  return source
+    .toLowerCase()
+    .replace(/\.(com|ca|digital|ai|co)$/g, '') // Remove common TLDs
+    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric with hyphens
+    .replace(/^-+|-+$/g, '') // Trim hyphens from start/end
+})
 </script>
 
 <template>
@@ -64,6 +77,7 @@ defineProps<Props>()
               :href="disabled ? undefined : companyUrl"
               :target="disabled ? undefined : '_blank'"
               :class="disabled ? '' : 'underline'"
+              :data-umami-event="`${projectSlug}-company`"
             >
               {{ companyTitle }}
             </component>
@@ -85,6 +99,7 @@ defineProps<Props>()
         flex w-full max-w-8 items-center justify-center border-l-2 border-matrix
         bg-black
       "
+      :data-umami-event="`${projectSlug}-github`"
     >
       <Icon
         name="svg:github"
@@ -102,6 +117,7 @@ defineProps<Props>()
         flex w-full max-w-8 items-center justify-center border-l-2 border-matrix
         bg-black
       "
+      :data-umami-event="`${projectSlug}-producthunt`"
     >
       <Icon
         name="svg:flame"
@@ -120,6 +136,7 @@ defineProps<Props>()
         flex w-full max-w-8 items-center justify-center border-l-2 border-matrix
         bg-black
       "
+      :data-umami-event="`${projectSlug}-acquisition`"
     >
       <Icon
         name="svg:trophy"

@@ -47,6 +47,13 @@ export default defineNuxtConfig({
         */
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       ],
+      script: [
+        {
+          'defer': true,
+          'src': 'https://umami-omega-eight-83.vercel.app/script.js',
+          'data-website-id': 'fac1fd6f-b4e8-4210-bc41-842f20a93cb3',
+        },
+      ],
     },
   },
   modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@vueuse/nuxt'],
