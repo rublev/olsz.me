@@ -1,7 +1,12 @@
 [build]
-command = "mkdir -p .output/public && cp index.html .output/public/"
-publish = ".output/public"
+command = "pnpm run generate"
+publish = "dist"
 
+[build.environment]
+NODE_VERSION = "20"
+PNPM_VERSION = "10.19.0"
+
+# SPA redirect for client-side routing
 [[redirects]]
 from = "/*"
 to = "/index.html"
